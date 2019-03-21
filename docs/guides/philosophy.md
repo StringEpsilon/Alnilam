@@ -1,10 +1,10 @@
 # Philosophy
 
-This guide's purpose is to explain the mental model to have when using React Router. We call it "Dynamic Routing", which is quite different from the "Static Routing" you're probably more familiar with.
+This guide's purpose is to explain the mental model to have when using Alnilam. It's called "Dynamic Routing", which is quite different from the "Static Routing" you're probably more familiar with.
 
 ## Static Routing
 
-If you've used Rails, Express, Ember, Angular etc. you've used static routing. In these frameworks, you declare your routes as part of your app's initialization before any rendering takes place. React Router pre-v4 was also static (mostly). Let's take a look at how to configure routes in express:
+If you've used Rails, Express, Ember, Angular etc. you've used static routing. In these frameworks, you declare your routes as part of your app's initialization before any rendering takes place. Let's take a look at how to configure routes in express:
 
 ```js
 // Express Style routing:
@@ -68,27 +68,19 @@ Router.map(function() {
 export default Router;
 ```
 
-Though the APIs are different, they all share the model of "static routes". React Router also followed that lead up until v4.
+Though the APIs are different, they all share the model of "static routes". 
 
-To be successful with React Router, you need to forget all that! :O
-
-## Backstory
-
-To be candid, we were pretty frustrated with the direction we'd taken React Router by v2. We (Michael and Ryan) felt limited by the API, recognized we were reimplementing parts of React (lifecycles, and more), and it just didn't match the mental model React has given us for composing UI.
-
-We were walking through the hallway of a hotel just before a workshop discussing what to do about it. We asked each other: "What would it look like if we built the router using the patterns we teach in our workshops?"
-
-It was only a matter of hours into development that we had a proof-of-concept that we knew was the future we wanted for routing. We ended up with API that wasn't "outside" of React, an API that composed, or naturally fell into place, with the rest of React. We think you'll love it.
+To be successful with Alnilam, you need to forget all that! :O
 
 ## Dynamic Routing
 
-When we say dynamic routing, we mean routing that takes place **as your app is rendering**, not in a configuration or convention outside of a running app. That means almost everything is a component in React Router. Here's a 60 second review of the API to see how it works:
+When we say dynamic routing, we mean routing that takes place **as your app is rendering**, not in a configuration or convention outside of a running app. That means almost everything is a component in Alnilam. Here's a 60 second review of the API to see how it works:
 
 First, grab yourself a `Router` component for the environment you're targeting and render it at the top of your app.
 
 ```jsx
 // react-dom (what we'll use here)
-import { BrowserRouter } from "react-web-router";
+import { BrowserRouter } from "alnilam";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -130,7 +122,7 @@ The `Route` will render `<Dashboard {...props}/>` where `props` are some router 
 
 ## Nested Routes
 
-Lots of routers have some concept of "nested routes". If you've used versions of React Router previous to v4, you'll know it did too! When you move from a static route configuration to dynamic, rendered routes, how do you "nest routes"? Well, how do you nest a `div`?
+Lots of routers have some concept of "nested routes". But how do you "nest routes"? Well, how do you nest a `div`?
 
 ```jsx
 const App = () => (
@@ -248,7 +240,7 @@ url: /invoices
 
 On a large screen, `/invoices` isn't a valid route, but on a small screen it is! To make things more interesting, consider somebody with a giant phone. They could be looking at `/invoices` in portrait orientation and then rotate their phone to landscape. Suddenly, we have enough room to show the master-detail UI, so you ought to redirect right then!
 
-React Router's previous versions' static routes didn't really have a composable answer for this. When routing is dynamic, however, you can declaratively compose this functionality. If you start thinking about routing as UI, not as static configuration, your intuition will lead you to the following code:
+When routing is dynamic, however, you can declaratively compose this functionality. If you start thinking about routing as UI, not as static configuration, your intuition will lead you to the following code:
 
 ```js
 const App = () => (
@@ -285,5 +277,3 @@ const Invoices = () => (
 ```
 
 As the user rotates their phone from portrait to landscape, this code will automatically redirect them to the dashboard. _The set of valid routes change depending on the dynamic nature of a mobile device in a user's hands_.
-
-This is just one example. There are many others we could discuss but we'll sum it up with this advice: To get your intuition in line with React Router's, think about components, not static routes. Think about how to solve the problem with React's declarative composability because nearly every "React Router question" is probably a "React question".

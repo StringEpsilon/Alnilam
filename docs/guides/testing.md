@@ -1,11 +1,13 @@
+// TODO: Rewrite this to reflect the removal of the MemoryRouter export.
+
 # Testing
 
-React Router relies on React context to work. This affects how you can
+Alnilam relies on React context to work. This affects how you can
 test your components that use our components.
 
 ## Context
 
-If you try to unit test one of your components that renders a `<Link>` or a `<Route>`, etc. you'll get some errors and warnings about context. While you may be tempted to stub out the router context yourself, we recommend you wrap your unit test in a `<StaticRouter>` or a `<MemoryRouter>`. Check it out:
+If you try to unit test one of your components that renders a `<Link>` or a `<Route>`, etc. you'll get some errors and warnings about context. While you may be tempted to stub out the router context yourself, we recommend you wrap your unit test in a `<StaticRouter>` or a `<Router>` with a memory history. Check it out:
 
 ```jsx
 class Sidebar extends Component {
@@ -71,7 +73,7 @@ We have a lot of tests that the routes work when the location changes, so you pr
 ```jsx
 import { render, unmountComponentAtNode } from "react-dom";
 import React from "react";
-import { Route, Link, MemoryRouter } from "react-web-router";
+import { Route, Link, MemoryRouter } from "alnilam";
 import { Simulate } from "react-addons-test-utils";
 
 // a way to render any part of your app inside a MemoryRouter

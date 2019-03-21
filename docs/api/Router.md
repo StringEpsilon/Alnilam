@@ -1,17 +1,10 @@
 # &lt;Router>
 
-The common low-level interface for all router components. Typically apps will use one of the high-level routers instead:
-
-- [`<BrowserRouter>`](../../../react-web-router/docs/api/BrowserRouter.md)
-- [`<HashRouter>`](../../../react-web-router/docs/api/HashRouter.md)
-- [`<MemoryRouter>`](./MemoryRouter.md)
-- [`<StaticRouter>`](./StaticRouter.md)
-
-The most common use-case for using the low-level `<Router>` is to
-synchronize a custom history with a state management lib like Redux or Mobx. Note that this is not required to use state management libs alongside React Router, it's only for deep integration.
+The common interface for all router components. You can make your own Router components that encapsulat the history properly, but there is not much
+reason to.
 
 ```jsx
-import { Router } from "react-web-router";
+import { Router } from "alnilam";
 import createBrowserHistory from "history/createBrowserHistory";
 
 const history = createBrowserHistory()

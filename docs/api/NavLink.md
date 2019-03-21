@@ -3,7 +3,7 @@
 A special version of the [`<Link>`](Link.md) that will add styling attributes to the rendered element when it matches the current URL.
 
 ```jsx
-import { NavLink } from 'react-web-router'
+import { NavLink } from 'alnilam'
 
 <NavLink to="/about">About</NavLink>
 ```

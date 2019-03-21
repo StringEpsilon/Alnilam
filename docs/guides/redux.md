@@ -1,10 +1,10 @@
 # Redux Integration
 
-Redux is an important part of the React ecosystem. We want to make the integration of React Router and Redux as seamless as possible for people wanting to use both.
+Redux is an important part of the React ecosystem. I want to make the integration of Alnilam and Redux as seamless as possible for people wanting to use both.
 
 ## Blocked Updates
 
-Generally, React Router and Redux work just fine together. Occasionally though, an app can have a component that doesn't update when the location changes (child routes or active nav links don't update).
+Generally, Alnilam and Redux work just fine together. Occasionally though, an app can have a component that doesn't update when the location changes (child routes or active nav links don't update).
 
 This happens if:
 
@@ -19,7 +19,7 @@ The problem is that Redux implements `shouldComponentUpdate` and there's no indi
 export default connect(mapStateToProps)(Something)
 
 // after
-import { withRouter } from 'react-web-router'
+import { withRouter } from 'alnilam'
 export default withRouter(connect(mapStateToProps)(Something))
 ```
 

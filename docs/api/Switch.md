@@ -17,7 +17,7 @@ If the URL is `/about`, then `<About>`, `<User>`, and `<NoMatch>` will all rende
 Occasionally, however, we want to pick only one `<Route>` to render. If we're at `/about` we don't want to also match `/:user` (or show our "404" page). Here's how to do it with `Switch`:
 
 ```jsx
-import { Switch, Route } from 'react-web-router'
+import { Switch, Route } from 'alnilam'
 
 <Switch>
   <Route exact path="/" component={Home}/>

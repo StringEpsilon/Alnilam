@@ -1,9 +1,9 @@
 # Installation
 
 ```bash
-npm install react-web-router
+npm install alnilam
 # or
-yarn add react-web-router
+yarn add alnilam
 ```
 
 All of the package modules can be imported from the top:
@@ -15,6 +15,6 @@ import {
   Route,
   Link
   // etc.
-} from "react-web-router";
+} from "alnilam";
 ```
 

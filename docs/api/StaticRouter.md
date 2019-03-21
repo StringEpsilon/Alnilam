@@ -10,7 +10,7 @@ Here's an example node server that sends a 302 status code for [`<Redirect>`](Re
 import { createServer } from "http";
 import React from "react";
 import ReactDOMServer from "react-dom/server";
-import { StaticRouter } from "react-web-router";
+import { StaticRouter } from "alnilam";
 
 createServer((req, res) => {
   // This context object contains the results of the render
@@ -76,7 +76,7 @@ const context = {}
 </StaticRouter>
 ```
 
-When a `<Route>` matches, it will pass the context object to the component it renders as the `staticContext` prop. Check out the [Server Rendering guide](../../../react-web-router/docs/guides/server-rendering.md) for more information on how to do this yourself.
+When a `<Route>` matches, it will pass the context object to the component it renders as the `staticContext` prop. Check out the [Server Rendering guide](../server-rendering.md) for more information on how to do this yourself.
 
 After the render, these properties can be used to to configure the server's response.
 

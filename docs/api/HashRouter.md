@@ -1,11 +1,11 @@
 # &lt;HashRouter>
 
-There is no HashRouter component in react-web-router. Instead you can use a ```<Router>``` with a history object created with ```createHashHistory()```.
+There is no HashRouter component in Alnilam. Instead you can use a ```<Router>``` with a history object created with ```createHashHistory()```.
 
 **IMPORTANT NOTE:** Hash history does not support `location.key` or `location.state`. As this technique is only intended to support legacy browsers, we encourage you to configure your server to work with a browser history instead.
 
 ```jsx
-import { Router } from 'react-web-router';
+import { Router } from 'alnilam';
 import { createHashHistory } from 'history';
 
 const hashHistory = createHashHistory();

@@ -158,7 +158,7 @@ And then the client:
 
 ```jsx
 import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-web-router";
+import { BrowserRouter } from "alnilam";
 import App from "./App";
 
 ReactDOM.render(
@@ -173,7 +173,7 @@ ReactDOM.render(
 
 There are so many different approaches to this, and there's no clear best practice yet, so we seek to be composable with any approach, and not prescribe or lean toward one or the other. We're confident the router can fit inside the constraints of your application.
 
-The primary constraint is that you want to load data before you render. React Router exports the `matchPath` static function that it uses internally to match locations to routes. You can use this function on the server to help determine what your data dependencies will be before rendering.
+The primary constraint is that you want to load data before you render. Alnilam exports the `matchPath` static function that it uses internally to match locations to routes. You can use this function on the server to help determine what your data dependencies will be before rendering.
 
 The gist of this approach relies on a static route config used to both render your routes and match against before rendering to determine data dependencies.
 
@@ -207,7 +207,7 @@ function App() {
 Then on the server you'd have something like:
 
 ```js
-import { matchPath } from "react-web-router";
+import { matchPath } from "alnilam";
 
 // inside a request
 const promises = [];

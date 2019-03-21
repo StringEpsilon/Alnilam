@@ -1,23 +1,23 @@
 # Basic Components
 
-There are three types of components in React Router: router components, route matching components, and navigation components.
+There are three types of components in Alnilam: router components, route matching components, and navigation components.
 
-All of the components that you use in a web application should be imported from `react-web-router`.
+All of the components that you use in a web application should be imported from `alnilam`.
 
 ```js
-import { BrowserRouter, Route, Link } from "react-web-router";
+import { BrowserRouter, Route, Link } from "alnilam";
 ```
 
 ## Routers
 
-At the core of every React Router application should be a router component. For web projects, `react-web-router` provides `<BrowserRouter>` and `<HashRouter>` routers. Both of these will create a specialized `history` object for you. Generally speaking, you should use a `<BrowserRouter>` if you have a server that responds to requests and a `<HashRouter>` if you are using a static file server.
+At the core of every Alnilam application should be a router component. 
 
 ```jsx
-import { BrowserRouter } from "react-web-router";
+import { Router } from "alnilam";
 ReactDOM.render(
-  <BrowserRouter>
+  <Router>
     <App />
-  </BrowserRouter>,
+  </Router>,
   holder
 );
 ```
@@ -27,7 +27,7 @@ ReactDOM.render(
 There are two route matching components: `<Route>` and `<Switch>`.
 
 ```js
-import { Route, Switch } from "react-web-router";
+import { Route, Switch } from "alnilam";
 ```
 
 Route matching is done by comparing a `<Route>`'s `path` prop to the current location's `pathname`. When a `<Route>` matches it will render its content and when it does not match, it will render `null`. A `<Route>` with no path will always match.
@@ -93,7 +93,7 @@ const App = () => {
 
 ## Navigation
 
-React Router provides a `<Link>` component to create links in your application. Wherever you render a `<Link>`, an anchor (`<a>`) will be rendered in your application's HTML.
+Alnilam provides a `<Link>` component to create links in your application. Wherever you render a `<Link>`, an anchor (`<a>`) will be rendered in your application's HTML.
 
 ```jsx
 <Link to="/">Home</Link>

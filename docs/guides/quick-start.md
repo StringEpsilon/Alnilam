@@ -1,6 +1,6 @@
 # Quick Start
 
-You'll need a React web app to add `react-web-router`.
+You'll need a React web app to add `alnilam`.
 
 If you need to create one, the easiest way to get started is with a popular tool called [Create React App][crapp].
 
@@ -14,10 +14,10 @@ cd demo-app
 
 ## Installation
 
-React Router DOM is [published to npm](https://npm.im/react-web-router) so you can install it with either `npm` or [`yarn`](https://yarnpkg.com).
+Alnilam is [published to npm](https://npm.im/alnilam) so you can install it with either `npm` or [`yarn`](https://yarnpkg.com).
 
 ```sh
-npm install react-web-router
+npm install alnilam
 ```
 
 Copy/paste either of the examples (below) into your `src/App.js`.
@@ -30,7 +30,7 @@ Note: Instead of `<a href="/">` we use `<Link to="/">`.
 
 ```jsx
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-web-router";
+import { BrowserRouter as Router, Route, Link } from "alnilam";
 
 function Index() {
   return <h2>Home</h2>;
@@ -79,7 +79,7 @@ This example shows how nested routing works. The route `/topics` loads the `Topi
 
 ```jsx
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-web-router";
+import { BrowserRouter as Router, Route, Link } from "alnilam";
 
 function App() {
   return (

@@ -3,7 +3,7 @@
 Provides declarative, accessible navigation around your application.
 
 ```jsx
-import { Link } from 'react-web-router'
+import { Link } from 'alnilam'
 
 <Link to="/about">About</Link>
 ```

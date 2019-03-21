@@ -8,7 +8,7 @@ matches the route's `path`.
 Consider the following code:
 
 ```jsx
-import { BrowserRouter as Router, Route } from 'react-web-router'
+import { BrowserRouter as Router, Route } from 'alnilam'
 
 <Router>
   <div>

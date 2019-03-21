@@ -1,5 +1,6 @@
 # context.router
 
-React Router uses `context.router` to facilitate communication between a `<Router>` and its descendant [`<Route>`](Route.md)s, [`<Link>`](../../../react-web-router/docs/api/Link.md)s, [`<Prompt>`](Prompt.md)s, etc.
+Alnilam uses `context.router` to facilitate communication between a `<Router>` and its descendant [`<Route>`](Route.md)s, [`<Link>`](../api/Link.md)s, [`<Prompt>`](Prompt.md)s, etc.
 
-`context.router` should not be considered public API. Since context itself is an experimental API and may change in a future release of React, you should avoid accessing `this.context.router` directly in your components. Instead, you can access the variables we store on context through the props that are passed to your [`<Route>`](Route.md) component or a component wrapped in [`withRouter`](withRouter.md).
+The RouterContext of Alnilam is considered internal API. Otherwise breaking changes to Alnilams context will not increase the major version number and
+bug reports regarding resulting breakages will be ignored. Use at your own peril.

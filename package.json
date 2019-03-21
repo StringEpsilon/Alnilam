@@ -1,7 +1,7 @@
 {
 	"name": "alnilam",
 	"version": "0.0.1",
-	"description": "Stellar declarative routing in typescript, for react.",
+	"description": "Stellar, statically typed, declarative routing for react.",
 	"main": "index.js",
 	"sideEffects": false,
 	"module": "dist/esm/alnilam.js",

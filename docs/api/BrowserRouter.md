@@ -1,11 +1,11 @@
 # &lt;BrowserRouter>
 
-The BrowserRouter component no longer exists in react-router-web. You can instead use the default [`<Router>`](./Router.md) and 
+The BrowserRouter component does not exist in Alnilam. You can instead use the default [`<Router>`](./Router.md) and 
 pass it a history object from ```createBrowserHistory()``` from the history package.
 
 
 ```jsx
-import { Router } from 'react-web-router'
+import { Router } from 'alnilam'
 import { createBrowserHistory } from "history";
 
 const history = createMemoryHistory({
