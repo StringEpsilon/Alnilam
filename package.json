@@ -1,0 +1,75 @@
+{
+	"name": "alnilam",
+	"version": "0.0.1",
+	"description": "Stellar declarative routing in typescript, for react.",
+	"main": "index.js",
+	"sideEffects": false,
+	"module": "dist/esm/alnilam.js",
+	"scripts": {
+		"test": "jest",
+		"build": "rollup -c"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/StringEpsilon/Alnilam.git"
+	},
+	"keywords": [
+		"react",
+		"routing"
+	],
+	"author": "StringEpsilon",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/StringEpsilon/Alnilam/issues"
+	},
+	"homepage": "https://github.com/StringEpsilon/Alnilam#readme",
+	"files": [
+		"dist/**"
+	],
+	"peerDependencies": {
+		"react": ">=16.4",
+		"@babel/runtime": ">=7.1.2"
+	},
+	"dependencies": {
+		"history": "^4.9.0",
+		"hoist-non-react-statics": "^3.3.0",
+		"loose-envify": "^1.4.0",
+		"path-to-regexp": "^1.7.0",
+		"prop-types": "^15.6.2",
+		"react-is": "^16.6.0",
+		"tiny-warning": "^1.0.2"
+	},
+	"resolutions": {
+		"write-file-atomic": "2.4.1"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.3.4",
+		"@babel/plugin-proposal-class-properties": "^7.3.4",
+		"@babel/plugin-transform-runtime": "^7.3.4",
+		"@babel/preset-env": "^7.3.4",
+		"@babel/preset-react": "^7.0.0",
+		"@babel/preset-typescript": "^7.3.3",
+		"@types/history": "^4.7.2",
+		"@types/hoist-non-react-statics": "^3.3.0",
+		"@types/jest": "^24.0.11",
+		"@types/prop-types": "^15.7.0",
+		"@types/react": "^16.8.7",
+		"@types/react-dom": "^16.8.2",
+		"@types/react-is": "^16.7.1",
+		"babel-core": "^7.0.0-bridge.0",
+		"babel-jest": "^24.5.0",
+		"babel-plugin-dev-expression": "^0.2.1",
+		"jest": "^24.5.0",
+		"raf": "^3.4.1",
+		"react": "^16.5.2",
+		"react-dom": "^16.5.2",
+		"rollup": "^1.7.0",
+		"rollup-plugin-babel": "^4.3.2",
+		"rollup-plugin-commonjs": "^9.2.1",
+		"rollup-plugin-node-resolve": "^4.0.1",
+		"rollup-plugin-replace": "^2.1.1",
+		"rollup-plugin-size-snapshot": "^0.8.0",
+		"rollup-plugin-uglify": "^6.0.2",
+		"typescript": "^3.3.3333"
+	}
+}
