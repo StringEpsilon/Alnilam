@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { NavLink, withRouter } from "..";
+import { NavLink, withRouter, Route } from "..";
 import renderStrict from "./utils/renderStrict";
 import { Location } from "history";
 import MemoryRouter from "./utils/MemoryRouter";
@@ -563,6 +563,77 @@ describe("A <NavLink>", () => {
 			if (a) {
 				expect(a.className).not.toContain("active");
 			}
+		});
+	});
+
+
+
+	describe("doesn't interfere with withRouter", () => {
+		it("allows withRouter to access the correct match without route", () => {
+			const PropChecker = withRouter((props: any) => {
+				expect(props.match).not.toBeNull();
+				expect(props.match.url).toBe("/");
+				return null;
+			});
+
+			renderStrict(
+				<MemoryRouter initialEntries={["/pizza/"]}>
+					<NavLink to="/pizza/">
+						<PropChecker />
+					</NavLink>
+				</MemoryRouter>,
+				node
+			);
+
+			expect.assertions(2);
+		});
+
+		it("allows withRouter to access the correct match inside a route", () => {
+			const PropChecker = withRouter((props: any) => {
+				expect(props.match).not.toBeNull();
+				expect(props.match.url).toBe("/pizza/");
+				return null;
+			});
+
+			renderStrict(
+				<MemoryRouter initialEntries={["/pizza/"]}>
+					<Route
+						path="/pizza"
+						component={() => (
+							<NavLink to="/pizza/">
+								<PropChecker />
+							</NavLink>
+						)}
+					/>
+				</MemoryRouter>,
+				node
+			);
+
+			expect.assertions(2);
+		});
+
+		it("allows withRouter to access the correct match with params inside a route", () => {
+			const PropChecker = withRouter((props: any) => {
+				expect(props.match).not.toBeNull();
+				expect(props.match.url).toBe("/pizza/cheese");
+				expect(props.match.params).toEqual({ topping: "cheese" });
+				return null;
+			});
+			renderStrict(
+				<MemoryRouter initialEntries={["/pizza/cheese"]}>
+					<Route
+						path="/pizza/:topping"
+						component={() => (
+							<NavLink to="/pizza/">
+								<PropChecker />
+							</NavLink>
+						)}
+					/>
+				</MemoryRouter>,
+				node
+			);
+
+			expect.assertions(3);
 		});
 	});
 });

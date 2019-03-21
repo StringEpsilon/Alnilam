@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import Link from "./Link";
 import { Location } from "history";
+import matchPath from "./matchPath";
 
 function joinClassnames(...classnames: any[]): string {
 	return classnames.filter(i => i).join(" ");
@@ -15,7 +16,7 @@ interface NavLinkProps {
 	activeStyle?: object;
 	className?: string;
 	exact?: boolean;
-	isActive?: (match: Match, location: Location) => boolean;
+	isActive?: (match: Match | null, location: Location) => boolean;
 	location?: Location;
 	strict?: boolean;
 	style?: any;
@@ -34,7 +35,7 @@ function NavLink(props: NavLinkProps) {
 		className,
 		exact,
 		isActive,
-		location,
+		location: locationProp,
 		strict,
 		style,
 		to,
@@ -49,11 +50,13 @@ function NavLink(props: NavLinkProps) {
 
 	return (
 		<Route
-			path={escapedPath}
-			exact={exact}
-			strict={strict}
-			location={location}
-			children={({ location, match }) => {
+			children={({ location }) => {
+				const pathToMatch = locationProp
+					? locationProp.pathname
+					: location.pathname;
+				const match = escapedPath
+					? matchPath(pathToMatch, { path: escapedPath, exact, strict })
+					: null;
 				const isActiveFlag = !!(isActive
 					? isActive(match, location)
 					: match);
