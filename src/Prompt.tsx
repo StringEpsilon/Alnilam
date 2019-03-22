@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Lifecycle from "./Lifecycle";
 import RouterContext from "./RouterContext";
 
-interface PromptProps{
+interface PromptProps {
 	message?: string;
 	when?: boolean;
 }
@@ -16,7 +16,7 @@ function Prompt({ message, when = true }: PromptProps) {
 		<RouterContext.Consumer>
 			{context => {
 				if (!context) {
-					throw new Error(__DEV__ ? "Invariant failed" : "You should not use <Prompt> outside a <Router>")
+					throw new Error(!__DEV__ ? "Invariant failed" : "You should not use <Prompt> outside a <Router>")
 				}
 
 				if (!when || context.staticContext) return null;
@@ -35,7 +35,7 @@ function Prompt({ message, when = true }: PromptProps) {
 							}
 						}}
 						onUnmount={self => {
-							if (self.release){
+							if (self.release) {
 								self.release();
 							}
 						}}

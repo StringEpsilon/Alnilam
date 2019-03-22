@@ -13,22 +13,13 @@ describe("A <Prompt>", () => {
 		ReactDOM.unmountComponentAtNode(node);
 	});
 
-	describe("with no message", () => {
-		it("logs a warning to the console", () => {
+	describe("without a <Router>", () => {
+		it("throws an error", () => {
 			jest.spyOn(console, "error").mockImplementation(() => { });
 
-			renderStrict(
-				<MemoryRouter>
-					<Prompt />
-				</MemoryRouter>,
-				node
-			);
-
-			expect(console.error).toHaveBeenCalledWith(
-				expect.stringMatching(
-					"The prop `message` is marked as required in `Prompt`"
-				)
-			);
+			expect(() => {
+				renderStrict(<Prompt />, node);
+			}).toThrow(/You should not use <Prompt> outside a <Router>/);
 		});
 	});
 
