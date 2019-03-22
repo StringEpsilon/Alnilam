@@ -13,7 +13,7 @@ describe("A <Route>", () => {
 	});
 
 	describe("context", () => {
-		let context: RouterContextType|null = null;
+		let context: RouterContextType | null = null;
 		function ContextChecker() {
 			return (
 				<RouterContext.Consumer>
@@ -39,7 +39,10 @@ describe("A <Route>", () => {
 				node
 			);
 
-			expect(context.history).toBe(history);
+			expect(context).toBeTruthy();
+			if (context) {
+				expect(context.history).toBe(history);
+			}
 		});
 
 		it("has a `location` property", () => {
@@ -51,8 +54,10 @@ describe("A <Route>", () => {
 				</Router>,
 				node
 			);
-
-			expect(context.location).toBe(history.location);
+			expect(context).toBeTruthy();
+			if (context) {
+				expect(context.location).toBe(history.location);
+			}
 		});
 
 		it("has a `match` property", () => {
@@ -66,13 +71,15 @@ describe("A <Route>", () => {
 				</Router>,
 				node
 			);
-
-			expect(context.match).toMatchObject({
-				path: "/",
-				url: "/",
-				params: {},
-				isExact: true
-			});
+			expect(context).toBeTruthy();
+			if (context) {
+				expect(context.match).toMatchObject({
+					path: "/",
+					url: "/",
+					params: {},
+					isExact: true
+				});
+			}
 		});
 	});
 });

@@ -10,3 +10,4 @@ export { default as RouterContext } from "./RouterContext";
 export { default as StaticRouter } from "./StaticRouter";
 export { default as Switch } from "./Switch";
 export { default as withRouter } from "./withRouter";
+export { default as Match } from "./Match"
