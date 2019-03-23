@@ -20,10 +20,6 @@ export interface MatchProps {
 	computedMatch?: Match,
 }
 
-function isEmptyChildren(children: any) {
-	return React.Children.count(children) === 0;
-}
-
 /**
  * The public API for matching a single path and rendering.
  */
