@@ -65,7 +65,7 @@ function MyRouter() {
 
 * [ ] Verify that the build output and package.json are in order
 * [x] Publish the package.
-* [ ] Outline API changes and refactorings for future work.
+* [ ] Outline (or implement) API changes and refactorings for future work.
 * [ ] Figure out typing for withRouter()
 * [ ] Figure out how to properly publish types along side the normal output.
 * [ ] Integrate typescript to rollup build without mandating tslib dependency. Somehow
