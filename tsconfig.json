@@ -3,22 +3,17 @@
   "compilerOptions": {
     "moduleResolution": "node",
     "jsx": "react",
-    "target": "es5",
+	"noEmit": true,
     "module":"es2015",
     "removeComments": true,
-    "lib": ["es2015", "es2016", "es2017", "dom"],
+	"lib": ["es2015", "es2016", "dom"],
     "strict": true,
-    "sourceMap": false,
-    "declaration": false,
     "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
     "allowJs": false,
-    "outDir": "dist/lib",
     "typeRoots": [
       "node_modules/@types"
     ],
-    "noImplicitAny": true
+	"noImplicitAny": true,
   },
   "include": [
     "src"
