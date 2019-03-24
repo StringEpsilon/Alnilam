@@ -1,5 +1,9 @@
+## 0.2.1 (2019-03-24)
 
-## 0.2.0 (future)
+* Fixed filename of ESM build (alnilam.min.js -> alnilam.js)
+* Fixed entry points in package.json.
+
+## 0.2.0 (2019-03-24)
 
 * Implemented ```Match```
 
