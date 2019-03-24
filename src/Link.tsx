@@ -1,9 +1,10 @@
 import React from "react";
 import RouterContext from "./RouterContext";
-import { createLocation, Location } from "history";
+
+import { createLocation, History, Location } from "history";
 import PropTypes from "prop-types";
 
-function isModifiedEvent(event: React.MouseEvent | React.KeyboardEvent) {
+function isModifiedEvent(event: React.MouseEvent) {
 	return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
 }
 
@@ -22,33 +23,9 @@ interface LinkProps {
  * The public API for rendering a history-aware <a>.
  */
 class Link extends React.Component<LinkProps> {
-	static contextType = RouterContext;
 	static propTypes: ObjectMap<any>;
 
-	constructor(props: LinkProps) {
-		super(props);
-		this.handleKeyPress = this.handleKeyPress.bind(this);
-		this.handleClick = this.handleClick.bind(this);
-	}
-
-	handleKeyPress(event: React.KeyboardEvent) {
-		if (isModifiedEvent(event)) {
-			return;
-		}
-		if (event.defaultPrevented) {
-			return;
-		}
-		if (event.key === "Enter") {
-			event.preventDefault();
-			const method = this.props.replace ?
-				this.context.history.replace as (to: string | Location) => void :
-				this.context.history.push as (to: string | Location) => void;
-
-			method(this.props.to);
-		}
-	}
-
-	handleClick(event: React.MouseEvent) {
+	handleClick(event: React.MouseEvent, history: History) {
 		if (this.props.onClick) {
 			this.props.onClick(event);
 		}
@@ -75,8 +52,8 @@ class Link extends React.Component<LinkProps> {
 
 		event.preventDefault();
 		const method = this.props.replace ?
-			this.context.history.replace as (to: string | Location) => void :
-			this.context.history.push as (to: string | Location) => void;
+			history.replace as (to: string | Location) => void :
+			history.push as (to: string | Location) => void;
 
 		method(this.props.to);
 	}
@@ -84,26 +61,32 @@ class Link extends React.Component<LinkProps> {
 	render() {
 		const { innerRef, replace, to, ...rest } = this.props; // eslint-disable-line no-unused-vars
 
-
-		if (!this.context) {
-			throw new Error(__DEV__ ? "You should not use <Link> outside a <Router>" : "Invariant failed");
-		}
-
-		const location =
-			typeof to === "string"
-				// void(0) because of the typing missmatch in createLocation().
-				? createLocation(to, null, void (0), this.context.location)
-				: to;
-		const href = location ? this.context.history.createHref(location) : "";
-
 		return (
-			<a
-				{...rest}
-				onClick={this.handleClick}
-				onKeyPress={this.handleKeyPress}
-				href={href}
-				ref={innerRef}
-			/>
+			<RouterContext.Consumer>
+				{context => {
+					if (!context) {
+						throw new Error(__DEV__ ? "You should not use <Link> outside a <Router>" : "Invariant failed");
+					}
+
+					const location =
+						typeof to === "string"
+							// void(0) because of the typing missmatch in createLocation().
+							? createLocation(to, null, void (0), context.location)
+							: to;
+					const href = location ? context.history.createHref(location) : "";
+
+					return (
+						<a
+							{...rest}
+							onClick={(event) => {
+								return this.handleClick(event, context.history);
+							}}
+							href={href}
+							ref={innerRef}
+						/>
+					);
+				}}
+			</RouterContext.Consumer>
 		);
 	}
 }

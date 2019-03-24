@@ -2,7 +2,7 @@
 	"name": "alnilam",
 	"version": "0.1.0",
 	"description": "Stellar, statically typed, declarative routing for react.",
-	"main": "/dist/cjs/alnilam.min.js",
+	"main": "index.js",
 	"sideEffects": false,
 	"module": "dist/esm/alnilam.js",
 	"scripts": {

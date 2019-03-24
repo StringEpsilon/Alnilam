@@ -1,19 +1,12 @@
 
 ## 0.2.0 (future)
 
-### Public:
-
 * Implemented ```Match```
 
 Match will always render the child components, like ```Route``` does in react-router@5 or alnilam@0.1.0. Unlike Route, it doesn't have a 
 render or component prop. It will instead just calculate the match and give it as a prop to the child.
 
-* Added onKeyPress handler to ```Link``` for slightly improved accessibility.
-
-### Internal:
-
 * Improved test coverage of ```Prompt```
-* Improved test coverage of ```Link```
 
 
 
