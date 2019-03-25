@@ -2,12 +2,14 @@ Stellar declarative routing in typescript, for React.
 
 :star: :star2: :star:
 
+[Documentation](./docs/readme.md)
+
 ## Why "Alnilam"?
 
 [Alnilam](https://en.wikipedia.org/wiki/Alnilam) is a star that was used in celestial
 navigation. It's one of the stars in Orions belt - which happens to be my
 favorite constellation - and it's official designation is *Epsilon* Orionis.
-I'm also a a fan of contrived package names ;-)
+I'm also a fan of contrived package names ;-)
 
 ## Thanks
 
@@ -66,8 +68,15 @@ function MyRouter() {
     </Router>
   );
 }
-
 ```
+## Demonstration
+
+[Here is a codesandbox](https://codesandbox.io/s/kkw61p4lno) demonstrating:
+
+* Nested routes
+* Basic use of ```<Match>```, ```<Route>```, ```<Link>```, and ```<Switch>```
+* Use of parameters in route declarations
+
 
 ## TODO for 1.0
 

@@ -12,7 +12,7 @@ function isModifiedEvent(event: React.MouseEvent) {
 interface LinkProps {
 	onClick?: (event: React.MouseEvent) => void;
 	innerRef?: any;
-	replace?: (to: string | Location) => void;
+	replace?: boolean;
 	to: string | Location;
 	target?: string;
 	"aria-current"?: any;
