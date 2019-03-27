@@ -1,6 +1,6 @@
 {
 	"name": "alnilam",
-	"version": "0.3.0-beta.0",
+	"version": "0.3.0-beta.1",
 	"description": "Stellar, statically typed, declarative routing for react.",
 	"main": "dist/cjs/alnilam.js",
 	"sideEffects": false,
