@@ -34,7 +34,7 @@ describe("A <Route>", () => {
 
 			renderStrict(
 				<Router history={history}>
-					<Route component={ContextChecker} />
+					<Route ><ContextChecker /></Route>
 				</Router>,
 				node,
 			);
@@ -50,7 +50,7 @@ describe("A <Route>", () => {
 
 			renderStrict(
 				<Router history={history}>
-					<Route component={ContextChecker} />
+					<Route ><ContextChecker /></Route>
 				</Router>,
 				node,
 			);
@@ -67,7 +67,9 @@ describe("A <Route>", () => {
 
 			renderStrict(
 				<Router history={history}>
-					<Route component={ContextChecker} />
+					<Route >
+						<ContextChecker />
+					</Route>
 				</Router>,
 				node,
 			);

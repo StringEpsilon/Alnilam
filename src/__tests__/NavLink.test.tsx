@@ -595,14 +595,11 @@ describe("A <NavLink>", () => {
 
 			renderStrict(
 				<MemoryRouter initialEntries={["/pizza/"]}>
-					<Route
-						path="/pizza"
-						component={() => (
+					<Route path="/pizza">
 							<NavLink to="/pizza/">
 								<PropChecker />
 							</NavLink>
-						)}
-					/>
+					</Route>
 				</MemoryRouter>,
 				node,
 			);
@@ -619,14 +616,11 @@ describe("A <NavLink>", () => {
 			});
 			renderStrict(
 				<MemoryRouter initialEntries={["/pizza/cheese"]}>
-					<Route
-						path="/pizza/:topping"
-						component={() => (
-							<NavLink to="/pizza/">
-								<PropChecker />
-							</NavLink>
-						)}
-					/>
+					<Route path="/pizza/:topping">
+						<NavLink to="/pizza/">
+							<PropChecker />
+						</NavLink>
+					</Route>
 				</MemoryRouter>,
 				node,
 			);

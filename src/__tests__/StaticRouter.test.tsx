@@ -49,7 +49,9 @@ describe("A <StaticRouter>", () => {
 
 			ReactDOMServer.renderToStaticMarkup(
 				<StaticRouter location="/the/path?the=query#the-hash">
-					<Route component={LocationChecker} />
+					<Route >
+						<LocationChecker />
+					</Route>
 				</StaticRouter>,
 			);
 
@@ -70,7 +72,9 @@ describe("A <StaticRouter>", () => {
 
 				ReactDOMServer.renderToStaticMarkup(
 					<StaticRouter location="/est%C3%A1tico">
-						<Route path="/:type" component={PropsChecker} />
+						<Route path="/:type">
+							<PropsChecker />
+						</Route>
 					</StaticRouter>,
 				);
 
@@ -92,7 +96,7 @@ describe("A <StaticRouter>", () => {
 
 			ReactDOMServer.renderToStaticMarkup(
 				<StaticRouter location={{ pathname: "/the/path", search: "", state: "", hash: "" }}>
-					<Route component={LocationChecker} />
+					<Route ><LocationChecker /></Route>
 				</StaticRouter>,
 			);
 			expect.assertions(1);
@@ -108,7 +112,7 @@ describe("A <StaticRouter>", () => {
 
 				ReactDOMServer.renderToStaticMarkup(
 					<StaticRouter location={{ pathname: "/est%C3%A1tico", search: "", state: "", hash: "" }}>
-						<Route path="/:type" component={PropsChecker} />
+						<Route path="/:type" ><PropsChecker /></Route>
 					</StaticRouter>,
 				);
 
@@ -149,7 +153,9 @@ describe("A <StaticRouter>", () => {
 					basename="/the-base"
 					location="/the-base/path"
 				>
-					<Route component={LocationChecker} />
+					<Route >
+						<LocationChecker />
+					</Route>
 				</StaticRouter>,
 			);
 
@@ -192,7 +198,7 @@ describe("A <StaticRouter>", () => {
 					<Route
 						children={({ history: { createHref } }) => (
 
-							<a href={createHref(props.to)}/>
+							<a href={createHref(props.to)} />
 						)}
 					/>
 				);

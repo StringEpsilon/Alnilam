@@ -1,13 +1,43 @@
-## 0.x.x (future)
+## 0.3.0-beta.1 (2019-03-27)
+
+### BREAKING:
+
+* ```Route```: Removed render prop
+* ```Route```: Removed component
+* ```Route```: Render children only if the path matches.
+
+Quick migration guide:
+
+```jsx
+
+<Route to="/rigel" component={MyComponent}/>
+
+// becomes:
+
+<Route to="/rigel">
+	<MyComponent />
+</Route>
+```
+
+### Changes and fixes:
 
 * Fixed component names in warnings and invariant exceptions.
 * Bumped @babel/runtime to 7.4.0
 * Swap Route for Match inside withRouter().
+* Tweaked how props are passed to Children of Match
 
-Internal:
+
+```jsx
+<Match path="foo">
+	<MyComponent/> {/* MyComponent will now get the usual props. */}
+</Match>
+```
+
+
+### Internal:
 
 * Added tslint (and then reformatted a lot of code)
-
+* Bumped some devDependencies
 
 ## 0.2.1 (2019-03-24)
 
@@ -18,7 +48,7 @@ Internal:
 
 * Implemented ```Match```
 
-Match will always render the child components, like ```Route``` does in react-router@5 or alnilam@0.1.0. Unlike Route, it doesn't have a 
+Match will always render the child components, like ```Route``` does in react-router@5 or alnilam@0.1.0. Unlike Route, it doesn't have a
 render or component prop. It will instead just calculate the match and give it as a prop to the child.
 
 * Improved test coverage of ```Prompt```

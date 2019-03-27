@@ -21,7 +21,8 @@ class Router extends React.Component<RouterProps, { location: Location }> {
 	private static computeRootMatch(pathname: string): Match {
 		return { path: "/", url: "/", params: {}, isExact: pathname === "/" };
 	}
-	private isMounted: boolean;
+	// tslint:disable-next-line:variable-name
+	private _isMounted: boolean;
 	private pendingLocation: Location | null;
 	private unlisten: any;
 
@@ -37,12 +38,12 @@ class Router extends React.Component<RouterProps, { location: Location }> {
 		// on the initial render. If there are, they will replace/push when
 		// they mount and since cDM fires in children before parents, we may
 		// get a new location before the <Router> is mounted.
-		this.isMounted = false;
+		this._isMounted = false;
 		this.pendingLocation = null;
 
 		if (!props.staticContext) {
 			this.unlisten = props.history.listen((location: Location) => {
-				if (this.isMounted) {
+				if (this._isMounted) {
 					this.setState({ location });
 				} else {
 					this.pendingLocation = location;
@@ -52,7 +53,7 @@ class Router extends React.Component<RouterProps, { location: Location }> {
 	}
 
 	public componentDidMount() {
-		this.isMounted = true;
+		this._isMounted = true;
 
 		if (this.pendingLocation) {
 			this.setState({ location: this.pendingLocation });

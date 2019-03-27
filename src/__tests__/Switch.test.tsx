@@ -26,8 +26,8 @@ describe("A <Switch>", () => {
 		renderStrict(
 			<MemoryRouter initialEntries={["/one"]}>
 				<Switch>
-					<Route path="/one" render={() => <h1>one</h1>} />
-					<Route path="/two" render={() => <h1>two</h1>} />
+					<Route path="/one" > <h1>one</h1> </Route>
+					<Route path="/two" > <h1>two</h1> </Route>
 				</Switch>
 			</MemoryRouter>,
 			node,
@@ -40,8 +40,8 @@ describe("A <Switch>", () => {
 		renderStrict(
 			<MemoryRouter initialEntries={["/one"]}>
 				<Switch>
-					<Route path="/one" render={() => <h1>one</h1>} />
-					<Route path="/one" render={() => <h1>two</h1>} />
+					<Route path="/one" > <h1>one</h1> </Route>
+					<Route path="/one" > <h1>two</h1> </Route>
 				</Switch>
 			</MemoryRouter>,
 			node,
@@ -54,8 +54,8 @@ describe("A <Switch>", () => {
 		renderStrict(
 			<MemoryRouter initialEntries={["/three"]}>
 				<Switch>
-					<Route path="/one" render={() => <h1>one</h1>} />
-					<Route path="/two" render={() => <h1>two</h1>} />
+					<Route path="/one" > <h1>one</h1> </Route>
+					<Route path="/two" > <h1>two</h1> </Route>
 					<Redirect from="/three" to="/two" />
 				</Switch>
 			</MemoryRouter>,
@@ -72,8 +72,8 @@ describe("A <Switch>", () => {
 		renderStrict(
 			<MemoryRouter initialEntries={["/three"]}>
 				<Switch>
-					<Route path="/one" render={() => <h1>one</h1>} />
-					<Route path="/two" render={() => <h1>two</h1>} />
+					<Route path="/one" > <h1>one</h1> </Route>
+					<Route path="/two" > <h1>two</h1> </Route>
 					<Redirect from="/three" to="/two" />
 					<Redirect from="/three" to="/one" />
 				</Switch>
@@ -91,8 +91,8 @@ describe("A <Switch>", () => {
 		renderStrict(
 			<MemoryRouter initialEntries={["/two"]}>
 				<Switch>
-					<Route path="/one" render={() => <h1>one</h1>} />
-					<Route render={() => <h1>two</h1>} />
+					<Route path="/one" > <h1>one</h1> </Route>
+					<Route > <h1>two</h1> </Route>
 				</Switch>
 			</MemoryRouter>,
 			node,
@@ -105,9 +105,9 @@ describe("A <Switch>", () => {
 		renderStrict(
 			<MemoryRouter initialEntries={["/three"]}>
 				<Switch>
-					<Route path="/one" render={() => <h1>one</h1>} />
+					<Route path="/one" > <h1>one</h1> </Route>
 					<Redirect to="/one" />
-					<Route path="/two" render={() => <h1>two</h1>} />
+					<Route path="/two" > <h1>two</h1> </Route>
 				</Switch>
 			</MemoryRouter>,
 			node,
@@ -125,7 +125,7 @@ describe("A <Switch>", () => {
 				<Switch>
 					<Redirect from="/one" to="/two" />
 					<Redirect from="/two" to="/three" />
-					<Route path="/three" render={() => <h1>three</h1>} />
+					<Route path="/three"> <h1>three</h1> </Route>
 				</Switch>
 			</MemoryRouter>,
 			node,
@@ -141,9 +141,13 @@ describe("A <Switch>", () => {
 		renderStrict(
 			<MemoryRouter initialEntries={["/cupcakes"]}>
 				<Switch>
-					<Route path="/bubblegum" render={() => <div>bub</div>} />
+					<Route path="/bubblegum">
+						<div>bub</div>
+					</Route>
 					{/* this is a comment */}
-					<Route path="/cupcakes" render={() => <div>cup</div>} />
+					<Route path="/cupcakes">
+						<div>cup</div>
+					</Route>
 				</Switch>
 			</MemoryRouter>,
 			node,
@@ -157,7 +161,7 @@ describe("A <Switch>", () => {
 		renderStrict(
 			<MemoryRouter initialEntries={["/one"]}>
 				<Switch>
-					<Route path="/one" render={() => <h1>one</h1>} />
+					<Route path="/one" > <h1>one</h1> </Route>
 					{false}
 					{undefined}
 				</Switch>
@@ -172,8 +176,12 @@ describe("A <Switch>", () => {
 		renderStrict(
 			<MemoryRouter initialEntries={["/one"]}>
 				<Switch location={{ pathname: "/two", search: "", hash: "", state: "" }}>
-					<Route path="/one" render={() => <h1>one</h1>} />
-					<Route path="/two" render={() => <h1>two</h1>} />
+					<Route path="/one">
+						<h1>one</h1>
+					</Route>
+					<Route path="/two">
+						<h1>two</h1>
+					</Route>
 				</Switch>
 			</MemoryRouter>,
 			node,

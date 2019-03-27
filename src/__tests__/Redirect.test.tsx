@@ -22,13 +22,12 @@ describe("A <Redirect>", () => {
 							from="/users/:username/messages/:messageId"
 							to="/:username/messages/:messageId"
 						/>
-						<Route
-							path="/:username/messages/:messageId"
-							render={({ match }) => {
+						<Route path="/:username/messages/:messageId">
+							{({ match }) => {
 								params = match.params;
 								return null;
 							}}
-						/>
+						</Route>
 					</Switch>
 				</MemoryRouter>,
 				node,

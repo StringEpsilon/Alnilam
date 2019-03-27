@@ -12,10 +12,6 @@ export interface RouteProps {
 	match?: Match | null;
 	location?: Location;
 	// TODO: remove any?
-	component?: React.ComponentType<any> | React.ComponentType<any>;
-	// TODO: remove any?
-	render?: ((props: any) => React.ReactNode);
-	// TODO: remove any?
 	children?: ((props: any) => React.ReactNode) | React.ReactNode;
 	path?: string | string[];
 	exact?: boolean;
@@ -39,7 +35,7 @@ class Route extends React.Component<RouteProps> {
 			<RouterContext.Consumer>
 				{(context) => {
 					if (!context) {
-						throw new Error(__DEV__ ?  "You should not use <Route> outside a <Router>" : "Invariant failed");
+						throw new Error(__DEV__ ? "You should not use <Route> outside a <Router>" : "Invariant failed");
 					}
 					const location = this.props.location || context.location;
 					const path = this.props.path;
@@ -51,20 +47,15 @@ class Route extends React.Component<RouteProps> {
 
 					const props = { ...context, location, match };
 
-					const { component, render } = this.props;
 					const children = sanitizeChildren("Route", this.props.children, props, path);
+
+					if (!match || !children) {
+						return null;
+					}
 
 					return (
 						<RouterContext.Provider value={props}>
-							{children && !isEmptyChildren(children)
-								? children
-								: props.match
-									? component
-										? React.createElement(component, props)
-										: render
-											? render(props)
-											: null
-									: null}
+							{children}
 						</RouterContext.Provider>
 					);
 				}}
@@ -76,49 +67,15 @@ class Route extends React.Component<RouteProps> {
 if (__DEV__) {
 	Route.propTypes = {
 		children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-		component: (props: ObjectMap<any>, propName: string) => {
-			if (props[propName] && !isValidElementType(props[propName])) {
-				return new Error(
-					`Invalid prop 'component' supplied to 'Route': the prop is not a valid React component`,
-				);
-			}
-		},
 		exact: PropTypes.bool,
 		location: PropTypes.object,
 		path: PropTypes.oneOfType([
 			PropTypes.string,
 			PropTypes.arrayOf(PropTypes.string),
 		]),
-		render: PropTypes.func,
 		sensitive: PropTypes.bool,
 		strict: PropTypes.bool,
 	};
-
-	Route.prototype.componentDidMount = function() {
-		warning(
-			!(
-				this.props.children &&
-				!isEmptyChildren(this.props.children) &&
-				this.props.component
-			),
-			"You should not use <Route component> and <Route children> in the same route; <Route component> will be ignored",
-		);
-
-		warning(
-			!(
-				this.props.children &&
-				!isEmptyChildren(this.props.children) &&
-				this.props.render
-			),
-			"You should not use <Route render> and <Route children> in the same route; <Route render> will be ignored",
-		);
-
-		warning(
-			!(this.props.component && this.props.render),
-			"You should not use <Route component> and <Route render> in the same route; <Route render> will be ignored",
-		);
-	};
-
 	addLocationPropWarning(Route.prototype, "Route");
 }
 

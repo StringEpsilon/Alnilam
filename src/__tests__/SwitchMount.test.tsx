@@ -29,8 +29,8 @@ describe("A <Switch>", () => {
 		renderStrict(
 			<Router history={memoryHistory} >
 				<Switch>
-					<Route path="/one" component={MountCounter} />
-					<Route path="/two" component={MountCounter} />
+					<Route path="/one" ><MountCounter /></Route>
+					<Route path="/two" ><MountCounter /></Route>
 				</Switch>
 			</Router>,
 			node,

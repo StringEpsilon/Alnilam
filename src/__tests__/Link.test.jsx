@@ -14,7 +14,7 @@ describe("A <Link>", () => {
 		ReactDOM.unmountComponentAtNode(node);
 	});
 
-	describe("calls onClick eventhandler and history.push", () => {
+	it("calls onClick eventhandler and history.push", () => {
 		const clickHandler = jest.fn();
 		const memoryHistory = createMemoryHistory();
 		memoryHistory.push = jest.fn();
@@ -38,7 +38,7 @@ describe("A <Link>", () => {
 		expect(memoryHistory.push).toBeCalledWith(to);
 	})
 
-	describe("does not call history.push on right click", () => {
+	it("does not call history.push on right click", () => {
 		const memoryHistory = createMemoryHistory();
 		memoryHistory.push = jest.fn();
 		const to = "/the/path?the=query#the-hash";
@@ -59,7 +59,7 @@ describe("A <Link>", () => {
 		expect(memoryHistory.push).toBeCalledTimes(0);
 	})
 
-	describe("does not call history.push on prevented event.", () => {
+	it("does not call history.push on prevented event.", () => {
 		const memoryHistory = createMemoryHistory();
 		memoryHistory.push = jest.fn();
 		const to = "/the/path?the=query#the-hash";
@@ -80,7 +80,7 @@ describe("A <Link>", () => {
 		expect(memoryHistory.push).toBeCalledTimes(0);
 	})
 
-	describe("does not call history.push target not specifying 'self'", () => {
+	it("does not call history.push target not specifying 'self'", () => {
 		const memoryHistory = createMemoryHistory();
 		memoryHistory.push = jest.fn();
 		const to = "/the/path?the=query#the-hash";

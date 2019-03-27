@@ -22,6 +22,8 @@ interface NavLinkProps {
 	style?: any;
 	to: string | Location;
 	children: React.ReactNode;
+
+	staticContext?: any;
 }
 
 /**
@@ -39,6 +41,7 @@ function NavLink(props: NavLinkProps) {
 		strict,
 		style,
 		to,
+		staticContext,
 		...rest
 	} = props;
 

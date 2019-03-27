@@ -28,7 +28,9 @@ describe("A <Route>", () => {
 
 		renderStrict(
 			<MemoryRouter initialEntries={["/cupcakes"]}>
-				<Route path="/cupcakes" render={() => <h1>{text}</h1>} />
+				<Route path="/cupcakes">
+					<h1>{text}</h1>
+				</Route>
 			</MemoryRouter>,
 			node,
 		);
@@ -41,7 +43,9 @@ describe("A <Route>", () => {
 
 		renderStrict(
 			<MemoryRouter initialEntries={["/"]}>
-				<Route path="/" render={() => <h1>{text}</h1>} />
+				<Route path="/">
+					<h1>{text}</h1>
+				</Route>
 			</MemoryRouter>,
 			node,
 		);
@@ -54,7 +58,9 @@ describe("A <Route>", () => {
 
 		renderStrict(
 			<MemoryRouter initialEntries={["/bunnies"]}>
-				<Route path="/flowers" render={() => <h1>{text}</h1>} />
+				<Route path="/flowers">
+					<h1>{text}</h1>
+				</Route>
 			</MemoryRouter>,
 			node,
 		);
@@ -69,10 +75,9 @@ describe("A <Route>", () => {
 
 		renderStrict(
 			<Router history={history}>
-				<Route
-					path="/sushi/:roll"
-					render={({ match }) => <h1>{match.url}</h1>}
-				/>
+				<Route path="/sushi/:roll">
+					{({ match }) => <h1>{match.url}</h1>}
+				</Route>
 			</Router>,
 			node,
 		);
@@ -86,10 +91,9 @@ describe("A <Route>", () => {
 		it("decodes them", () => {
 			renderStrict(
 				<MemoryRouter initialEntries={["/a%20dynamic%20segment"]}>
-					<Route
-						path="/:id"
-						render={({ match }) => <h1>{match.params.id}</h1>}
-					/>
+					<Route path="/:id" >
+						{({ match }) => <h1>{match.params.id}</h1>}
+					</Route>
 				</MemoryRouter>,
 				node,
 			);
@@ -102,10 +106,9 @@ describe("A <Route>", () => {
 		it("matches the first provided path", () => {
 			ReactDOM.render(
 				<MemoryRouter initialEntries={["/hello"]}>
-					<Route
-						path={["/hello", "/world"]}
-						render={() => <div>Hello World</div>}
-					/>
+					<Route path={["/hello", "/world"]} >
+						{() => <div>Hello World</div>}
+					</Route>
 				</MemoryRouter>,
 				node,
 			);
@@ -116,10 +119,9 @@ describe("A <Route>", () => {
 		it("matches other provided paths", () => {
 			ReactDOM.render(
 				<MemoryRouter initialEntries={["/other", "/world"]} initialIndex={1}>
-					<Route
-						path={["/hello", "/world"]}
-						render={() => <div>Hello World</div>}
-					/>
+					<Route path={["/hello", "/world"]} >
+						{() => <div>Hello World</div>}
+					</Route>
 				</MemoryRouter>,
 				node,
 			);
@@ -130,10 +132,9 @@ describe("A <Route>", () => {
 		it("provides the matched path as a string", () => {
 			ReactDOM.render(
 				<MemoryRouter initialEntries={["/other", "/world"]} initialIndex={1}>
-					<Route
-						path={["/hello", "/world"]}
-						render={({ match }) => <div>{match.path}</div>}
-					/>
+					<Route path={["/hello", "/world"]} >
+						{({ match }) => <div>{match.path}</div>}
+					</Route>
 				</MemoryRouter>,
 				node,
 			);
@@ -156,7 +157,9 @@ describe("A <Route>", () => {
 			history.push("/hello");
 			ReactDOM.render(
 				<Router history={history}>
-					<Route path={["/hello", "/world"]} component={MatchedRoute} />
+					<Route path={["/hello", "/world"]}>
+						<MatchedRoute />
+					</Route>
 				</Router>,
 				node,
 			);
@@ -175,7 +178,9 @@ describe("A <Route>", () => {
 		it("is able to match", () => {
 			renderStrict(
 				<MemoryRouter initialEntries={["/パス名"]}>
-					<Route path="/パス名" render={({ match }) => <h1>{match.url}</h1>} />
+					<Route path="/パス名" >
+						{({ match }) => <h1>{match.url}</h1>}
+					</Route>
 				</MemoryRouter>,
 				node,
 			);
@@ -188,10 +193,9 @@ describe("A <Route>", () => {
 		it("is able to match", () => {
 			renderStrict(
 				<MemoryRouter initialEntries={["/pizza (1)"]}>
-					<Route
-						path="/pizza \(1\)"
-						render={({ match }) => <h1>{match.url}</h1>}
-					/>
+					<Route path="/pizza \(1\)">
+						{({ match }) => <h1>{match.url}</h1>}
+					</Route>
 				</MemoryRouter>,
 				node,
 			);
@@ -206,7 +210,9 @@ describe("A <Route>", () => {
 
 			renderStrict(
 				<MemoryRouter initialEntries={["/somepath/"]}>
-					<Route exact={true} path="/somepath" render={() => <h1>{text}</h1>} />
+					<Route exact={true} path="/somepath">
+						{() => <h1>{text}</h1>}
+					</Route>
 				</MemoryRouter>,
 				node,
 			);
@@ -219,7 +225,9 @@ describe("A <Route>", () => {
 
 			renderStrict(
 				<MemoryRouter initialEntries={["/somepath"]}>
-					<Route exact={true} path="/somepath/" render={() => <h1>{text}</h1>} />
+					<Route exact={true} path="/somepath/">
+						<h1>{text}</h1>}
+					</Route>
 				</MemoryRouter>,
 				node,
 			);
@@ -272,215 +280,15 @@ describe("A <Route>", () => {
 
 			renderStrict(
 				<MemoryRouter initialEntries={["/cupcakes"]}>
-					<Route
-						location={{ pathname: "/bubblegum", search: "", state: "", hash: "" }}
-						path="/bubblegum"
-						render={() => <h1>{text}</h1>}
-					/>
+					<Route location={{ pathname: "/bubblegum", search: "", state: "", hash: "" }}
+						path="/bubblegum">
+						<h1>{text}</h1>
+					</Route>
 				</MemoryRouter>,
 				node,
 			);
 
 			expect(node.innerHTML).toContain(text);
-		});
-	});
-
-	describe("the `children` prop", () => {
-		describe("that is an element", () => {
-			it("renders", () => {
-				const text = "bubblegum";
-
-				renderStrict(
-					<MemoryRouter initialEntries={["/"]}>
-						<Route path="/">
-							<h1>{text}</h1>
-						</Route>
-					</MemoryRouter>,
-					node,
-				);
-
-				expect(node.innerHTML).toContain(text);
-			});
-		});
-
-		describe("that is a function", () => {
-			it("receives { history, location, match } props", () => {
-				const history = createHistory();
-
-				renderStrict(
-					<Router history={history}>
-						<Route
-							path="/"
-							children={(props: RouteProps) => {
-								expect(props).not.toBe(null);
-								if (props) {
-									expect(props.history).toBe(history);
-									expect(typeof props.location).toBe("object");
-									expect(typeof props.match).toBe("object");
-								}
-								return null;
-							}}
-						/>
-					</Router>,
-					node,
-				);
-				expect.assertions(4);
-			});
-
-			it("renders", () => {
-				const text = "bubblegum";
-
-				renderStrict(
-					<MemoryRouter initialEntries={["/"]}>
-						<Route path="/" children={() => <h1>{text}</h1>} />
-					</MemoryRouter>,
-					node,
-				);
-
-				expect(node.innerHTML).toContain(text);
-			});
-
-			describe("that returns `undefined`", () => {
-				it("logs a warning to the console and renders nothing", () => {
-					jest.spyOn(console, "warn").mockImplementation(() => null);
-
-					renderStrict(
-						<MemoryRouter initialEntries={["/"]}>
-							<Route path="/" children={() => undefined} />
-						</MemoryRouter>,
-						node,
-					);
-
-					expect(node.innerHTML).toEqual("");
-					// tslint:disable-next-line:no-console
-					expect(console.warn).toHaveBeenCalledWith(
-						expect.stringContaining(
-							"You returned `undefined` from the `children` function",
-						),
-					);
-				});
-			});
-		});
-
-		describe("that is an empty array (as in Preact)", () => {
-			it("ignores the children", () => {
-				const text = "bubblegum";
-
-				renderStrict(
-					<MemoryRouter>
-						<Route render={() => <h1>{text}</h1>}>{[]}</Route>
-					</MemoryRouter>,
-					node,
-				);
-
-				expect(node.innerHTML).toContain(text);
-			});
-		});
-	});
-
-	describe("the `component` prop", () => {
-		it("renders the component", () => {
-			const text = "bubblegum";
-
-			const Home = () => <h1>{text}</h1>;
-
-			renderStrict(
-				<MemoryRouter initialEntries={["/"]}>
-					<Route path="/" component={Home} />
-				</MemoryRouter>,
-				node,
-			);
-
-			expect(node.innerHTML).toContain(text);
-		});
-
-		it("receives { history, location, match } props", () => {
-			const history = createHistory();
-
-			const Component = (props: RouteProps) => {
-				expect(props).not.toBe(null);
-				expect(props.history).toBe(history);
-				expect(typeof props.location).toBe("object");
-				expect(typeof props.match).toBe("object");
-				return null;
-			};
-
-			renderStrict(
-				<Router history={history}>
-					<Route path="/" component={Component} />
-				</Router>,
-				node,
-			);
-
-			expect.assertions(4);
-		});
-
-		it("won't throw a prop-type warning when passed valid React components that aren't functions", () => {
-			// tslint:disable-next-line:no-shadowed-variable
-			function forwardRef(Component: (props: any) => any) {
-				// tslint:disable-next-line:max-classes-per-file
-				class ForwardComponent extends React.Component<any> {
-					public render() {
-						const { forwardedRef, ...rest } = this.props;
-						return <Component ref={forwardedRef} {...rest} />;
-					}
-				}
-				return React.forwardRef((props, ref) => {
-					return <ForwardComponent {...props} forwardedRef={ref} />;
-				});
-			}
-
-			const history = createHistory();
-			const Component = () => null;
-			const WrappedComponent = forwardRef(Component);
-			jest.spyOn(console, "error").mockImplementation(() => ({}));
-
-			ReactDOM.render(
-				<Router history={history}>
-					<Route path="/" component={WrappedComponent} />
-				</Router>,
-				node,
-			);
-
-			// tslint:disable-next-line:no-console
-			expect(console.error).not.toHaveBeenCalled();
-		});
-	});
-
-	describe("the `render` prop", () => {
-		it("renders its return value", () => {
-			const text = "Mrs. Kato";
-
-			renderStrict(
-				<MemoryRouter initialEntries={["/"]}>
-					<Route path="/" render={() => <h1>{text}</h1>} />
-				</MemoryRouter>,
-				node,
-			);
-
-			expect(node.innerHTML).toContain(text);
-		});
-
-		it("receives { history, location, match } props", () => {
-			const history = createHistory();
-
-			renderStrict(
-				<Router history={history}>
-					<Route
-						path="/"
-						render={(props) => {
-							expect(props).not.toBe(null);
-							expect(props.history).toBe(history);
-							expect(typeof props.location).toBe("object");
-							expect(typeof props.match).toBe("object");
-							return null;
-						}}
-					/>
-				</Router>,
-				node,
-			);
-
-			expect.assertions(4);
 		});
 	});
 });

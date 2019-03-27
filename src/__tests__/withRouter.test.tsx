@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import * as ReactIs from "react-is";
-import { Route, StaticRouter, withRouter } from "../index";
+import { Route, StaticRouter, withRouter, Match } from "../index";
 import MemoryRouter from "./utils/MemoryRouter";
 import renderStrict from "./utils/renderStrict";
 
@@ -48,13 +48,12 @@ describe("withRouter", () => {
 
 		renderStrict(
 			<MemoryRouter initialEntries={["/bubblegum"]}>
-				<Route
-					path="/:flavor"
-					render={({ match }) => {
+				<Route path="/:flavor" >
+					{({ match }) => {
 						parentMatch = match;
 						return <PropsChecker />;
 					}}
-				/>
+				</Route>
 			</MemoryRouter>,
 			node,
 		);
@@ -71,8 +70,7 @@ describe("withRouter", () => {
 
 		renderStrict(
 			<MemoryRouter initialEntries={["/somepath"]}>
-				<Route
-					path="/no-match"
+				<Match path="/no-match"
 					children={({ match }) => {
 						expect(match).toBe(null);
 						return <PropChecker />;
@@ -98,7 +96,7 @@ describe("withRouter", () => {
 
 			renderStrict(
 				<StaticRouter context={context}>
-					<Route component={PropsChecker} />
+					<Route> <PropsChecker /> </Route>
 				</StaticRouter>,
 				node,
 			);
@@ -124,10 +122,9 @@ describe("withRouter", () => {
 		let ref: any;
 		renderStrict(
 			<MemoryRouter initialEntries={["/bubblegum"]}>
-				<Route
-					path="/bubblegum"
-					render={() => <Component wrappedComponentRef={(r: any) => (ref = r)} />}
-				/>
+				<Route path="/bubblegum">
+					<Component wrappedComponentRef={(r: any) => (ref = r)} />
+				</Route>
 			</MemoryRouter>,
 			node,
 		);

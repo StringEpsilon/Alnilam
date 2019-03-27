@@ -17,15 +17,12 @@ describe("Integration Tests", () => {
 
 		renderStrict(
 			<MemoryRouter initialEntries={["/nested"]}>
-				<Route
-					path="/"
-					render={() => (
-						<div>
-							<h1>{TEXT1}</h1>
-							<Route path="/nested" render={() => <h2>{TEXT2}</h2>} />
-						</div>
-					)}
-				/>
+				<Route path="/">
+					<div>
+						<h1>{TEXT1}</h1>
+						<Route path="/nested"><h2>{TEXT2}</h2></Route>
+					</div>
+				</Route>
 			</MemoryRouter>,
 			node,
 		);
@@ -40,14 +37,14 @@ describe("Integration Tests", () => {
 
 		renderStrict(
 			<MemoryRouter initialEntries={["/"]}>
-				<Route
-					path="/"
-					render={() => (
-						<div>
-							<h1>{TEXT1}</h1>
-							<Route path="/nested" render={() => <h2>{TEXT2}</h2>} />
-						</div>
-					)}
+				<Route path="/" >
+					<div>
+						<h1>{TEXT1}</h1>
+						<Route path="/nested">
+							<h2>{TEXT2}</h2>
+						</Route>
+					</div>
+				</Route>
 				/>
 			</MemoryRouter>,
 			node,
@@ -65,10 +62,14 @@ describe("Integration Tests", () => {
 			<MemoryRouter initialEntries={["/double"]}>
 				<div>
 					<aside>
-						<Route path="/double" render={() => <h1>{TEXT1}</h1>} />
+						<Route path="/double" >
+							<h1>{TEXT1}</h1>
+						</Route>
 					</aside>
 					<main>
-						<Route path="/double" render={() => <h1>{TEXT2}</h1>} />
+						<Route path="/double" >
+							<h1>{TEXT2}</h1>
+						</Route>
 					</main>
 				</div>
 			</MemoryRouter>,
