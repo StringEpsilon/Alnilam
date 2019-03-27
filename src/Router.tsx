@@ -21,9 +21,9 @@ class Router extends React.Component<RouterProps, { location: Location }> {
 	private static computeRootMatch(pathname: string): Match {
 		return { path: "/", url: "/", params: {}, isExact: pathname === "/" };
 	}
-	public _isMounted: boolean;
-	public _pendingLocation: Location | null;
-	public _unlisten: any;
+	private isMounted: boolean;
+	private pendingLocation: Location | null;
+	private unlisten: any;
 
 	constructor(props: RouterProps) {
 		super(props);
@@ -37,30 +37,30 @@ class Router extends React.Component<RouterProps, { location: Location }> {
 		// on the initial render. If there are, they will replace/push when
 		// they mount and since cDM fires in children before parents, we may
 		// get a new location before the <Router> is mounted.
-		this._isMounted = false;
-		this._pendingLocation = null;
+		this.isMounted = false;
+		this.pendingLocation = null;
 
 		if (!props.staticContext) {
-			this._unlisten = props.history.listen((location: Location) => {
-				if (this._isMounted) {
+			this.unlisten = props.history.listen((location: Location) => {
+				if (this.isMounted) {
 					this.setState({ location });
 				} else {
-					this._pendingLocation = location;
+					this.pendingLocation = location;
 				}
 			});
 		}
 	}
 
 	public componentDidMount() {
-		this._isMounted = true;
+		this.isMounted = true;
 
-		if (this._pendingLocation) {
-			this.setState({ location: this._pendingLocation });
+		if (this.pendingLocation) {
+			this.setState({ location: this.pendingLocation });
 		}
 	}
 
 	public componentWillUnmount() {
-		if (this._unlisten) { this._unlisten(); }
+		if (this.unlisten) { this.unlisten(); }
 	}
 
 	public render() {
