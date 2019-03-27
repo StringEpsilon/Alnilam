@@ -1,8 +1,7 @@
 import hoistStatics from "hoist-non-react-statics";
 import PropTypes from "prop-types";
 import React from "react";
-
-import Route, { RouteProps } from "./Route";
+import Match from "./Match";
 
 interface WithRouterProps {
 	wrappedComponentRef?: (props: any) => any;
@@ -17,13 +16,15 @@ function withRouter<P>(Component: React.ComponentType<P>) {
 		const { wrappedComponentRef, ...remainingProps } = props;
 
 		return (
-			<Route children={(routeComponentProps: any) => (
-				<Component
-					{...remainingProps}
-					{...routeComponentProps}
-					ref={wrappedComponentRef}
-				/>
-			)} />
+			<Match>
+				{(routeComponentProps: any) => (
+					<Component
+						{...remainingProps}
+						{...routeComponentProps}
+						ref={wrappedComponentRef}
+					/>
+				)}
+			</Match>
 		);
 	};
 

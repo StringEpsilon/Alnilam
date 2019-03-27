@@ -2,7 +2,12 @@
 
 * Fixed component names in warnings and invariant exceptions.
 * Bumped @babel/runtime to 7.4.0
-* 
+* Swap Route for Match inside withRouter().
+
+Internal:
+
+* Added tslint (and then reformatted a lot of code)
+
 
 ## 0.2.1 (2019-03-24)
 

@@ -1,25 +1,25 @@
 {
   "dist/cjs/alnilam.js": {
-    "bundled": 27385,
-    "minified": 14290,
-    "gzipped": 4149
+    "bundled": 27360,
+    "minified": 14293,
+    "gzipped": 4150
   },
   "dist/cjs/alnilam.min.js": {
-    "bundled": 10835,
-    "minified": 10823,
-    "gzipped": 3358
+    "bundled": 10838,
+    "minified": 10826,
+    "gzipped": 3362
   },
   "dist/esm/alnilam.js": {
-    "bundled": 28278,
-    "minified": 14961,
-    "gzipped": 4161,
+    "bundled": 28253,
+    "minified": 14964,
+    "gzipped": 4164,
     "treeshaked": {
       "rollup": {
         "code": 6218,
         "import_statements": 197
       },
       "webpack": {
-        "code": 7519
+        "code": 7525
       }
     }
   }
