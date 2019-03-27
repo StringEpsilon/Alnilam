@@ -5,21 +5,20 @@ import Match from "./Match";
 
 interface WithRouterProps {
 	wrappedComponentRef?: (props: any) => any;
-	remainingProps?: any[];
 }
 
 /**
  * A public higher-order component to access the imperative API
  */
-function withRouter<P>(Component: React.ComponentType<P>) {
+function withRouter<P>(Component: React.ComponentType<P>): any {
 	const WrappedComponent = (props: WithRouterProps) => {
-		const { wrappedComponentRef, ...remainingProps } = props;
+		const { wrappedComponentRef, ...rest } = props;
 
 		return (
 			<Match>
 				{(routeComponentProps: any) => (
 					<Component
-						{...remainingProps}
+						{...rest}
 						{...routeComponentProps}
 						ref={wrappedComponentRef}
 					/>

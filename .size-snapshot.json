@@ -1,6 +1,6 @@
 {
   "dist/cjs/alnilam.js": {
-    "bundled": 27360,
+    "bundled": 27340,
     "minified": 14293,
     "gzipped": 4150
   },
@@ -10,7 +10,7 @@
     "gzipped": 3362
   },
   "dist/esm/alnilam.js": {
-    "bundled": 28253,
+    "bundled": 28233,
     "minified": 14964,
     "gzipped": 4164,
     "treeshaked": {

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import * as ReactIs from "react-is";
-import { StaticRouter, Route, withRouter } from "../index";
+import { Route, StaticRouter, withRouter } from "../index";
 import MemoryRouter from "./utils/MemoryRouter";
 import renderStrict from "./utils/renderStrict";
 
@@ -13,10 +13,14 @@ describe("withRouter", () => {
 	});
 
 	it("provides { match, location, history } props", () => {
-		let props;
 
-		const PropsChecker = withRouter(p => {
-			props = p;
+		const PropsChecker = withRouter((props: any) => {
+			expect(typeof props).toBe("object");
+			if (props) {
+				expect(typeof props.match).toBe("object");
+				expect(typeof props.location).toBe("object");
+				expect(typeof props.history).toBe("object");
+			}
 			return null;
 		});
 
@@ -24,20 +28,21 @@ describe("withRouter", () => {
 			<MemoryRouter>
 				<PropsChecker />
 			</MemoryRouter>,
-			node
+			node,
 		);
 
-		expect(typeof props).toBe("object");
-		expect(typeof props.match).toBe("object");
-		expect(typeof props.location).toBe("object");
-		expect(typeof props.history).toBe("object");
+		expect.assertions(4);
 	});
 
 	it("provides the parent match as a prop to the wrapped component", () => {
-		let parentMatch, props;
+		let parentMatch: any;
 
-		const PropsChecker = withRouter(p => {
-			props = p;
+		const PropsChecker = withRouter((props: any) => {
+			expect(typeof parentMatch).toBe("object");
+			expect(typeof props).toBe("object");
+			if (props) {
+				expect(props.match).toBe(parentMatch);
+			}
 			return null;
 		});
 
@@ -51,19 +56,16 @@ describe("withRouter", () => {
 					}}
 				/>
 			</MemoryRouter>,
-			node
+			node,
 		);
 
-		expect(typeof parentMatch).toBe("object");
-		expect(typeof props).toBe("object");
-		expect(props.match).toBe(parentMatch);
+		expect.assertions(3);
 	});
 
 	it("works when parent match is null", () => {
-		let parentMatch, props;
-
-		const PropChecker = withRouter(p => {
-			props = p;
+		const PropChecker = withRouter((props: any) => {
+			expect(typeof props).toBe("object");
+			expect(props.match).toBe(null);
 			return null;
 		});
 
@@ -72,25 +74,23 @@ describe("withRouter", () => {
 				<Route
 					path="/no-match"
 					children={({ match }) => {
-						parentMatch = match;
+						expect(match).toBe(null);
 						return <PropChecker />;
 					}}
 				/>
 			</MemoryRouter>,
-			node
+			node,
 		);
 
-		expect(parentMatch).toBe(null);
-		expect(typeof props).toBe("object");
-		expect(props.match).toBe(null);
+		expect.assertions(3);
 	});
 
 	describe("inside a <StaticRouter>", () => {
 		it("provides the staticContext prop", () => {
-			let props;
-
-			const PropsChecker = withRouter(p => {
-				props = p;
+			const PropsChecker = withRouter((props: any) => {
+				expect(typeof props).toBe("object");
+				expect(typeof props.staticContext).toBe("object");
+				expect(props.staticContext).toBe(context);
 				return null;
 			});
 
@@ -100,12 +100,10 @@ describe("withRouter", () => {
 				<StaticRouter context={context}>
 					<Route component={PropsChecker} />
 				</StaticRouter>,
-				node
+				node,
 			);
 
-			expect(typeof props).toBe("object");
-			expect(typeof props.staticContext).toBe("object");
-			expect(props.staticContext).toBe(context);
+			expect.assertions(3);
 		});
 	});
 
@@ -117,33 +115,35 @@ describe("withRouter", () => {
 
 	it("exposes the instance of the wrapped component via wrappedComponentRef", () => {
 		class WrappedComponent extends React.Component {
-			render() {
+			public render() {
 				return null;
 			}
 		}
 		const Component = withRouter(WrappedComponent);
 
-		let ref;
+		let ref: any;
 		renderStrict(
 			<MemoryRouter initialEntries={["/bubblegum"]}>
 				<Route
 					path="/bubblegum"
-					render={() => <Component wrappedComponentRef={r => (ref = r)} />}
+					render={() => <Component wrappedComponentRef={(r: any) => (ref = r)} />}
 				/>
 			</MemoryRouter>,
-			node
+			node,
 		);
 
 		expect(ref instanceof WrappedComponent).toBe(true);
 	});
 
 	it("hoists non-react statics from the wrapped component", () => {
+		// tslint:disable-next-line:max-classes-per-file
 		class Component extends React.Component {
-			static foo() {
+			public static hello: string;
+			public static foo() {
 				return "bar";
 			}
 
-			render() {
+			public render() {
 				return null;
 			}
 		}
@@ -156,9 +156,9 @@ describe("withRouter", () => {
 		expect(decorated.foo()).toBe("bar");
 	});
 
-	it('does not allow ref forwarding', () => {
-		const WrappedComponent = React.forwardRef((props, ref) => <div {...props} ref={ref} />)
+	it("does not allow ref forwarding", () => {
+		const WrappedComponent = React.forwardRef((props: any, ref: any) => <div {...props} ref={ref} />);
 		const Component = withRouter(WrappedComponent);
 		expect(ReactIs.isForwardRef(<Component />)).toBe(false);
-	})
+	});
 });
