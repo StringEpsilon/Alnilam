@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import warning from "tiny-warning";
 import RouterContext from "./RouterContext";
 import matchPath from "./matchPath";
 import { Location } from "history";
+import { addLocationPropWarning } from "./utils";
 
 interface SwitchChildProps {
 	from?: string,
@@ -68,12 +68,7 @@ if (__DEV__) {
 		location: PropTypes.object
 	};
 
-	Switch.prototype.componentDidUpdate = function (prevProps) {
-		warning(
-			!(!!this.props.location !== !!prevProps.location),
-			'<Switch> elements should not change from uncontrolled to controlled (or vice versa). You initially used no "location" prop and then provided one on a subsequent render.'
-		);
-	};
+	addLocationPropWarning(Switch.prototype, "Switch");
 }
 
 export default Switch;

@@ -6,7 +6,7 @@ import MemoryRouter from "./utils/MemoryRouter";
 import renderStrict from "./utils/renderStrict";
 import { RouteProps } from "../Route";
 
-describe("A <Route>", () => {
+describe("A <Match>", () => {
 	const node = document.createElement("div");
 
 	afterEach(() => {
@@ -19,7 +19,7 @@ describe("A <Route>", () => {
 
 			expect(() => {
 				renderStrict(<MatchComponent><div /></MatchComponent>, node);
-			}).toThrow(/You should not use <Route> outside a <Router>/);
+			}).toThrow(/You should not use <Match> outside a <Router>/);
 		});
 	});
 

@@ -1,10 +1,10 @@
 import React from "react";
-import { isValidElementType } from "react-is";
 import PropTypes from "prop-types";
-import warning from "tiny-warning";
 import RouterContext, { RouterContextType } from "./RouterContext";
 import matchPath from "./matchPath";
 import { Location, History } from "history";
+import warning from "tiny-warning";
+import { addLocationPropWarning, sanitizeChildren } from "./utils";
 
 export interface MatchProps {
 	history?: History;
@@ -31,7 +31,7 @@ class MatchComponent extends React.Component<MatchProps> {
 			<RouterContext.Consumer>
 				{context => {
 					if (!context) {
-						throw new Error(__DEV__ ? "You should not use <Route> outside a <Router>" : "Invariant failed")
+						throw new Error(__DEV__ ? "You should not use <Match> outside a <Router>" : "Invariant failed")
 					}
 					const location = this.props.location || context.location;
 					let match = this.props.computedMatch
@@ -43,33 +43,11 @@ class MatchComponent extends React.Component<MatchProps> {
 					const props: RouterContextType = { ...context, location, match };
 
 					let { children } = this.props;
-
-					// Preact uses an empty array as children by
-					// default, so use null if that's the case.
-					if (Array.isArray(children) && children.length === 0) {
-						children = null;
+					children = sanitizeChildren("Match", children, props, this.props.path);
+					
+					if (!children){
+						return null;
 					}
-
-					if (typeof children === "function") {
-						const childrenFunction = children as Function;
-						children = childrenFunction ? childrenFunction(props) : null;
-
-						if (children === undefined) {
-							if (__DEV__) {
-								const { path } = this.props;
-
-								warning(
-									false,
-									"You returned `undefined` from the `children` function of " +
-									`<Route${path ? ` path="${path}"` : ""}>, but you ` +
-									"should have returned a React element or `null`"
-								);
-							}
-
-							children = null;
-						}
-					}
-
 					return (
 						<RouterContext.Provider value={props}>
 							{children}
@@ -84,13 +62,6 @@ class MatchComponent extends React.Component<MatchProps> {
 if (__DEV__) {
 	MatchComponent.propTypes = {
 		children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-		component: (props: ObjectMap<any>, propName: string) => {
-			if (props[propName] && !isValidElementType(props[propName])) {
-				return new Error(
-					`Invalid prop 'component' supplied to 'Route': the prop is not a valid React component`
-				);
-			}
-		},
 		exact: PropTypes.bool,
 		location: PropTypes.object,
 		path: PropTypes.oneOfType([
@@ -100,14 +71,7 @@ if (__DEV__) {
 		sensitive: PropTypes.bool,
 		strict: PropTypes.bool
 	};
-
-
-	MatchComponent.prototype.componentDidUpdate = function (prevProps) {
-		warning(
-			!(!!this.props.location !== !!prevProps.location),
-			'<Route> elements should not change from uncontrolled to controlled (or vice versa). You initially used no "location" prop and then provided one on a subsequent render.'
-		);
-	};
+	addLocationPropWarning(MatchComponent.prototype, "Match");
 }
 
 export default MatchComponent;

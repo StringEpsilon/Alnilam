@@ -1,3 +1,9 @@
+## 0.x.x (future)
+
+* Fixed component names in warnings and invariant exceptions.
+* Bumped @babel/runtime to 7.4.0
+* 
+
 ## 0.2.1 (2019-03-24)
 
 * Fixed filename of ESM build (alnilam.min.js -> alnilam.js)

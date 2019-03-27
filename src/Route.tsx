@@ -5,6 +5,7 @@ import warning from "tiny-warning";
 import RouterContext from "./RouterContext";
 import matchPath from "./matchPath";
 import { Location, History } from "history";
+import { addLocationPropWarning, sanitizeChildren } from "./utils";
 
 export interface RouteProps {
 	history?: History;
@@ -41,6 +42,7 @@ class Route extends React.Component<RouteProps> {
 					throw new Error(__DEV__ ?  "You should not use <Route> outside a <Router>" : "Invariant failed")
 				}
 					const location = this.props.location || context.location;
+					const path = this.props.path;
 					const match = this.props.computedMatch
 						? this.props.computedMatch // <Switch> already computed the match for us
 						: this.props.path
@@ -50,32 +52,7 @@ class Route extends React.Component<RouteProps> {
 					const props = { ...context, location, match };
 
 					let { children, component, render } = this.props;
-
-					// Preact uses an empty array as children by
-					// default, so use null if that's the case.
-					if (Array.isArray(children) && children.length === 0) {
-						children = null;
-					}
-
-					if (typeof children === "function") {
-						const childrenFunction = children as Function;
-						children = childrenFunction ? childrenFunction(props) : null;
-
-						if (children === undefined) {
-							if (__DEV__) {
-								const { path } = this.props;
-
-								warning(
-									false,
-									"You returned `undefined` from the `children` function of " +
-									`<Route${path ? ` path="${path}"` : ""}>, but you ` +
-									"should have returned a React element or `null`"
-								);
-							}
-
-							children = null;
-						}
-					}
+					children = sanitizeChildren("Route", children, props, path);
 
 					return (
 						<RouterContext.Provider value={props}>
@@ -142,12 +119,7 @@ if (__DEV__) {
 		);
 	};
 
-	Route.prototype.componentDidUpdate = function (prevProps) {
-		warning(
-			!(!!this.props.location !== !!prevProps.location),
-			'<Route> elements should not change from uncontrolled to controlled (or vice versa). You initially used no "location" prop and then provided one on a subsequent render.'
-		);
-	};
+	addLocationPropWarning(Route.prototype, "Route");
 }
 
 export default Route;
