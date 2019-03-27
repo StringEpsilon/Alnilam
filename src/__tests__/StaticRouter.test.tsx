@@ -1,10 +1,10 @@
+import { Location } from "history";
 import React from "react";
 import ReactDOM from "react-dom";
+// tslint:disable-next-line:no-submodule-imports
 import ReactDOMServer from "react-dom/server";
-import { Route, Prompt, Redirect, StaticRouter } from "..";
-
+import { Prompt, Redirect, Route, StaticRouter } from "..";
 import renderStrict from "./utils/renderStrict";
-import { RouterContextType } from "../RouterContext";
 
 describe("A <StaticRouter>", () => {
 	const node = document.createElement("div");
@@ -19,7 +19,7 @@ describe("A <StaticRouter>", () => {
 		ReactDOMServer.renderToStaticMarkup(
 			<StaticRouter context={context}>
 				<Redirect to="/somewhere-else" />
-			</StaticRouter>
+			</StaticRouter>,
 		);
 
 		expect(context.action).toBe("REPLACE");
@@ -31,8 +31,8 @@ describe("A <StaticRouter>", () => {
 
 		ReactDOMServer.renderToStaticMarkup(
 			<StaticRouter context={context}>
-				<Redirect to="/somewhere-else" push />
-			</StaticRouter>
+				<Redirect to="/somewhere-else" push={true} />
+			</StaticRouter>,
 		);
 
 		expect(context.action).toBe("PUSH");
@@ -50,13 +50,13 @@ describe("A <StaticRouter>", () => {
 			ReactDOMServer.renderToStaticMarkup(
 				<StaticRouter location="/the/path?the=query#the-hash">
 					<Route component={LocationChecker} />
-				</StaticRouter>
+				</StaticRouter>,
 			);
 
 			expect(location).toMatchObject({
 				pathname: "/the/path",
 				search: "?the=query",
-				hash: "#the-hash"
+				hash: "#the-hash",
 			});
 		});
 
@@ -71,7 +71,7 @@ describe("A <StaticRouter>", () => {
 				ReactDOMServer.renderToStaticMarkup(
 					<StaticRouter location="/est%C3%A1tico">
 						<Route path="/:type" component={PropsChecker} />
-					</StaticRouter>
+					</StaticRouter>,
 				);
 
 				expect.assertions(2);
@@ -85,7 +85,7 @@ describe("A <StaticRouter>", () => {
 				expect(props.location).toMatchObject({
 					pathname: "/the/path",
 					search: "",
-					hash: ""
+					hash: "",
 				});
 				return null;
 			}
@@ -93,7 +93,7 @@ describe("A <StaticRouter>", () => {
 			ReactDOMServer.renderToStaticMarkup(
 				<StaticRouter location={{ pathname: "/the/path", search: "", state: "", hash: "" }}>
 					<Route component={LocationChecker} />
-				</StaticRouter>
+				</StaticRouter>,
 			);
 			expect.assertions(1);
 		});
@@ -109,7 +109,7 @@ describe("A <StaticRouter>", () => {
 				ReactDOMServer.renderToStaticMarkup(
 					<StaticRouter location={{ pathname: "/est%C3%A1tico", search: "", state: "", hash: "" }}>
 						<Route path="/:type" component={PropsChecker} />
-					</StaticRouter>
+					</StaticRouter>,
 				);
 
 				expect.assertions(2);
@@ -122,8 +122,9 @@ describe("A <StaticRouter>", () => {
 
 		ReactDOMServer.renderToStaticMarkup(
 			<StaticRouter context={context}>
+				{/* tslint:disable-next-line:no-object-literal-type-assertion*/}
 				<Redirect to={{ pathname: "/somewhere-else", search: "", hash: "" } as Location} />
-			</StaticRouter>
+			</StaticRouter>,
 		);
 
 		expect(context.action).toBe("REPLACE");
@@ -149,7 +150,7 @@ describe("A <StaticRouter>", () => {
 					location="/the-base/path"
 				>
 					<Route component={LocationChecker} />
-				</StaticRouter>
+				</StaticRouter>,
 			);
 
 			expect.assertions(1);
@@ -161,7 +162,7 @@ describe("A <StaticRouter>", () => {
 			ReactDOMServer.renderToStaticMarkup(
 				<StaticRouter context={context} basename="/the-base">
 					<Redirect to="/somewhere-else" />
-				</StaticRouter>
+				</StaticRouter>,
 			);
 
 			expect(context.action).toBe("REPLACE");
@@ -173,8 +174,8 @@ describe("A <StaticRouter>", () => {
 
 			ReactDOMServer.renderToStaticMarkup(
 				<StaticRouter context={context} basename="/the-base">
-					<Redirect to="/somewhere-else" push />
-				</StaticRouter>
+					<Redirect to="/somewhere-else" push={true} />
+				</StaticRouter>,
 			);
 
 			expect(context.action).toBe("PUSH");
@@ -190,7 +191,8 @@ describe("A <StaticRouter>", () => {
 				return (
 					<Route
 						children={({ history: { createHref } }) => (
-							<a href={createHref(props.to)}></a>
+
+							<a href={createHref(props.to)}/>
 						)}
 					/>
 				);
@@ -200,7 +202,7 @@ describe("A <StaticRouter>", () => {
 				<StaticRouter>
 					<HrefChecker to={pathname} />
 				</StaticRouter>,
-				node
+				node,
 			);
 
 			const a = node.getElementsByTagName("a")[0];
@@ -216,7 +218,7 @@ describe("A <StaticRouter>", () => {
 					<StaticRouter>
 						<Prompt message="this is only a test" />
 					</StaticRouter>,
-					node
+					node,
 				);
 			}).not.toThrow();
 		});

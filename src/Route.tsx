@@ -1,10 +1,10 @@
+import { History, Location } from "history";
+import PropTypes from "prop-types";
 import React from "react";
 import { isValidElementType } from "react-is";
-import PropTypes from "prop-types";
 import warning from "tiny-warning";
-import RouterContext from "./RouterContext";
 import matchPath from "./matchPath";
-import { Location, History } from "history";
+import RouterContext from "./RouterContext";
 import { addLocationPropWarning, sanitizeChildren } from "./utils";
 
 export interface RouteProps {
@@ -21,7 +21,7 @@ export interface RouteProps {
 	exact?: boolean;
 	sensitive?: boolean;
 	strict?: boolean;
-	computedMatch?: Match,
+	computedMatch?: Match;
 }
 
 function isEmptyChildren(children: any) {
@@ -32,15 +32,15 @@ function isEmptyChildren(children: any) {
  * The public API for matching a single path and rendering.
  */
 class Route extends React.Component<RouteProps> {
-	static propTypes: ObjectMap<any>;
+	public static propTypes: ObjectMap<any>;
 
-	render() {
+	public render() {
 		return (
 			<RouterContext.Consumer>
-				{context => {
-				if (!context) {
-					throw new Error(__DEV__ ?  "You should not use <Route> outside a <Router>" : "Invariant failed")
-				}
+				{(context) => {
+					if (!context) {
+						throw new Error(__DEV__ ?  "You should not use <Route> outside a <Router>" : "Invariant failed");
+					}
 					const location = this.props.location || context.location;
 					const path = this.props.path;
 					const match = this.props.computedMatch
@@ -51,8 +51,8 @@ class Route extends React.Component<RouteProps> {
 
 					const props = { ...context, location, match };
 
-					let { children, component, render } = this.props;
-					children = sanitizeChildren("Route", children, props, path);
+					const { component, render } = this.props;
+					const children = sanitizeChildren("Route", this.props.children, props, path);
 
 					return (
 						<RouterContext.Provider value={props}>
@@ -79,7 +79,7 @@ if (__DEV__) {
 		component: (props: ObjectMap<any>, propName: string) => {
 			if (props[propName] && !isValidElementType(props[propName])) {
 				return new Error(
-					`Invalid prop 'component' supplied to 'Route': the prop is not a valid React component`
+					`Invalid prop 'component' supplied to 'Route': the prop is not a valid React component`,
 				);
 			}
 		},
@@ -87,21 +87,21 @@ if (__DEV__) {
 		location: PropTypes.object,
 		path: PropTypes.oneOfType([
 			PropTypes.string,
-			PropTypes.arrayOf(PropTypes.string)
+			PropTypes.arrayOf(PropTypes.string),
 		]),
 		render: PropTypes.func,
 		sensitive: PropTypes.bool,
-		strict: PropTypes.bool
+		strict: PropTypes.bool,
 	};
 
-	Route.prototype.componentDidMount = function () {
+	Route.prototype.componentDidMount = function() {
 		warning(
 			!(
 				this.props.children &&
 				!isEmptyChildren(this.props.children) &&
 				this.props.component
 			),
-			"You should not use <Route component> and <Route children> in the same route; <Route component> will be ignored"
+			"You should not use <Route component> and <Route children> in the same route; <Route component> will be ignored",
 		);
 
 		warning(
@@ -110,12 +110,12 @@ if (__DEV__) {
 				!isEmptyChildren(this.props.children) &&
 				this.props.render
 			),
-			"You should not use <Route render> and <Route children> in the same route; <Route render> will be ignored"
+			"You should not use <Route render> and <Route children> in the same route; <Route render> will be ignored",
 		);
 
 		warning(
 			!(this.props.component && this.props.render),
-			"You should not use <Route component> and <Route render> in the same route; <Route render> will be ignored"
+			"You should not use <Route component> and <Route render> in the same route; <Route render> will be ignored",
 		);
 	};
 

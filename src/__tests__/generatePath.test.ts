@@ -61,7 +61,7 @@ describe("generatePath", () => {
 
 			const generated = generatePath(pattern, params);
 			expect(generated).toBe(
-				"/view/Q29tcGxhaW50OjVhZjFhMDg0MzhjMTk1MThiMTdlOTQ2Yg=="
+				"/view/Q29tcGxhaW50OjVhZjFhMDg0MzhjMTk1MThiMTdlOTQ2Yg==",
 			);
 		});
 	});

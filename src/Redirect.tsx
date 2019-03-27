@@ -1,15 +1,15 @@
-import React from "react";
+import { createLocation, Location, locationsAreEqual } from "history";
 import PropTypes from "prop-types";
-import { createLocation, locationsAreEqual } from "history";
+import React from "react";
+import generatePath from "./generatePath";
 import Lifecycle from "./Lifecycle";
 import RouterContext from "./RouterContext";
-import generatePath from "./generatePath";
 
 interface RedirectProps {
-	computedMatch?: Match,
-	from?: string | Location,
-	to: string | Location,
-	push?: boolean,
+	computedMatch?: Match;
+	from?: string | Location;
+	to: string | Location;
+	push?: boolean;
 }
 
 /**
@@ -19,9 +19,9 @@ function Redirect(props: RedirectProps) {
 	const { computedMatch, to, push = false } = props;
 	return (
 		<RouterContext.Consumer>
-			{context => {
+			{(context) => {
 				if (!context) {
-					throw new Error(__DEV__ ? "Invariant failed" : "You should not use <Redirect> outside a <Router>")
+					throw new Error(__DEV__ ? "Invariant failed" : "You should not use <Redirect> outside a <Router>");
 				}
 
 				const { history, staticContext } = context;
@@ -33,9 +33,9 @@ function Redirect(props: RedirectProps) {
 							? generatePath(to, computedMatch.params)
 							: {
 								...to,
-								pathname: generatePath(to.pathname, computedMatch.params)
+								pathname: generatePath(to.pathname, computedMatch.params),
 							}
-						: to
+						: to,
 				);
 
 				// When rendering in a static context,
@@ -67,7 +67,7 @@ if (__DEV__) {
 	Redirect.propTypes = {
 		push: PropTypes.bool,
 		from: PropTypes.string,
-		to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired
+		to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 	};
 }
 

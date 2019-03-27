@@ -1,8 +1,8 @@
+import { createMemoryHistory as createHistory } from "history";
 import React from "react";
 import ReactDOM from "react-dom";
-import { createMemoryHistory as createHistory } from "history";
 import { Route, Router, RouterContext } from "..";
-import { RouterContextType } from "../RouterContext"
+import { RouterContextType } from "../RouterContext";
 import renderStrict from "./utils/renderStrict";
 
 describe("A <Route>", () => {
@@ -17,7 +17,7 @@ describe("A <Route>", () => {
 		function ContextChecker() {
 			return (
 				<RouterContext.Consumer>
-					{value => {
+					{(value) => {
 						context = value;
 						return null;
 					}}
@@ -36,7 +36,7 @@ describe("A <Route>", () => {
 				<Router history={history}>
 					<Route component={ContextChecker} />
 				</Router>,
-				node
+				node,
 			);
 
 			expect(context).toBeTruthy();
@@ -52,7 +52,7 @@ describe("A <Route>", () => {
 				<Router history={history}>
 					<Route component={ContextChecker} />
 				</Router>,
-				node
+				node,
 			);
 			expect(context).toBeTruthy();
 			if (context) {
@@ -62,14 +62,14 @@ describe("A <Route>", () => {
 
 		it("has a `match` property", () => {
 			const history = createHistory({
-				initialEntries: ["/"]
+				initialEntries: ["/"],
 			});
 
 			renderStrict(
 				<Router history={history}>
 					<Route component={ContextChecker} />
 				</Router>,
-				node
+				node,
 			);
 			expect(context).toBeTruthy();
 			if (context) {
@@ -77,7 +77,7 @@ describe("A <Route>", () => {
 					path: "/",
 					url: "/",
 					params: {},
-					isExact: true
+					isExact: true,
 				});
 			}
 		});

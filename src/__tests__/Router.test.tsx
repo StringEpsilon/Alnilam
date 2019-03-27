@@ -1,6 +1,6 @@
+import { createMemoryHistory as createHistory } from "history";
 import React from "react";
 import ReactDOM from "react-dom";
-import { createMemoryHistory as createHistory } from "history";
 import { Router } from "..";
 
 import renderStrict from "./utils/renderStrict";
@@ -27,7 +27,7 @@ describe("A <Router>", () => {
 					<Router history={createHistory()}>
 						<p>Bar</p>
 					</Router>,
-					node
+					node,
 				);
 			}).not.toThrow();
 		});
@@ -41,7 +41,7 @@ describe("A <Router>", () => {
 						<p>Bubblegum</p>
 						<p>Cupcakes</p>
 					</Router>,
-					node
+					node,
 				);
 			}).not.toThrow();
 		});

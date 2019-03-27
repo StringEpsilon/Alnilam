@@ -1,9 +1,8 @@
-import React from "react";
+import { History, Location } from "history";
 import PropTypes from "prop-types";
-import RouterContext, { RouterContextType } from "./RouterContext";
+import React from "react";
 import matchPath from "./matchPath";
-import { Location, History } from "history";
-import warning from "tiny-warning";
+import RouterContext, { RouterContextType } from "./RouterContext";
 import { addLocationPropWarning, sanitizeChildren } from "./utils";
 
 export interface MatchProps {
@@ -17,24 +16,24 @@ export interface MatchProps {
 	exact?: boolean;
 	sensitive?: boolean;
 	strict?: boolean;
-	computedMatch?: Match,
+	computedMatch?: Match;
 }
 
 /**
  * The public API for matching a single path and rendering.
  */
 class MatchComponent extends React.Component<MatchProps> {
-	static propTypes: ObjectMap<any>;
+	public static propTypes: ObjectMap<any>;
 
-	render() {
+	public render() {
 		return (
 			<RouterContext.Consumer>
-				{context => {
+				{(context) => {
 					if (!context) {
-						throw new Error(__DEV__ ? "You should not use <Match> outside a <Router>" : "Invariant failed")
+						throw new Error(__DEV__ ? "You should not use <Match> outside a <Router>" : "Invariant failed");
 					}
 					const location = this.props.location || context.location;
-					let match = this.props.computedMatch
+					const match = this.props.computedMatch
 						? this.props.computedMatch // <Switch> already computed the match for us
 						: this.props.path
 							? matchPath(location.pathname, this.props)
@@ -44,8 +43,8 @@ class MatchComponent extends React.Component<MatchProps> {
 
 					let { children } = this.props;
 					children = sanitizeChildren("Match", children, props, this.props.path);
-					
-					if (!children){
+
+					if (!children) {
 						return null;
 					}
 					return (
@@ -66,10 +65,10 @@ if (__DEV__) {
 		location: PropTypes.object,
 		path: PropTypes.oneOfType([
 			PropTypes.string,
-			PropTypes.arrayOf(PropTypes.string)
+			PropTypes.arrayOf(PropTypes.string),
 		]),
 		sensitive: PropTypes.bool,
-		strict: PropTypes.bool
+		strict: PropTypes.bool,
 	};
 	addLocationPropWarning(MatchComponent.prototype, "Match");
 }

@@ -1,10 +1,10 @@
+import { createMemoryHistory as createHistory } from "history";
 import React from "react";
 import ReactDOM from "react-dom";
-import { createMemoryHistory as createHistory } from "history";
-import { Router, Match as MatchComponent } from "..";
+import { Match as MatchComponent, Router } from "..";
+import { RouteProps } from "../Route";
 import MemoryRouter from "./utils/MemoryRouter";
 import renderStrict from "./utils/renderStrict";
-import { RouteProps } from "../Route";
 
 describe("A <Match>", () => {
 	const node = document.createElement("div");
@@ -15,7 +15,7 @@ describe("A <Match>", () => {
 
 	describe("without a <Router>", () => {
 		it("throws an error", () => {
-			jest.spyOn(console, "error").mockImplementation(() => { });
+			jest.spyOn(console, "error").mockImplementation(() => null);
 
 			expect(() => {
 				renderStrict(<MatchComponent><div /></MatchComponent>, node);
@@ -32,7 +32,7 @@ describe("A <Match>", () => {
 					<h1>{text}</h1>
 				</MatchComponent>
 			</MemoryRouter>,
-			node
+			node,
 		);
 
 		expect(node.innerHTML).toContain(text);
@@ -47,7 +47,7 @@ describe("A <Match>", () => {
 					<h1>{text}</h1>
 				</MatchComponent>
 			</MemoryRouter>,
-			node
+			node,
 		);
 
 		expect(node.innerHTML).toContain(text);
@@ -55,7 +55,7 @@ describe("A <Match>", () => {
 
 	it("matches using nextContext when updating", () => {
 		const history = createHistory({
-			initialEntries: ["/sushi/california"]
+			initialEntries: ["/sushi/california"],
 		});
 
 		renderStrict(
@@ -65,7 +65,7 @@ describe("A <Match>", () => {
 				</MatchComponent>
 				/>
 			</Router>,
-			node
+			node,
 		);
 
 		history.push("/sushi/spicy-tuna");
@@ -82,7 +82,7 @@ describe("A <Match>", () => {
 					</MatchComponent>
 					/>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			expect(node.innerHTML).toContain("a dynamic segment");
@@ -91,57 +91,53 @@ describe("A <Match>", () => {
 
 	describe("with an array of paths", () => {
 		it("matches the first provided path", () => {
-			const node = document.createElement("div");
 			ReactDOM.render(
 				<MemoryRouter initialEntries={["/hello"]}>
 					<MatchComponent path={["/hello", "/world"]}>
 						{() => <div>Hello World</div>}
 					</MatchComponent>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			expect(node.innerHTML).toContain("Hello World");
 		});
 
 		it("matches other provided paths", () => {
-			const node = document.createElement("div");
 			ReactDOM.render(
 				<MemoryRouter initialEntries={["/other", "/world"]} initialIndex={1}>
 					<MatchComponent path={["/hello", "/world"]}>
 						{() => <div>Hello World</div>}
 					</MatchComponent>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			expect(node.innerHTML).toContain("Hello World");
 		});
 
 		it("provides the matched path as a string", () => {
-			const node = document.createElement("div");
 			ReactDOM.render(
 				<MemoryRouter initialEntries={["/other", "/world"]} initialIndex={1}>
 					<MatchComponent path={["/hello", "/world"]}>
 						{({ match }) => <div>{match.path}</div>}
 					</MatchComponent>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			expect(node.innerHTML).toContain("/world");
 		});
 
 		it("doesn't remount when moving from one matching path to another", () => {
-			const node = document.createElement("div");
 			const history = createHistory();
 			const mount = jest.fn();
 			class MatchedRoute extends React.Component {
-				componentWillMount() {
+				public componentWillMount() {
 					mount();
 				}
 
-				render() {
+				public render() {
 					return <div>Hello World</div>;
 				}
 			}
@@ -152,7 +148,7 @@ describe("A <Match>", () => {
 						<MatchedRoute />
 					</MatchComponent>
 				</Router>,
-				node
+				node,
 			);
 
 			expect(mount).toHaveBeenCalledTimes(1);
@@ -173,7 +169,7 @@ describe("A <Match>", () => {
 						{({ match }) => <h1>{match.url}</h1>}
 					</MatchComponent>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			expect(node.innerHTML).toContain("/パス名");
@@ -188,13 +184,12 @@ describe("A <Match>", () => {
 						{({ match }: any) => <h1>{match.url}</h1>}
 					</MatchComponent>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			expect(node.innerHTML).toContain("/pizza (1)");
 		});
 	});
-
 
 	describe("the `location` prop", () => {
 		it("overrides `context.location`", () => {
@@ -203,12 +198,12 @@ describe("A <Match>", () => {
 			renderStrict(
 				<MemoryRouter initialEntries={["/cupcakes"]}>
 					<MatchComponent
-						location={{ pathname: "/bubblegum", search: "", state: "", hash: "", }}
+						location={{ pathname: "/bubblegum", search: "", state: "", hash: "" }}
 						path="/bubblegum">
 						{({ match }) => <h1>{match.url}</h1>}
 					</MatchComponent>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			expect(node.innerHTML).toContain("/bubblegum");
@@ -226,7 +221,7 @@ describe("A <Match>", () => {
 							<h1>{text}</h1>
 						</MatchComponent>
 					</MemoryRouter>,
-					node
+					node,
 				);
 
 				expect(node.innerHTML).toContain(text);
@@ -252,7 +247,7 @@ describe("A <Match>", () => {
 							}}
 						/>
 					</Router>,
-					node
+					node,
 				);
 				expect.assertions(4);
 			});
@@ -264,7 +259,7 @@ describe("A <Match>", () => {
 					<MemoryRouter initialEntries={["/"]}>
 						<MatchComponent path="/" children={() => <h1>{text}</h1>} />
 					</MemoryRouter>,
-					node
+					node,
 				);
 
 				expect(node.innerHTML).toContain(text);
@@ -272,7 +267,7 @@ describe("A <Match>", () => {
 
 			describe("that returns `undefined`", () => {
 				it("logs a warning to the console and renders nothing", () => {
-					jest.spyOn(console, "warn").mockImplementation(() => { });
+					jest.spyOn(console, "warn").mockImplementation(() => null);
 
 					renderStrict(
 						<MemoryRouter initialEntries={["/"]}>
@@ -280,20 +275,16 @@ describe("A <Match>", () => {
 								{() => undefined}
 							</MatchComponent>
 						</MemoryRouter>,
-						node
+						node,
 					);
 
 					expect(node.innerHTML).toEqual("");
-
+					// tslint:disable-next-line:no-console
 					expect(console.warn).toHaveBeenCalledWith(
-						expect.stringContaining(
-							"You returned `undefined` from the `children` function"
-						)
+						expect.stringContaining("You returned `undefined` from the `children` function"),
 					);
 				});
 			});
 		});
-
 	});
-
 });

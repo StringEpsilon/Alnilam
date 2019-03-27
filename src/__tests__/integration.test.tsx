@@ -27,7 +27,7 @@ describe("Integration Tests", () => {
 					)}
 				/>
 			</MemoryRouter>,
-			node
+			node,
 		);
 
 		expect(node.innerHTML).toContain(TEXT1);
@@ -50,7 +50,7 @@ describe("Integration Tests", () => {
 					)}
 				/>
 			</MemoryRouter>,
-			node
+			node,
 		);
 
 		expect(node.innerHTML).toContain(TEXT1);
@@ -72,7 +72,7 @@ describe("Integration Tests", () => {
 					</main>
 				</div>
 			</MemoryRouter>,
-			node
+			node,
 		);
 
 		expect(node.innerHTML).toContain(TEXT1);

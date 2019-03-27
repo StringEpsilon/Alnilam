@@ -90,7 +90,7 @@ describe("matchPath", () => {
 	describe("with sensitive path", () => {
 		it("returns non-sensitive url", () => {
 			const options = {
-				path: "/SomeWhere"
+				path: "/SomeWhere",
 			};
 			const pathname = "/somewhere";
 			const match = matchPath(pathname, options);
@@ -103,7 +103,7 @@ describe("matchPath", () => {
 		it("returns sensitive url", () => {
 			const options = {
 				path: "/SomeWhere",
-				sensitive: true
+				sensitive: true,
 			};
 			const pathname = "/somewhere";
 			const match = matchPath(pathname, options);
@@ -117,12 +117,12 @@ describe("matchPath", () => {
 			const trueFalse = matchPath("/one/two", {
 				path: "/one/two/",
 				exact: true,
-				strict: false
+				strict: false,
 			});
 			const falseTrue = matchPath("/one/two", {
 				path: "/one/two/",
 				exact: false,
-				strict: true
+				strict: true,
 			});
 			expect(!!trueFalse).toBe(true);
 			expect(!!falseTrue).toBe(false);

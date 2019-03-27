@@ -1,6 +1,6 @@
+import { createMemoryHistory as createHistory } from "history";
 import React from "react";
 import ReactDOM from "react-dom";
-import { createMemoryHistory as createHistory } from "history";
 import { Prompt, Router } from "..";
 import MemoryRouter from "./utils/MemoryRouter";
 
@@ -15,7 +15,7 @@ describe("A <Prompt>", () => {
 
 	describe("without a <Router>", () => {
 		it("throws an error", () => {
-			jest.spyOn(console, "error").mockImplementation(() => { });
+			jest.spyOn(console, "error").mockImplementation(() => null);
 
 			expect(() => {
 				renderStrict(<Prompt />, node);
@@ -29,21 +29,21 @@ describe("A <Prompt>", () => {
 		});
 
 		const history = createHistory({
-			getUserConfirmation: getUserConfirmation
+			getUserConfirmation,
 		});
 
 		renderStrict(
 			<Router history={history}>
 				<Prompt message="Are you sure?" />
 			</Router>,
-			node
+			node,
 		);
 
 		history.push("/somewhere");
 
 		expect(getUserConfirmation).toHaveBeenCalledWith(
 			expect.stringMatching("Are you sure?"),
-			expect.any(Function)
+			expect.any(Function),
 		);
 	});
 
@@ -54,14 +54,14 @@ describe("A <Prompt>", () => {
 			});
 
 			const history = createHistory({
-				getUserConfirmation: getUserConfirmation
+				getUserConfirmation,
 			});
 
 			renderStrict(
 				<Router history={history}>
 					<Prompt message="Are you sure?" when={false} />
 				</Router>,
-				node
+				node,
 			);
 
 			history.push("/somewhere");

@@ -1,17 +1,17 @@
+import PropTypes from "prop-types";
 import React from "react";
 import Route from "./Route";
-import PropTypes from "prop-types";
 
-import Link from "./Link";
 import { Location } from "history";
+import Link from "./Link";
 import matchPath from "./matchPath";
 
 function joinClassnames(...classnames: any[]): string {
-	return classnames.filter(i => i).join(" ");
+	return classnames.filter((i) => i).join(" ");
 }
 
 interface NavLinkProps {
-	"aria-current"?: string | null,
+	"aria-current"?: string | null;
 	activeClassName?: string;
 	activeStyle?: object;
 	className?: string;
@@ -21,7 +21,7 @@ interface NavLinkProps {
 	strict?: boolean;
 	style?: any;
 	to: string | Location;
-	children: React.ReactNode,
+	children: React.ReactNode;
 }
 
 /**
@@ -42,7 +42,7 @@ function NavLink(props: NavLinkProps) {
 		...rest
 	} = props;
 
-	//let ariaCurrent: string|null = props["aria-current"] || "page";
+	// let ariaCurrent: string|null = props["aria-current"] || "page";
 	const path = typeof to === "object" ? to.pathname : to;
 
 	// Regex taken from: https://github.com/pillarjs/path-to-regexp/blob/master/index.js#L202
@@ -78,8 +78,6 @@ function NavLink(props: NavLinkProps) {
 	);
 }
 
-
-
 if (__DEV__) {
 	const ariaCurrentType = PropTypes.oneOf([
 		"page",
@@ -87,7 +85,7 @@ if (__DEV__) {
 		"location",
 		"date",
 		"time",
-		"true"
+		"true",
 	]);
 
 	NavLink.propTypes = {
@@ -100,7 +98,7 @@ if (__DEV__) {
 		isActive: PropTypes.func,
 		location: PropTypes.object,
 		strict: Route.propTypes.strict,
-		style: PropTypes.object
+		style: PropTypes.object,
 	};
 }
 

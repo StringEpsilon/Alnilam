@@ -31,12 +31,12 @@ describe("A <Redirect>", () => {
 						/>
 					</Switch>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			expect(params).toMatchObject({
 				username: "mjackson",
-				messageId: "123"
+				messageId: "123",
 			});
 		});
 	});

@@ -12,20 +12,20 @@ interface LinkProps {
 	onClick?: (event: React.MouseEvent) => void;
 	innerRef?: any;
 	replace?: (to: string | Location) => void;
-	to: string | Location
+	to: string | Location;
 	target?: string;
-	"aria-current"?: any,
-	className?: any,
-	style?: any,
+	"aria-current"?: any;
+	className?: any;
+	style?: any;
 }
 
 /**
  * The public API for rendering a history-aware <a>.
  */
 class Link extends React.Component<LinkProps> {
-	static propTypes: ObjectMap<any>;
+	public static propTypes: ObjectMap<any>;
 
-	handleClick(event: React.MouseEvent, history: History) {
+	public handleClick(event: React.MouseEvent, history: History) {
 		if (this.props.onClick) {
 			this.props.onClick(event);
 		}
@@ -58,12 +58,12 @@ class Link extends React.Component<LinkProps> {
 		method(this.props.to);
 	}
 
-	render() {
+	public render() {
 		const { innerRef, replace, to, ...rest } = this.props; // eslint-disable-line no-unused-vars
 
 		return (
 			<RouterContext.Consumer>
-				{context => {
+				{(context) => {
 					if (!context) {
 						throw new Error(__DEV__ ? "You should not use <Link> outside a <Router>" : "Invariant failed");
 					}
@@ -96,7 +96,7 @@ if (__DEV__) {
 	const innerRefType = PropTypes.oneOfType([
 		PropTypes.string,
 		PropTypes.func,
-		PropTypes.shape({ current: PropTypes.any })
+		PropTypes.shape({ current: PropTypes.any }),
 	]);
 
 	Link.propTypes = {
@@ -104,7 +104,7 @@ if (__DEV__) {
 		onClick: PropTypes.func,
 		replace: PropTypes.bool,
 		target: PropTypes.string,
-		to: toType.isRequired
+		to: toType.isRequired,
 	};
 }
 

@@ -1,12 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
 import hoistStatics from "hoist-non-react-statics";
+import PropTypes from "prop-types";
+import React from "react";
 
 import Route, { RouteProps } from "./Route";
 
 interface WithRouterProps {
-	wrappedComponentRef?: Function,
-	remainingProps?: any[],
+	wrappedComponentRef?: (props: any) => any;
+	remainingProps?: any[];
 }
 
 /**
@@ -17,15 +17,13 @@ function withRouter<P>(Component: React.ComponentType<P>) {
 		const { wrappedComponentRef, ...remainingProps } = props;
 
 		return (
-			// TODO: remove "any".
 			<Route children={(routeComponentProps: any) => (
 				<Component
 					{...remainingProps}
 					{...routeComponentProps}
 					ref={wrappedComponentRef}
 				/>
-			)}
-			/>
+			)} />
 		);
 	};
 
@@ -34,7 +32,7 @@ function withRouter<P>(Component: React.ComponentType<P>) {
 
 	if (__DEV__) {
 		WrappedComponent.propTypes = {
-			wrappedComponentRef: PropTypes.func
+			wrappedComponentRef: PropTypes.func,
 		};
 	}
 

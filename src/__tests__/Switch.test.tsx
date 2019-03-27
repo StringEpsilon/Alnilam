@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Route, Redirect, Switch } from "..";
+import { Redirect, Route, Switch } from "..";
 import MemoryRouter from "./utils/MemoryRouter";
 import renderStrict from "./utils/renderStrict";
 import waitForRedirects from "./utils/waitForRedirects";
@@ -14,7 +14,7 @@ describe("A <Switch>", () => {
 
 	describe("without a <Router>", () => {
 		it("throws an error", () => {
-			jest.spyOn(console, "error").mockImplementation(() => { });
+			jest.spyOn(console, "error").mockImplementation(() => null);
 
 			expect(() => {
 				renderStrict(<Switch />, node);
@@ -30,7 +30,7 @@ describe("A <Switch>", () => {
 					<Route path="/two" render={() => <h1>two</h1>} />
 				</Switch>
 			</MemoryRouter>,
-			node
+			node,
 		);
 
 		expect(node.innerHTML).toContain("one");
@@ -44,13 +44,13 @@ describe("A <Switch>", () => {
 					<Route path="/one" render={() => <h1>two</h1>} />
 				</Switch>
 			</MemoryRouter>,
-			node
+			node,
 		);
 
 		expect(node.innerHTML).not.toContain("two");
 	});
 
-	it("renders the first <Redirect> that matches the URL", done => {
+	it("renders the first <Redirect> that matches the URL", (done) => {
 		renderStrict(
 			<MemoryRouter initialEntries={["/three"]}>
 				<Switch>
@@ -59,7 +59,7 @@ describe("A <Switch>", () => {
 					<Redirect from="/three" to="/two" />
 				</Switch>
 			</MemoryRouter>,
-			node
+			node,
 		);
 
 		waitForRedirects(() => {
@@ -68,7 +68,7 @@ describe("A <Switch>", () => {
 		});
 	});
 
-	it("does not render a second <Redirect> that also matches the URL", done => {
+	it("does not render a second <Redirect> that also matches the URL", (done) => {
 		renderStrict(
 			<MemoryRouter initialEntries={["/three"]}>
 				<Switch>
@@ -78,7 +78,7 @@ describe("A <Switch>", () => {
 					<Redirect from="/three" to="/one" />
 				</Switch>
 			</MemoryRouter>,
-			node
+			node,
 		);
 
 		waitForRedirects(() => {
@@ -95,13 +95,13 @@ describe("A <Switch>", () => {
 					<Route render={() => <h1>two</h1>} />
 				</Switch>
 			</MemoryRouter>,
-			node
+			node,
 		);
 
 		expect(node.innerHTML).toContain("two");
 	});
 
-	it("renders a Redirect with no `from` prop", done => {
+	it("renders a Redirect with no `from` prop", (done) => {
 		renderStrict(
 			<MemoryRouter initialEntries={["/three"]}>
 				<Switch>
@@ -110,7 +110,7 @@ describe("A <Switch>", () => {
 					<Route path="/two" render={() => <h1>two</h1>} />
 				</Switch>
 			</MemoryRouter>,
-			node
+			node,
 		);
 
 		waitForRedirects(() => {
@@ -119,7 +119,7 @@ describe("A <Switch>", () => {
 		});
 	});
 
-	it("handles subsequent redirects", done => {
+	it("handles subsequent redirects", (done) => {
 		renderStrict(
 			<MemoryRouter initialEntries={["/one"]}>
 				<Switch>
@@ -128,7 +128,7 @@ describe("A <Switch>", () => {
 					<Route path="/three" render={() => <h1>three</h1>} />
 				</Switch>
 			</MemoryRouter>,
-			node
+			node,
 		);
 
 		waitForRedirects(() => {
@@ -146,7 +146,7 @@ describe("A <Switch>", () => {
 					<Route path="/cupcakes" render={() => <div>cup</div>} />
 				</Switch>
 			</MemoryRouter>,
-			node
+			node,
 		);
 
 		expect(node.innerHTML).not.toContain("bub");
@@ -162,7 +162,7 @@ describe("A <Switch>", () => {
 					{undefined}
 				</Switch>
 			</MemoryRouter>,
-			node
+			node,
 		);
 
 		expect(node.innerHTML).toMatch(/one/);
@@ -176,7 +176,7 @@ describe("A <Switch>", () => {
 					<Route path="/two" render={() => <h1>two</h1>} />
 				</Switch>
 			</MemoryRouter>,
-			node
+			node,
 		);
 
 		expect(node.innerHTML).toMatch(/two/);

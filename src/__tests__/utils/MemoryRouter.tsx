@@ -1,13 +1,12 @@
-import React from "react";
 import { createMemoryHistory, Location } from "history";
-
+import React from "react";
 import Router from "../../Router";
 
 interface MemoryRouterProps {
-	basename?: string,
-	context?: any, // TODO
-	location?: Location,
-	staticContext?: any,
+	basename?: string;
+	context?: any; // TODO
+	location?: Location;
+	staticContext?: any;
 	getUserConfirmation?: any; // TODO
 	initialEntries?: string[];
 	initialIndex?: number;
@@ -18,10 +17,10 @@ interface MemoryRouterProps {
  * The public API for a <Router> that stores location in memory.
  */
 class MemoryRouter extends React.Component<MemoryRouterProps> {
-	history = createMemoryHistory(this.props);
-	static propTypes: ObjectMap<any>;
+	public static propTypes: ObjectMap<any>;
+	public history = createMemoryHistory(this.props);
 
-	render() {
+	public render() {
 		return <Router history={this.history} children={this.props.children} />;
 	}
 }

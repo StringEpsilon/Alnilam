@@ -1,10 +1,9 @@
+import { Location } from "history";
 import React from "react";
 import ReactDOM from "react-dom";
-import { NavLink, withRouter, Route } from "..";
-import renderStrict from "./utils/renderStrict";
-import { Location } from "history";
+import { NavLink, Route, withRouter } from "..";
 import MemoryRouter from "./utils/MemoryRouter";
-
+import renderStrict from "./utils/renderStrict";
 
 describe("A <NavLink>", () => {
 	const node = document.createElement("div");
@@ -19,7 +18,7 @@ describe("A <NavLink>", () => {
 				<MemoryRouter initialEntries={["/pizza"]}>
 					<NavLink to="/pizza">Pizza!</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -35,9 +34,9 @@ describe("A <NavLink>", () => {
 				<MemoryRouter initialEntries={["/pizza"]}>
 					<NavLink to="/pizza" activeClassName="selected">
 						Pizza!
-          </NavLink>
+				</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -56,9 +55,9 @@ describe("A <NavLink>", () => {
 				<MemoryRouter initialEntries={["/pizza"]}>
 					<NavLink to="/pizza" style={defaultStyle} activeStyle={activeStyle}>
 						Pizza!
-          </NavLink>
+				</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -74,7 +73,7 @@ describe("A <NavLink>", () => {
 				<MemoryRouter initialEntries={["/pizza"]}>
 					<NavLink to="/pizza">Pizza!</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -90,9 +89,9 @@ describe("A <NavLink>", () => {
 				<MemoryRouter initialEntries={["/pizza"]}>
 					<NavLink to="/pizza" aria-current="true">
 						Pizza!
-          </NavLink>
+				</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -109,7 +108,7 @@ describe("A <NavLink>", () => {
 					<MemoryRouter initialEntries={["/pizza"]}>
 						<NavLink to={{ search: "foo=bar" } as Location}>Pizza!</NavLink>
 					</MemoryRouter>,
-					node
+					node,
 				);
 			}).not.toThrow();
 		});
@@ -119,7 +118,7 @@ describe("A <NavLink>", () => {
 				<MemoryRouter initialEntries={["/pizza (1)"]}>
 					<NavLink to="/pizza (1)">Pizza!</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -132,7 +131,7 @@ describe("A <NavLink>", () => {
 
 		it("renders child components that use withRouter", () => {
 			class WrappedComponent extends React.Component {
-				render() {
+				public render() {
 					return null;
 				}
 			}
@@ -146,7 +145,7 @@ describe("A <NavLink>", () => {
 						<Component wrappedComponentRef={(r: any) => (ref = r)} />
 					</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			expect(ref instanceof WrappedComponent).toBe(true);
@@ -159,7 +158,7 @@ describe("A <NavLink>", () => {
 				<MemoryRouter initialEntries={["/pizza"]}>
 					<NavLink to="/salad">Salad?</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -175,9 +174,9 @@ describe("A <NavLink>", () => {
 				<MemoryRouter initialEntries={["/pizza"]}>
 					<NavLink to="/salad" activeClassName="selected">
 						Salad?
-          </NavLink>
+				</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -196,9 +195,9 @@ describe("A <NavLink>", () => {
 				<MemoryRouter initialEntries={["/pizza"]}>
 					<NavLink to="/salad" style={defaultStyle} activeStyle={activeStyle}>
 						Salad?
-          </NavLink>
+				</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -214,9 +213,9 @@ describe("A <NavLink>", () => {
 				<MemoryRouter initialEntries={["/pizza"]}>
 					<NavLink to="/salad" activeClassName="selected" aria-current="page">
 						Pizza!
-          </NavLink>
+				</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -232,9 +231,9 @@ describe("A <NavLink>", () => {
 				<MemoryRouter initialEntries={["/pizza"]}>
 					<NavLink to="/salad" activeClassName="selected">
 						Pizza!
-          </NavLink>
+				</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -246,8 +245,9 @@ describe("A <NavLink>", () => {
 		});
 
 		it("renders child components that use withRouter", () => {
+			// tslint:disable-next-line:max-classes-per-file
 			class WrappedComponent extends React.Component {
-				render() {
+				public render() {
 					return null;
 				}
 			}
@@ -257,11 +257,11 @@ describe("A <NavLink>", () => {
 			let ref: any;
 			renderStrict(
 				<MemoryRouter initialEntries={["/pizza"]}>
-					<NavLink exact to="/salad">
+					<NavLink exact={true} to="/salad">
 						<Component wrappedComponentRef={(r: any) => (ref = r)} />
 					</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			expect(ref instanceof WrappedComponent).toBe(true);
@@ -274,9 +274,9 @@ describe("A <NavLink>", () => {
 				<MemoryRouter initialEntries={["/pizza"]}>
 					<NavLink to="/pizza" isActive={() => true}>
 						Pizza!
-          </NavLink>
+				</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -292,9 +292,9 @@ describe("A <NavLink>", () => {
 				<MemoryRouter initialEntries={["/pizza"]}>
 					<NavLink to="/pizza" activeClassName="selected" isActive={() => true}>
 						Pizza!
-          </NavLink>
+				</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -310,9 +310,9 @@ describe("A <NavLink>", () => {
 				<MemoryRouter initialEntries={["/pizza"]}>
 					<NavLink to="/pizza" isActive={() => false}>
 						Pizza!
-          </NavLink>
+				</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -332,9 +332,9 @@ describe("A <NavLink>", () => {
 						isActive={() => false}
 					>
 						Pizza!
-          </NavLink>
+				</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -351,9 +351,9 @@ describe("A <NavLink>", () => {
 			<MemoryRouter initialEntries={["/pizza/anchovies"]}>
 				<NavLink to="/pizza" activeClassName="active">
 					Pizza!
-        </NavLink>
+				</NavLink>
 			</MemoryRouter>,
-			node
+			node,
 		);
 
 		const a = node.querySelector("a");
@@ -368,11 +368,11 @@ describe("A <NavLink>", () => {
 		it("applies default activeClassName for exact matches", () => {
 			renderStrict(
 				<MemoryRouter initialEntries={["/pizza"]}>
-					<NavLink exact to="/pizza">
+					<NavLink exact={true} to="/pizza">
 						Pizza!
-          </NavLink>
+					</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -386,11 +386,11 @@ describe("A <NavLink>", () => {
 		it("does not apply default activeClassName for partial matches", () => {
 			renderStrict(
 				<MemoryRouter initialEntries={["/pizza/anchovies"]}>
-					<NavLink exact to="/pizza">
+					<NavLink exact={true} to="/pizza">
 						Pizza!
-          </NavLink>
+					</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -404,11 +404,11 @@ describe("A <NavLink>", () => {
 		it("applies custom activeClassName for exact matches", () => {
 			renderStrict(
 				<MemoryRouter initialEntries={["/pizza"]}>
-					<NavLink exact to="/pizza" activeClassName="selected">
+					<NavLink exact={true} to="/pizza" activeClassName="selected">
 						Pizza!
-          </NavLink>
+					</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -422,11 +422,11 @@ describe("A <NavLink>", () => {
 		it("applies custom activeClassName for partial matches", () => {
 			renderStrict(
 				<MemoryRouter initialEntries={["/pizza/anchovies"]}>
-					<NavLink exact to="/pizza" activeClassName="selected">
+					<NavLink exact={true} to="/pizza" activeClassName="selected">
 						Pizza!
-          </NavLink>
+					</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -443,7 +443,7 @@ describe("A <NavLink>", () => {
 			<MemoryRouter initialEntries={["/pizza"]}>
 				<NavLink to="/pizza/">Pizza!</NavLink>
 			</MemoryRouter>,
-			node
+			node,
 		);
 
 		const a = node.querySelector("a");
@@ -458,11 +458,11 @@ describe("A <NavLink>", () => {
 		it("applies default activeClassName for strict matches", () => {
 			renderStrict(
 				<MemoryRouter initialEntries={["/pizza/"]}>
-					<NavLink strict to="/pizza/">
+					<NavLink strict={true} to="/pizza/">
 						Pizza!
-          </NavLink>
+					</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -476,11 +476,11 @@ describe("A <NavLink>", () => {
 		it("does not apply default activeClassName for non-strict matches", () => {
 			renderStrict(
 				<MemoryRouter initialEntries={["/pizza"]}>
-					<NavLink strict to="/pizza/">
+					<NavLink strict={true} to="/pizza/">
 						Pizza!
-          </NavLink>
+					</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -494,11 +494,11 @@ describe("A <NavLink>", () => {
 		it("applies custom activeClassName for strict matches", () => {
 			renderStrict(
 				<MemoryRouter initialEntries={["/pizza/"]}>
-					<NavLink strict to="/pizza/" activeClassName="selected">
+					<NavLink strict={true} to="/pizza/" activeClassName="selected">
 						Pizza!
-          </NavLink>
+					</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -512,11 +512,11 @@ describe("A <NavLink>", () => {
 		it("does not apply custom activeClassName for non-strict matches", () => {
 			renderStrict(
 				<MemoryRouter initialEntries={["/pizza"]}>
-					<NavLink strict to="/pizza/" activeClassName="selected">
+					<NavLink strict={true} to="/pizza/" activeClassName="selected">
 						Pizza!
-          </NavLink>
+					</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -534,9 +534,9 @@ describe("A <NavLink>", () => {
 				<MemoryRouter initialEntries={["/pizza"]}>
 					<NavLink to="/pasta" location={{ pathname: "/pasta" } as Location}>
 						Pasta!
-          </NavLink>
+					</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -552,9 +552,9 @@ describe("A <NavLink>", () => {
 				<MemoryRouter initialEntries={["/pasta"]}>
 					<NavLink to="/pasta" location={{ pathname: "/pizza" } as Location}>
 						Pasta!
-          			</NavLink>
+					</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			const a = node.querySelector("a");
@@ -565,8 +565,6 @@ describe("A <NavLink>", () => {
 			}
 		});
 	});
-
-
 
 	describe("doesn't interfere with withRouter", () => {
 		it("allows withRouter to access the correct match without route", () => {
@@ -582,7 +580,7 @@ describe("A <NavLink>", () => {
 						<PropChecker />
 					</NavLink>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			expect.assertions(2);
@@ -606,7 +604,7 @@ describe("A <NavLink>", () => {
 						)}
 					/>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			expect.assertions(2);
@@ -630,7 +628,7 @@ describe("A <NavLink>", () => {
 						)}
 					/>
 				</MemoryRouter>,
-				node
+				node,
 			);
 
 			expect.assertions(3);

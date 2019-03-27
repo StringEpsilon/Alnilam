@@ -5,7 +5,9 @@ const cacheLimit = 10000;
 let cacheCount = 0;
 
 function compilePath(path: string) {
-	if (cache[path]) return cache[path];
+	if (cache[path]) {
+		return cache[path];
+	}
 
 	const generator = pathToRegexp.compile(path);
 

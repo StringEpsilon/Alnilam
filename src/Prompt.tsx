@@ -1,5 +1,5 @@
-import React from "react";
 import PropTypes from "prop-types";
+import React from "react";
 import Lifecycle from "./Lifecycle";
 import RouterContext from "./RouterContext";
 
@@ -14,18 +14,18 @@ interface PromptProps {
 function Prompt({ message, when = true }: PromptProps) {
 	return (
 		<RouterContext.Consumer>
-			{context => {
+			{(context) => {
 				if (!context) {
-					throw new Error(!__DEV__ ? "Invariant failed" : "You should not use <Prompt> outside a <Router>")
+					throw new Error(!__DEV__ ? "Invariant failed" : "You should not use <Prompt> outside a <Router>");
 				}
 
-				if (!when || context.staticContext) return null;
+				if (!when || context.staticContext) { return null; }
 
 				const method = context.history.block;
 
 				return (
 					<Lifecycle
-						onMount={self => {
+						onMount={(self) => {
 							self.release = method(message);
 						}}
 						onUpdate={(self, prevProps) => {
@@ -34,7 +34,7 @@ function Prompt({ message, when = true }: PromptProps) {
 								self.release = method(message);
 							}
 						}}
-						onUnmount={self => {
+						onUnmount={(self) => {
 							if (self.release) {
 								self.release();
 							}
@@ -52,7 +52,7 @@ if (__DEV__) {
 
 	Prompt.propTypes = {
 		when: PropTypes.bool,
-		message: messageType.isRequired
+		message: messageType.isRequired,
 	};
 }
 

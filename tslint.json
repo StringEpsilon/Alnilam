@@ -1,0 +1,15 @@
+{
+	"extends": ["tslint:latest", "tslint-react"],
+	"rules": {
+		"indent": [true, "tabs"],
+		"interface-name": [true, "never-prefix"],
+		"jsx-alignment": false,
+		"jsx-no-multiline-js": false,
+		"no-implicit-dependencies": false,
+		"object-literal-sort-keys": false,
+		"jsx-wrap-multiline": false,
+		"jsx-no-lambda": false,
+		"object-literal-key-quotes": [true, "as-needed"],
+		"no-object-literal-type-assertion": false
+	}	
+}
