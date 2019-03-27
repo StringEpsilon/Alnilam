@@ -1,3 +1,9 @@
+## 0.3.0-beta.2 (2019-03-27)
+
+I messed up my packaging and publishing. Sorry for the inconvienience.
+
+Still new for me. Especially beta stuff.
+
 ## 0.3.0-beta.1 (2019-03-27)
 
 ### BREAKING:
