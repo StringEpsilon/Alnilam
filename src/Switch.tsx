@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import matchPath from "./matchPath";
 import RouterContext from "./RouterContext";
+import { RouterException } from "./RouterException";
 import { addLocationPropWarning } from "./utils";
 
 interface SwitchChildProps {
@@ -28,7 +29,7 @@ class Switch extends React.Component<SwitchProps> {
 			<RouterContext.Consumer>
 				{(context) => {
 					if (!context) {
-						throw new Error(__DEV__ ? "You should not use <Switch> outside a <Router>" : "Invariant failed");
+						throw RouterException("Switch");
 					}
 
 					const location = this.props.location || context.location;

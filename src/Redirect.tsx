@@ -4,6 +4,7 @@ import React from "react";
 import generatePath from "./generatePath";
 import Lifecycle from "./Lifecycle";
 import RouterContext from "./RouterContext";
+import { RouterException } from "./RouterException";
 
 interface RedirectProps {
 	computedMatch?: Match;
@@ -21,7 +22,7 @@ function Redirect(props: RedirectProps) {
 		<RouterContext.Consumer>
 			{(context) => {
 				if (!context) {
-					throw new Error(__DEV__ ? "Invariant failed" : "You should not use <Redirect> outside a <Router>");
+					throw RouterException("Redirect");
 				}
 
 				const { history, staticContext } = context;
@@ -67,7 +68,11 @@ if (__DEV__) {
 	Redirect.propTypes = {
 		push: PropTypes.bool,
 		from: PropTypes.string,
-		to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+		to: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.object,
+
+		]).isRequired,
 	};
 }
 

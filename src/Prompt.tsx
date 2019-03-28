@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import Lifecycle from "./Lifecycle";
 import RouterContext from "./RouterContext";
+import { RouterException } from "./RouterException";
 
 interface PromptProps {
 	message?: string;
@@ -16,7 +17,7 @@ function Prompt({ message, when = true }: PromptProps) {
 		<RouterContext.Consumer>
 			{(context) => {
 				if (!context) {
-					throw new Error(!__DEV__ ? "Invariant failed" : "You should not use <Prompt> outside a <Router>");
+					throw RouterException("Prompt");
 				}
 
 				if (!when || context.staticContext) { return null; }
@@ -48,11 +49,12 @@ function Prompt({ message, when = true }: PromptProps) {
 }
 
 if (__DEV__) {
-	const messageType = PropTypes.oneOfType([PropTypes.func, PropTypes.string]);
-
 	Prompt.propTypes = {
 		when: PropTypes.bool,
-		message: messageType.isRequired,
+		message: PropTypes.oneOfType([
+			PropTypes.func,
+			PropTypes.string,
+		]).isRequired,
 	};
 }
 

@@ -89,7 +89,7 @@ if (__DEV__) {
 	Router.prototype.componentDidUpdate = function(prevProps) {
 		warning(
 			prevProps.history === this.props.history,
-			"You cannot change <Router history>",
+			"You cannot change <Router> history>",
 		);
 	};
 }

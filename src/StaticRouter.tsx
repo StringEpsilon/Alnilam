@@ -97,7 +97,10 @@ if (__DEV__) {
 	StaticRouter.propTypes = {
 		basename: PropTypes.string,
 		context: PropTypes.object,
-		location: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+		location: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.object,
+		]),
 	};
 
 }

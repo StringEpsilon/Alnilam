@@ -3,6 +3,7 @@ import RouterContext from "./RouterContext";
 
 import { createLocation, History, Location } from "history";
 import PropTypes from "prop-types";
+import { RouterException } from "./RouterException";
 
 function isModifiedEvent(event: React.MouseEvent) {
 	return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
@@ -65,7 +66,7 @@ class Link extends React.Component<LinkProps> {
 			<RouterContext.Consumer>
 				{(context) => {
 					if (!context) {
-						throw new Error(__DEV__ ? "You should not use <Link> outside a <Router>" : "Invariant failed");
+						throw RouterException("Link");
 					}
 
 					const location =
@@ -92,7 +93,6 @@ class Link extends React.Component<LinkProps> {
 }
 
 if (__DEV__) {
-	const toType = PropTypes.oneOfType([PropTypes.string, PropTypes.object]);
 	const innerRefType = PropTypes.oneOfType([
 		PropTypes.string,
 		PropTypes.func,
@@ -104,7 +104,10 @@ if (__DEV__) {
 		onClick: PropTypes.func,
 		replace: PropTypes.bool,
 		target: PropTypes.string,
-		to: toType.isRequired,
+		to: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.object,
+		]).isRequired,
 	};
 }
 

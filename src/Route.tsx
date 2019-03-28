@@ -1,10 +1,9 @@
 import { History, Location } from "history";
 import PropTypes from "prop-types";
 import React from "react";
-import { isValidElementType } from "react-is";
-import warning from "tiny-warning";
 import matchPath from "./matchPath";
 import RouterContext from "./RouterContext";
+import { RouterException } from "./RouterException";
 import { addLocationPropWarning, sanitizeChildren } from "./utils";
 
 export interface RouteProps {
@@ -20,10 +19,6 @@ export interface RouteProps {
 	computedMatch?: Match;
 }
 
-function isEmptyChildren(children: any) {
-	return React.Children.count(children) === 0;
-}
-
 /**
  * The public API for matching a single path and rendering.
  */
@@ -35,7 +30,7 @@ class Route extends React.Component<RouteProps> {
 			<RouterContext.Consumer>
 				{(context) => {
 					if (!context) {
-						throw new Error(__DEV__ ? "You should not use <Route> outside a <Router>" : "Invariant failed");
+						throw RouterException("Route");
 					}
 					const location = this.props.location || context.location;
 					const path = this.props.path;
