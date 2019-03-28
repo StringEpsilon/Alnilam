@@ -7,7 +7,10 @@
 	"module": "dist/esm/alnilam.js",
 	"scripts": {
 		"test": "jest",
-		"build": "tsc && rollup -c"
+		"build": "tsc && rollup -c",
+		"ci": "rollup -c --config-ci",
+		"lint": "tslint --project tsconfig.json",
+		"typecheck": "tsc --noEmit"
 	},
 	"repository": {
 		"type": "git",
