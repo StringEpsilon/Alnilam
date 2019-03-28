@@ -2,7 +2,7 @@ import React from "react";
 import warning from "tiny-warning";
 
 export function addLocationPropWarning(prototype: any, componentName: string): void {
-	prototype.componentDidUpdate = function (prevProps: any) {
+	prototype.componentDidUpdate = function(prevProps: any) {
 		warning(
 			!(!!this.props.location !== !!prevProps.location),
 			`<${componentName}> elements should not change from uncontrolled to controlled (or vice versa).`,

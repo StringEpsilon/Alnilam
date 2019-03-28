@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import * as ReactIs from "react-is";
-import { Route, StaticRouter, withRouter, Match } from "../index";
+import { Match, Route, StaticRouter, withRouter } from "../index";
 import MemoryRouter from "./utils/MemoryRouter";
 import renderStrict from "./utils/renderStrict";
 

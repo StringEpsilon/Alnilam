@@ -11,47 +11,50 @@ function isBareModuleId(id) {
 }
 const extensions = [".js", ".ts", ".tsx", ".jsx"];
 
-const cjs = [
-	{
-		input: "src/index.ts",
-		output: { file: `dist/cjs/${pkg.name}.js`, format: "cjs", compact: true, },
-		external: isBareModuleId,
-		plugins: [
-			nodeResolve({ extensions }),
-			babel({ exclude: /node_modules/, extensions }),
-			replace({ "process.env.NODE_ENV": JSON.stringify("development") }),
-			commonjs({ extensions }),
-			sizeSnapshot(),
-		]
-	},
-	{
-		input: "src/index.ts",
-		output: { file: `dist/cjs/${pkg.name}.min.js`, format: "cjs", compact: true, },
-		external: isBareModuleId,
-		plugins: [
-			nodeResolve({ extensions }),
-			babel({ exclude: /node_modules/, extensions }),
-			replace({ "process.env.NODE_ENV": JSON.stringify("production") }),
-			uglify(),
-			sizeSnapshot(),
-		]
-	}
-];
+export default function configureRollup(commandOptions) {
+	const addSizeSnapshot = !commandOptions["config-ci"];
+	const cjs = [
+		{
+			input: "src/index.ts",
+			output: { file: `dist/cjs/${pkg.name}.js`, format: "cjs", compact: true, },
+			external: isBareModuleId,
+			plugins: [
+				nodeResolve({ extensions }),
+				babel({ exclude: /node_modules/, extensions }),
+				replace({ "process.env.NODE_ENV": JSON.stringify("development") }),
+				commonjs({ extensions }),
+				addSizeSnapshot ? sizeSnapshot() : null,
+			]
+		},
+		{
+			input: "src/index.ts",
+			output: { file: `dist/cjs/${pkg.name}.min.js`, format: "cjs", compact: true, },
+			external: isBareModuleId,
+			plugins: [
+				nodeResolve({ extensions }),
+				babel({ exclude: /node_modules/, extensions }),
+				replace({ "process.env.NODE_ENV": JSON.stringify("production") }),
+				uglify(),
+				addSizeSnapshot ? sizeSnapshot() : null,
+			]
+		}
+	];
 
-const esm = [
-	{
-		input: "src/index.ts",
-		output: { file: `dist/esm/${pkg.name}.js`, format: "esm", entryFileNames: "[name].js" },
-		external: isBareModuleId,
-		plugins: [
-			nodeResolve({ extensions }),
-			babel({
-				exclude: /node_modules/,
-				extensions,
-			}),
-			sizeSnapshot(),
-		]
-	}
-];
+	const esm = [
+		{
+			input: "src/index.ts",
+			output: { file: `dist/esm/${pkg.name}.js`, format: "esm", entryFileNames: "[name].js" },
+			external: isBareModuleId,
+			plugins: [
+				nodeResolve({ extensions }),
+				babel({
+					exclude: /node_modules/,
+					extensions,
+				}),
+				addSizeSnapshot ? sizeSnapshot() : null,
+			]
+		}
+	];
 
-module.exports = cjs.concat(esm);
+	return cjs.concat(esm);
+}
