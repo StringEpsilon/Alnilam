@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Redirect, Route, Switch } from "../index";
 import MemoryRouter from "./utils/MemoryRouter";
 import renderStrict from "./utils/renderStrict";
+import { createLocation } from "history";
 
 describe("A <Redirect>", () => {
 	const node = document.createElement("div");
@@ -11,24 +12,33 @@ describe("A <Redirect>", () => {
 		ReactDOM.unmountComponentAtNode(node);
 	});
 
-	it("Doesn't break when rendered inside stateless component", () => {
-
+	describe("inside a functional component", () => {
 		const Stateless = (props: any) => {
-			if (props.flag === 1) {
-				return <Redirect to="/go-out" />;
-			}
-
-			return <b>Stateless!</b>;
+			return <Redirect to={props.to} />;
 		};
 
-		expect(() => {
-			renderStrict(
-				<MemoryRouter>
-					<Stateless flag={1} />
-				</MemoryRouter>,
-				node,
-			);
-		}).not.toThrow();
+		it("doesn't break / throw when rendered with string `to`", () => {
+			expect(() => {
+				renderStrict(
+					<MemoryRouter>
+						<Stateless to="/go-out" />
+					</MemoryRouter>,
+					node,
+				);
+			}).not.toThrow();
+		});
+
+		it("doesn't break / throw when rendered with location `to`", () => {
+			const to = createLocation("/go-out?search=foo#hash");
+			expect(() => {
+				renderStrict(
+					<MemoryRouter>
+						<Stateless to={to} />
+					</MemoryRouter>,
+					node,
+				);
+			}).not.toThrow();
+		});
 	});
 
 	describe("inside a <Switch>", () => {

@@ -52,11 +52,11 @@ function Redirect(props: RedirectProps) {
 							method(location);
 						}}
 						onUpdate={(self, prevProps: RedirectProps) => {
-							if (typeof prevProps.to === "string") {
-								if (prevProps.to !== location.pathname) {
-									method(location);
-								}
-							} else if (!locationsAreEqual(prevProps.to, location)) {
+							const prevLocation =
+								typeof prevProps.to === "string"
+									? createLocation(prevProps.to)
+									: prevProps.to;
+							if (!locationsAreEqual(prevLocation, location)) {
 								method(location);
 							}
 						}}
