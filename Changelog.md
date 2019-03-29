@@ -1,5 +1,6 @@
-## future
+## 0.3.0-beta.3
 
+* Pass alnilam props to all children of ```Route``` and ```Match```.
 * Fixed an infinite loop of updates caused by Redirect in some cases.
 
 ## 0.3.0-beta.2 (2019-03-27)

@@ -2,7 +2,7 @@ import React from "react";
 import warning from "tiny-warning";
 
 export function addLocationPropWarning(prototype: any, componentName: string): void {
-	prototype.componentDidUpdate = function(prevProps: any) {
+	prototype.componentDidUpdate = function (prevProps: any) {
 		warning(
 			!(!!this.props.location !== !!prevProps.location),
 			`<${componentName}> elements should not change from uncontrolled to controlled (or vice versa).`,
@@ -31,8 +31,14 @@ export function sanitizeChildren(name: string, children: any, props: any, path?:
 			}
 			children = null;
 		}
-	} else if (!!children && typeof children === "object" && typeof children.type === "function") {
-		return React.cloneElement(children, props);
+	} else if (!!children) {
+		return React.Children.map(children, (child) => {
+			if (React.isValidElement(child) && typeof child.type !== "string") {
+				return React.cloneElement(child, props);
+			} else {
+				return child;
+			}
+		});
 	}
 	return children;
 }
