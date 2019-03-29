@@ -1,3 +1,7 @@
+## future
+
+* Fixed an infinite loop of updates caused by Redirect in some cases.
+
 ## 0.3.0-beta.2 (2019-03-27)
 
 I messed up my packaging and publishing. Sorry for the inconvienience.

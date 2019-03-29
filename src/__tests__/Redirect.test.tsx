@@ -11,6 +11,26 @@ describe("A <Redirect>", () => {
 		ReactDOM.unmountComponentAtNode(node);
 	});
 
+	it("Doesn't break when rendered inside stateless component", () => {
+
+		const Stateless = (props: any) => {
+			if (props.flag === 1) {
+				return <Redirect to="/go-out" />;
+			}
+
+			return <b>Stateless!</b>;
+		};
+
+		expect(() => {
+			renderStrict(
+				<MemoryRouter>
+					<Stateless flag={1} />
+				</MemoryRouter>,
+				node,
+			);
+		}).not.toThrow();
+	});
+
 	describe("inside a <Switch>", () => {
 		it("automatically interpolates params", () => {
 			let params;
