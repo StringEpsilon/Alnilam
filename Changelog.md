@@ -1,25 +1,4 @@
-## 0.3.0-beta.5
-
-* Integrated typescript into the rollup-build properly using @wessberg/rollup-plugin-ts
-  * the transpilation is still done using babel and there is no dependency on tslib, just @babel/runtime
-  * Build output is now smaller too, since the plugin shakes out type imports.
-
-## 0.3.0-beta.4
-
-See 0.3.0-beta.3
-
-## 0.3.0-beta.3
-
-* Pass alnilam props to all children of ```Route``` and ```Match```.
-* Fixed an infinite loop of updates caused by Redirect in some cases.
-
-## 0.3.0-beta.2 (2019-03-27)
-
-I messed up my packaging and publishing. Sorry for the inconvienience.
-
-Still new for me. Especially beta stuff.
-
-## 0.3.0-beta.1 (2019-03-27)
+## 0.3.0
 
 ### BREAKING:
 
@@ -30,23 +9,32 @@ Still new for me. Especially beta stuff.
 Quick migration guide:
 
 ```jsx
-
+// 0.2.x:
 <Route to="/rigel" component={MyComponent}/>
 
-// becomes:
-
+// 0.3.0:
 <Route to="/rigel">
 	<MyComponent />
 </Route>
 ```
 
-### Changes and fixes:
+```jsx
+// 0.2.x:
+<Route to="/rigel" >
+	<MyComponent/>
+</Route>
 
-* Fixed component names in warnings and invariant exceptions.
-* Bumped @babel/runtime to 7.4.0
-* Swap Route for Match inside withRouter().
-* Tweaked how props are passed to Children of Match
+// 0.3.x:
+<Match to="/rigel">
+	<MyComponent />
+</Match>
+```
 
+### Changes:
+
+* Route now supports multiple children
+* Match now supports multiple children
+* Match and Route now support ClassComponents as children:
 
 ```jsx
 <Match path="foo">
@@ -54,6 +42,20 @@ Quick migration guide:
 </Match>
 ```
 
+* Bumped @babel/runtime to 7.4.0
+
+### Bugfixes:
+
+* Fixed an infinite loop of updates caused by Redirect in some cases.
+* Fixed component names in warnings and invariant exceptions.
+
+### Internal:
+
+* Swap Route for Match inside withRouter().
+* Integrated typescript into the rollup-build properly using @wessberg/rollup-plugin-ts
+  * the transpilation is still done using babel and there is no dependency on tslib, just @babel/runtime
+  * Build output is now smaller too, since the plugin shakes out type imports.
+* New documentation format
 
 ### Internal:
 
