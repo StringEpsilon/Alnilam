@@ -1,3 +1,13 @@
+## 0.3.0-beta.5
+
+* Integrated typescript into the rollup-build properly using @wessberg/rollup-plugin-ts
+  * the transpilation is still done using babel and there is no dependency on tslib, just @babel/runtime
+  * Build output is now smaller too, since the plugin shakes out type imports.
+
+## 0.3.0-beta.4
+
+See 0.3.0-beta.3
+
 ## 0.3.0-beta.3
 
 * Pass alnilam props to all children of ```Route``` and ```Match```.

@@ -2,9 +2,11 @@ const babel = require("rollup-plugin-babel");
 const replace = require("rollup-plugin-replace");
 const commonjs = require("rollup-plugin-commonjs");
 const nodeResolve = require("rollup-plugin-node-resolve");
-const { uglify } = require("rollup-plugin-uglify");
+const { terser } = require("rollup-plugin-terser");
 const { sizeSnapshot } = require("rollup-plugin-size-snapshot");
 const pkg = require("./package.json");
+const ts = require("@wessberg/rollup-plugin-ts");
+
 
 function isBareModuleId(id) {
 	return !id.startsWith(".") && !id.includes(pkg.name + "/");
@@ -20,7 +22,9 @@ export default function configureRollup(commandOptions) {
 			external: isBareModuleId,
 			plugins: [
 				nodeResolve({ extensions }),
-				babel({ exclude: /node_modules/, extensions }),
+				ts({
+					transpiler: "babel",
+				}),
 				replace({ "process.env.NODE_ENV": JSON.stringify("development") }),
 				commonjs({ extensions }),
 				addSizeSnapshot ? sizeSnapshot() : null,
@@ -32,9 +36,11 @@ export default function configureRollup(commandOptions) {
 			external: isBareModuleId,
 			plugins: [
 				nodeResolve({ extensions }),
-				babel({ exclude: /node_modules/, extensions }),
+				ts({
+					transpiler: "babel",
+				}),
 				replace({ "process.env.NODE_ENV": JSON.stringify("production") }),
-				uglify(),
+				terser(),
 				addSizeSnapshot ? sizeSnapshot() : null,
 			]
 		}
@@ -47,9 +53,8 @@ export default function configureRollup(commandOptions) {
 			external: isBareModuleId,
 			plugins: [
 				nodeResolve({ extensions }),
-				babel({
-					exclude: /node_modules/,
-					extensions,
+				ts({
+					transpiler: "babel",
 				}),
 				addSizeSnapshot ? sizeSnapshot() : null,
 			]

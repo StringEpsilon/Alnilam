@@ -7,7 +7,7 @@
 	"module": "dist/esm/alnilam.js",
 	"scripts": {
 		"test": "jest",
-		"build": "tsc && rollup -c",
+		"build": "rollup -c",
 		"ci": "rollup -c --config-ci",
 		"lint": "tslint --project tsconfig.json",
 		"typecheck": "tsc --noEmit"
@@ -59,6 +59,7 @@
 		"@types/react": "^16.8.10",
 		"@types/react-dom": "^16.8.3",
 		"@types/react-is": "^16.7.1",
+		"@wessberg/rollup-plugin-ts": "^1.1.43",
 		"babel-core": "^7.0.0-bridge.0",
 		"babel-jest": "^24.5.0",
 		"babel-plugin-dev-expression": "^0.2.1",
@@ -72,9 +73,10 @@
 		"rollup-plugin-node-resolve": "^4.0.1",
 		"rollup-plugin-replace": "^2.1.1",
 		"rollup-plugin-size-snapshot": "^0.8.0",
+		"rollup-plugin-terser": "^4.0.4",
 		"rollup-plugin-uglify": "^6.0.2",
 		"tslint": "^5.14.0",
 		"tslint-react": "^4.0.0",
-		"typescript": "^3.4.1"
+		"typescript": "^3.3.4000"
 	}
 }

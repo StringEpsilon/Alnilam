@@ -77,4 +77,4 @@ function MyRouter() {
 	* [ ] Document the API differences properly in a separate document.
 * [ ] Figure out typing for withRouter()
 * [ ] Figure out how to properly publish types along side the normal output.
-* [ ] Integrate typescript to rollup build without mandating tslib dependency. Somehow
+* [x] Integrate typescript to rollup build without mandating tslib dependency.
