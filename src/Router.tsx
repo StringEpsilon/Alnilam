@@ -92,7 +92,7 @@ if (process.env.NODE_ENV !== "production") {
 		staticContext: PropTypes.object,
 	};
 
-	Router.prototype.componentDidUpdate = function(prevProps) {
+	Router.prototype.componentDidUpdate = function (prevProps) {
 		warning(
 			prevProps.history === this.props.history,
 			"You cannot change <Router> history>",
