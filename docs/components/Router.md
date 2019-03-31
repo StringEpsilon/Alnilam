@@ -29,3 +29,4 @@ const history = createBrowserHistory()
 ### Caveats
 
 0. Do not change the history prop value at runtime. That will break the Router. Future versions might not accept the updated prop at all.
+1. Nesting one Router inside another will have various unforeseen sideeffects. Alnilam will throw an exception in development mode.

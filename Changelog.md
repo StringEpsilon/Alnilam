@@ -1,3 +1,7 @@
+## Future:
+
+* Router: When nested inside another Router, will throw an exception (in development).
+
 ## 0.3.0
 
 ### BREAKING:

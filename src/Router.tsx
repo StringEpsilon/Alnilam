@@ -2,7 +2,7 @@ import { History, Location } from "history";
 import PropTypes from "prop-types";
 import React from "react";
 import warning from "tiny-warning";
-import RouterContext from "./RouterContext";
+import RouterContext, { RouterContextType } from "./RouterContext";
 
 export interface RouterProps {
 	basename?: string;
@@ -16,6 +16,7 @@ export interface RouterProps {
  * The public API for putting history on context.
  */
 class Router extends React.Component<RouterProps, { location: Location }> {
+	public static contextType = RouterContext;
 	public static propTypes: ObjectMap<any>;
 
 	private static computeRootMatch(pathname: string): Match {
@@ -65,6 +66,11 @@ class Router extends React.Component<RouterProps, { location: Location }> {
 	}
 
 	public render() {
+		if (process.env.NODE_ENV !== "production") {
+			if (this.context) {
+				throw new Error("You should not nest A <Router> inside another <Router");
+			}
+		}
 		return (
 			<RouterContext.Provider
 				children={this.props.children || null}
@@ -86,7 +92,7 @@ if (process.env.NODE_ENV !== "production") {
 		staticContext: PropTypes.object,
 	};
 
-	Router.prototype.componentDidUpdate = function(prevProps) {
+	Router.prototype.componentDidUpdate = function (prevProps) {
 		warning(
 			prevProps.history === this.props.history,
 			"You cannot change <Router> history>",

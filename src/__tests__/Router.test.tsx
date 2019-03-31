@@ -33,6 +33,19 @@ describe("A <Router>", () => {
 		});
 	});
 
+	describe("inside another Router", () => {
+		it("throws an error", () => {
+			expect(() => {
+				renderStrict(
+					<Router history={createHistory()}>
+						<Router history={createHistory()} />
+					</Router >,
+					node,
+				);
+			}).toThrow();
+		});
+	});
+
 	describe("with more than one child", () => {
 		it("does not throw an error", () => {
 			expect(() => {

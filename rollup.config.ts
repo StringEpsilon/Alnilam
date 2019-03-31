@@ -13,7 +13,8 @@ const extensions = [".js", ".ts", ".tsx", ".jsx"];
 
 export default function configureRollup(commandOptions) {
 	const addSizeSnapshot = !commandOptions["config-ci"];
-	const cjs = [
+	return [
+		// CJS:
 		{
 			input: "src/index.ts",
 			output: { file: `dist/cjs/${pkg.name}.js`, format: "cjs", compact: true },
@@ -42,9 +43,7 @@ export default function configureRollup(commandOptions) {
 				addSizeSnapshot ? sizeSnapshot() : null,
 			],
 		},
-	];
-
-	const esm = [
+		// ESM:
 		{
 			input: "src/index.ts",
 			output: { file: `dist/esm/${pkg.name}.js`, format: "esm", entryFileNames: "[name].js" },
@@ -58,5 +57,4 @@ export default function configureRollup(commandOptions) {
 			],
 		},
 	];
-	return [...cjs, esm];
 }
