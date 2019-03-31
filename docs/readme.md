@@ -2,7 +2,7 @@
 
 ## Components
 
-* [Router](./components/Router.md) 
+* [Router](./components/Router.md)
 * [Switch](./components/Switch.md)
 * [Route](./components/Route.md)
 * [Match](./components/Match.md)
@@ -26,3 +26,7 @@
 * [Nested routing](./recipes/nested_routing.md)
 * [Testing](./recipes/testing.md)
 * [Matching options](./recipes/matching_options.md)
+
+# Differences to RR:
+
+[See here.](./differences.md)
