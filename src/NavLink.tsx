@@ -1,10 +1,11 @@
+import { Location } from "history";
 import PropTypes from "prop-types";
 import React from "react";
-import Route from "./Route";
-
-import { Location } from "history";
 import Link from "./Link";
 import matchPath from "./matchPath";
+import Route from "./Route";
+import RouterContext from "./RouterContext";
+import { RouterException } from "./RouterException";
 
 function joinClassnames(...classnames: any[]): string {
 	return classnames.filter((i) => i).join(" ");
@@ -52,16 +53,26 @@ function NavLink(props: NavLinkProps) {
 	const escapedPath = path && path.replace(/([.+*?=^!:${}()[\]|/\\])/g, "\\$1");
 
 	return (
-		<Route
-			children={({ location }) => {
+		<RouterContext.Consumer>
+			{(context) => {
+				if (!context) {
+					throw RouterException("NavLink");
+				}
+
 				const pathToMatch = locationProp
 					? locationProp.pathname
-					: location.pathname;
+					: context.location.pathname;
+
 				const match = escapedPath
-					? matchPath(pathToMatch, { path: escapedPath, exact, strict })
+					? matchPath(
+						pathToMatch,
+						{ path: escapedPath, exact, strict },
+						context.match ? context.match.path : "",
+					)
 					: null;
+
 				const isActiveFlag = !!(isActive
-					? isActive(match, location)
+					? isActive(match, context.location)
 					: match);
 
 				const classNameValue = isActiveFlag
@@ -77,7 +88,7 @@ function NavLink(props: NavLinkProps) {
 					/>
 				);
 			}}
-		/>
+		</RouterContext.Consumer>
 	);
 }
 
