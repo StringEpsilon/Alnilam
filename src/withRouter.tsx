@@ -30,7 +30,7 @@ function withRouter<P>(Component: React.ComponentType<P>): any {
 	WrappedComponent.displayName = `withRouter(${Component.displayName || Component.name})`;
 	WrappedComponent.WrappedComponent = Component;
 
-	if (__DEV__) {
+	if (process.env.NODE_ENV !== "production") {
 		WrappedComponent.propTypes = {
 			wrappedComponentRef: PropTypes.func,
 		};

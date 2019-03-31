@@ -68,7 +68,7 @@ function Redirect(props: RedirectProps) {
 	);
 }
 
-if (__DEV__) {
+if (process.env.NODE_ENV !== "production") {
 	Redirect.propTypes = {
 		push: PropTypes.bool,
 		from: PropTypes.string,

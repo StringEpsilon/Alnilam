@@ -44,7 +44,7 @@ class MatchComponent extends React.Component<RouteProps> {
 	}
 }
 
-if (__DEV__) {
+if (process.env.NODE_ENV !== "production") {
 	MatchComponent.propTypes = Route.propTypes;
 	addLocationPropWarning(MatchComponent.prototype, "Match");
 }

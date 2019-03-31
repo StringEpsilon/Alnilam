@@ -21,7 +21,7 @@ export function sanitizeChildren(name: string, children: any, props: any, path?:
 		children = childrenFunction ? childrenFunction(props) : null;
 
 		if (children === undefined) {
-			if (__DEV__) {
+			if (process.env.NODE_ENV !== "production") {
 				warning(
 					false,
 					"You returned `undefined` from the `children` function of " +

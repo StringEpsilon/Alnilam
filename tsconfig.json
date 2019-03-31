@@ -1,21 +1,25 @@
-
 {
-  "compilerOptions": {
-    "moduleResolution": "node",
-    "jsx": "react",
-	"noEmit": true,
-    "module":"es2015",
-    "removeComments": true,
-	"lib": ["es2015", "es2016", "dom"],
-    "strict": true,
-    "allowSyntheticDefaultImports": true,
-    "allowJs": false,
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-	"noImplicitAny": true,
-  },
-  "include": [
-    "src"
-  ]
+	"compilerOptions": {
+		"moduleResolution": "node",
+		"jsx": "react",
+		"noEmit": true,
+		"module": "es2015",
+		"removeComments": true,
+		"lib": [
+			"es2015",
+			"es2016",
+			"dom"
+		],
+		"strict": true,
+		"allowSyntheticDefaultImports": true,
+		"allowJs": false,
+		"typeRoots": [
+			"node_modules/@types"
+		],
+		"noImplicitAny": true,
+		"resolveJsonModule": true
+	},
+	"include": [
+		"src"
+	]
 }

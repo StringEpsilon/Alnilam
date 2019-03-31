@@ -1,12 +1,10 @@
-const babel = require("rollup-plugin-babel");
-const replace = require("rollup-plugin-replace");
-const commonjs = require("rollup-plugin-commonjs");
-const nodeResolve = require("rollup-plugin-node-resolve");
-const { terser } = require("rollup-plugin-terser");
-const { sizeSnapshot } = require("rollup-plugin-size-snapshot");
-const pkg = require("./package.json");
-const ts = require("@wessberg/rollup-plugin-ts");
-
+import ts from "@wessberg/rollup-plugin-ts";
+import commonjs from "rollup-plugin-commonjs";
+import nodeResolve from "rollup-plugin-node-resolve";
+import replace from "rollup-plugin-replace";
+import { sizeSnapshot } from "rollup-plugin-size-snapshot";
+import { uglify } from "rollup-plugin-uglify";
+import pkg from "./package.json";
 
 function isBareModuleId(id) {
 	return !id.startsWith(".") && !id.includes(pkg.name + "/");
@@ -18,7 +16,7 @@ export default function configureRollup(commandOptions) {
 	const cjs = [
 		{
 			input: "src/index.ts",
-			output: { file: `dist/cjs/${pkg.name}.js`, format: "cjs", compact: true, },
+			output: { file: `dist/cjs/${pkg.name}.js`, format: "cjs", compact: true },
 			external: isBareModuleId,
 			plugins: [
 				nodeResolve({ extensions }),
@@ -28,11 +26,11 @@ export default function configureRollup(commandOptions) {
 				replace({ "process.env.NODE_ENV": JSON.stringify("development") }),
 				commonjs({ extensions }),
 				addSizeSnapshot ? sizeSnapshot() : null,
-			]
+			],
 		},
 		{
 			input: "src/index.ts",
-			output: { file: `dist/cjs/${pkg.name}.min.js`, format: "cjs", compact: true, },
+			output: { file: `dist/cjs/${pkg.name}.min.js`, format: "cjs", compact: true },
 			external: isBareModuleId,
 			plugins: [
 				nodeResolve({ extensions }),
@@ -40,10 +38,10 @@ export default function configureRollup(commandOptions) {
 					transpiler: "babel",
 				}),
 				replace({ "process.env.NODE_ENV": JSON.stringify("production") }),
-				terser(),
+				uglify(),
 				addSizeSnapshot ? sizeSnapshot() : null,
-			]
-		}
+			],
+		},
 	];
 
 	const esm = [
@@ -57,9 +55,8 @@ export default function configureRollup(commandOptions) {
 					transpiler: "babel",
 				}),
 				addSizeSnapshot ? sizeSnapshot() : null,
-			]
-		}
+			],
+		},
 	];
-
-	return cjs.concat(esm);
+	return [...cjs, esm];
 }

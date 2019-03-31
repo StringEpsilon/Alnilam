@@ -92,7 +92,7 @@ class Link extends React.Component<LinkProps> {
 	}
 }
 
-if (__DEV__) {
+if (process.env.NODE_ENV !== "production") {
 	const innerRefType = PropTypes.oneOfType([
 		PropTypes.string,
 		PropTypes.func,

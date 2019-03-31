@@ -59,7 +59,7 @@ class Route extends React.Component<RouteProps> {
 	}
 }
 
-if (__DEV__) {
+if (process.env.NODE_ENV !== "production") {
 	Route.propTypes = {
 		children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
 		exact: PropTypes.bool,

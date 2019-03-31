@@ -81,7 +81,7 @@ function NavLink(props: NavLinkProps) {
 	);
 }
 
-if (__DEV__) {
+if (process.env.NODE_ENV !== "production") {
 	const ariaCurrentType = PropTypes.oneOf([
 		"page",
 		"step",

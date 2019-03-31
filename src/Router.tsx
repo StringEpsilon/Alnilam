@@ -79,7 +79,7 @@ class Router extends React.Component<RouterProps, { location: Location }> {
 	}
 }
 
-if (__DEV__) {
+if (process.env.NODE_ENV !== "production") {
 	Router.propTypes = {
 		children: PropTypes.node,
 		history: PropTypes.object.isRequired,

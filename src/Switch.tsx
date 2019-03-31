@@ -62,7 +62,7 @@ class Switch extends React.Component<SwitchProps> {
 	}
 }
 
-if (__DEV__) {
+if (process.env.NODE_ENV !== "production") {
 	Switch.propTypes = {
 		children: PropTypes.node,
 		location: PropTypes.object,

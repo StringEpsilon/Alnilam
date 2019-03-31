@@ -42,7 +42,10 @@ function createURL(location: string | Location): string {
 
 function staticHandler(methodName: string) {
 	return () => {
-		throw new Error(__DEV__ ? "Invariant failed" : `You cannot ${methodName} with <StaticRouter>`);
+		throw new Error(process.env.NODE_ENV !== "production"
+			? `You cannot ${methodName} with <StaticRouter>`
+			: "Invariant failed",
+		);
 	};
 }
 
@@ -93,7 +96,7 @@ class StaticRouter extends React.Component<StaticRouterProps> {
 	}
 }
 
-if (__DEV__) {
+if (process.env.NODE_ENV !== "production") {
 	StaticRouter.propTypes = {
 		basename: PropTypes.string,
 		context: PropTypes.object,

@@ -48,7 +48,7 @@ function Prompt({ message, when = true }: PromptProps) {
 	);
 }
 
-if (__DEV__) {
+if (process.env.NODE_ENV !== "production") {
 	Prompt.propTypes = {
 		when: PropTypes.bool,
 		message: PropTypes.oneOfType([

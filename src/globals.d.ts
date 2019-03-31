@@ -1,4 +1,3 @@
-declare var __DEV__:boolean;
 
 interface Match {
 	path: string;
@@ -20,6 +19,6 @@ interface ObjectMap<T> {
 	[key: string]: T;
 }
 
-declare module "tiny-warning"{
-    export default function warning(condition: any, message: string): void
+declare module "tiny-warning" {
+	export default function warning(condition: any, message: string): void
 }
