@@ -8,7 +8,7 @@
 	"scripts": {
 		"test": "jest",
 		"build": "rollup -c rollup.config.ts",
-		"ci": "rollup -c --config-ci",
+		"ci": "rollup -c rollup.config.ts --config-ci",
 		"lint": "tslint --project tsconfig.json",
 		"typecheck": "tsc --noEmit"
 	},
