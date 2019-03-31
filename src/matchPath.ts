@@ -27,15 +27,49 @@ function compilePath(path: string, options: pathToRegexp.RegExpOptions): CacheEn
 	return result;
 }
 
+function resolvePath(path: string, basePath: string): string {
+	// Normalize basePath so that it never ends in a slash:
+	if (basePath.endsWith("/")) {
+		basePath = basePath.substr(0, basePath.length - 1);
+	}
+
+	switch (path[0]) {
+		// paths like "/foo" -> not relative.
+		case "/": {
+			return path;
+		}
+		// paths like "./foo" -> relative.
+		case ".": {
+			switch (path.charAt(1)) {
+				case "/": {
+					return basePath + "/" + path.substr(2);
+				}
+				case ".": {
+					throw new Error("Alnilam does not support paths with starting with '../'");
+				}
+			}
+			break;
+		}
+		// paths like "foo/" -> relative
+		default: {
+			return basePath + "/" + path;
+		}
+	}
+	return path;
+}
+
 /**
  * Public API for matching a URL pathname to a path.
  */
-function matchPath(pathname: string, options: any = {}): Match | null {
+function matchPath(pathname: string, options: any = {}, basePath?: string): Match | null {
 	if (typeof options === "string") { options = { path: options }; }
 
 	const { path: rawPath, exact = false, strict = false, sensitive = false } = options;
 
-	const paths: string[] = [].concat(rawPath);
+	let paths: string[] = [].concat(rawPath);
+	if (basePath) {
+		paths = paths.map((path: string) => resolvePath(path, basePath));
+	}
 
 	return paths.reduce((matched: Match | null, path: string) => {
 		if (matched) {

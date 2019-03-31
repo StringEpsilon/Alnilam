@@ -22,7 +22,7 @@ class MatchComponent extends React.Component<RouteProps> {
 					const match = this.props.computedMatch
 						? this.props.computedMatch // <Switch> already computed the match for us
 						: this.props.path
-							? matchPath(location.pathname, this.props)
+							? matchPath(location.pathname, this.props, context.match ? context.match.path : "")
 							: context.match;
 
 					const props: RouterContextType = { ...context, location, match };

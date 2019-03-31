@@ -45,6 +45,29 @@ describe("matchPath", () => {
 		});
 	});
 
+	describe("with relative paths", () => {
+		it("returns correct url on no leading slash", () => {
+			const path = "else";
+			const pathname = "/somewhere/else";
+
+			const match = matchPath(pathname, path, "/somewhere");
+			expect(match).not.toBeNull();
+			if (match) {
+				expect(match.url).toBe("/somewhere/else");
+			}
+		});
+		it("returns correct url on leading './'", () => {
+			const path = "./else";
+			const pathname = "/somewhere/else";
+
+			const match = matchPath(pathname, path, "/somewhere");
+			expect(match).not.toBeNull();
+			if (match) {
+				expect(match.url).toBe("/somewhere/else");
+			}
+		});
+	});
+
 	describe("with an array of paths", () => {
 		it('return the correct url at "/elsewhere"', () => {
 			const path = ["/somewhere", "/elsewhere"];
