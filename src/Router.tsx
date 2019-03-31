@@ -67,7 +67,7 @@ class Router extends React.Component<RouterProps, { location: Location }> {
 
 	public render() {
 		if (process.env.NODE_ENV !== "production") {
-			if (this.context) {
+			if (this.context && this.context.history) {
 				throw new Error("You should not nest A <Router> inside another <Router");
 			}
 		}
