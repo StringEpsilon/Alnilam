@@ -31,6 +31,47 @@ describe("Integration Tests", () => {
 		expect(node.innerHTML).toContain(TEXT2);
 	});
 
+	it("renders nested matches with relative paths", () => {
+		const TEXT1 = "Ms. Tripp";
+		const TEXT2 = "Mrs. Schiffman";
+
+		renderStrict(
+			<MemoryRouter initialEntries={["/milkyway/proxima"]}>
+				<Route path="/milkyway">
+					<div>
+						<h1>{TEXT1}</h1>
+						<Route path="./proxima"><h2>{TEXT2}</h2></Route>
+					</div>
+				</Route>
+			</MemoryRouter>,
+			node,
+		);
+
+		expect(node.innerHTML).toContain(TEXT1);
+		expect(node.innerHTML).toContain(TEXT2);
+	});
+
+	it("renders nested matches with relative paths and route params", () => {
+		renderStrict(
+			<MemoryRouter initialEntries={["/milkyway/proxima"]}>
+				<Route path="/:galaxy">
+					<Route path="./:star">
+						{(props: any) =>
+							<>
+								<h2>{props.match.params.galaxy}</h2>
+								<h3>{props.match.params.star}</h3>
+							</>
+						}
+					</Route>
+				</Route>
+			</MemoryRouter>,
+			node,
+		);
+
+		expect(node.innerHTML).toContain("milkyway");
+		expect(node.innerHTML).toContain("proxima");
+	});
+
 	it("renders only as deep as the matching Route", () => {
 		const TEXT1 = "Ms. Tripp";
 		const TEXT2 = "Mrs. Schiffman";

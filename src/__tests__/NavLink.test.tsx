@@ -2,9 +2,9 @@ import { Location } from "history";
 import React from "react";
 import ReactDOM from "react-dom";
 import { NavLink, Route, withRouter } from "..";
+import MatchComponent from "../Match";
 import MemoryRouter from "./utils/MemoryRouter";
 import renderStrict from "./utils/renderStrict";
-import MatchComponent from "../Match";
 
 describe("A <NavLink>", () => {
 	const node = document.createElement("div");
