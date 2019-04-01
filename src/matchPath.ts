@@ -38,6 +38,9 @@ function resolvePath(path: string, basePath: string): string {
 		case "/": {
 			return path;
 		}
+		case "\\": {
+			return path;
+		}
 		// paths like "./foo" -> relative.
 		case ".": {
 			switch (path.charAt(1)) {

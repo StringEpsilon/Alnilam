@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import { NavLink, Route, withRouter } from "..";
 import MemoryRouter from "./utils/MemoryRouter";
 import renderStrict from "./utils/renderStrict";
+import MatchComponent from "../Match";
 
 describe("A <NavLink>", () => {
 	const node = document.createElement("div");
@@ -29,12 +30,30 @@ describe("A <NavLink>", () => {
 			}
 		});
 
+		it("applies its default activeClassName with relative route", () => {
+			renderStrict(
+				<MemoryRouter initialEntries={["/milkyway/proxima"]}>
+					<MatchComponent path="/milkyway">
+						<NavLink to="proxima">Pizza!</NavLink>
+					</MatchComponent>
+				</MemoryRouter>,
+				node,
+			);
+
+			const a = node.querySelector("a");
+
+			expect(a).not.toBeNull();
+			if (a) {
+				expect(a.className).toContain("active");
+			}
+		});
+
 		it("applies a custom activeClassName instead of the default", () => {
 			renderStrict(
 				<MemoryRouter initialEntries={["/pizza"]}>
 					<NavLink to="/pizza" activeClassName="selected">
 						Pizza!
-				</NavLink>
+					</NavLink>
 				</MemoryRouter>,
 				node,
 			);
@@ -596,9 +615,9 @@ describe("A <NavLink>", () => {
 			renderStrict(
 				<MemoryRouter initialEntries={["/pizza/"]}>
 					<Route path="/pizza">
-							<NavLink to="/pizza/">
-								<PropChecker />
-							</NavLink>
+						<NavLink to="/pizza/">
+							<PropChecker />
+						</NavLink>
 					</Route>
 				</MemoryRouter>,
 				node,
