@@ -36,6 +36,23 @@ describe("A <Switch>", () => {
 		expect(node.innerHTML).toContain("one");
 	});
 
+	it("renders the first <Route> that matches the URL with a relative path", () => {
+		renderStrict(
+			<MemoryRouter initialEntries={["/milkyway/alnilam"]}>
+				<Route path="/milkyway">
+					<Switch>
+						<Route path="./alnilam" > <h1>one</h1> </Route>
+						<Route path="./rigel" > <h1>two</h1> </Route>
+					</Switch>
+				</Route>
+			</MemoryRouter>,
+			node,
+		);
+
+		expect(node.innerHTML).toContain("one");
+	});
+
+
 	it("does not render a second <Route> that also matches the URL", () => {
 		renderStrict(
 			<MemoryRouter initialEntries={["/one"]}>
