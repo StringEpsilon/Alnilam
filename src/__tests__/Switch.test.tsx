@@ -52,7 +52,6 @@ describe("A <Switch>", () => {
 		expect(node.innerHTML).toContain("one");
 	});
 
-
 	it("does not render a second <Route> that also matches the URL", () => {
 		renderStrict(
 			<MemoryRouter initialEntries={["/one"]}>
