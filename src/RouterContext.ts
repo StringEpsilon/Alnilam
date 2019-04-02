@@ -9,4 +9,5 @@ export type RouterContextType = {
 } | undefined;
 
 const context = React.createContext<RouterContextType | null>(null);
+context.displayName = "RouterContext";
 export default context;
