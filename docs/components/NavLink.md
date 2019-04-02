@@ -24,6 +24,8 @@ A [```<Link>```](./Link.md) wrapper that knows if it's "active" or not. It consi
 
 ```NavLink``` will also pass additional props down to ```Link``` and thus to the anchor. So you can pass your own additional event handlers, callbacks and attributes to the anchor element.
 
+Note: A ```path``` without a leading slash or with a leading "./" will be considered relative to it's parent Route or Match.
+
 **Call signatures for the callbacks:**
 
 ```isActive(match: Match | null, location: Location) => boolean```

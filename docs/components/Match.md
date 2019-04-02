@@ -17,6 +17,8 @@ Like Route and NavLink, Match will provide the same props to the children as [wi
 | children  | React element | no       | Child elements
 | location  | [Location](../types/Location.md)| no       | Overrides current location from history for matching
 
+Note: A ```path``` without a leading slash or with a leading "./" will be considered relative to it's parent Route or Match.
+
 ### Example usage
 
 A semi-realistic usecase is demonstrated in this codesandbox:

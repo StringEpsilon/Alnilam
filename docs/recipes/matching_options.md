@@ -2,12 +2,12 @@
 
 ## Overview
 
-| Property  | type   | default   | explanation                                    |
-|-----------|--------|-----------|------------------------------------------------|
-| path      | string | undefined | The path to match against the current location |
-| exact     | bool   | false     | If true, only match when paths are equal       |
-| strict    | bool   | false     | If true, only match if trailing slashes are identical |
-| sensitive | bool   | false     | if true, only match on identical casing        |
+| Property  | type   | default   | explanation
+|-----------|--------|-----------|-------------
+| path      | string | undefined | The path to match against the current location
+| exact     | bool   | false     | If true, only match when paths are equal
+| strict    | bool   | false     | If true, only match if trailing slashes are identical
+| sensitive | bool   | false     | if true, only match on identical casing
 
 ```exact``` is implemented in alnilam. For the rest of the matching options,
 you can also consult the documentation of [path-to-regexp@1.7.0](https://github.com/pillarjs/path-to-regexp/tree/v1.7.0).

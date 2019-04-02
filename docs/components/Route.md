@@ -19,6 +19,8 @@ A route without a path will always render it's children, but in that case the ``
 | children  | React element | no       | Child elements
 | location  | [Location](../types/Location.md)| no       | Overrides current location from history for matching
 
+Note: A ```path``` without a leading slash or with a leading "./" will be considered relative to it's parent Route or Match.
+
 ### Example usage
 
 Basic app setup:
