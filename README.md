@@ -1,6 +1,10 @@
-Stellar<sup><a href="#footnote">1</a></sup> declarative routing in typescript, for React.
-
-:star: :star2: :star:
+<p align="center"> :star: :star2: :star: </p>
+<p align="center">
+<img alt="npm bundle size" src="https://img.shields.io/bundlephobia/min/alnilam.svg?style=flat-square">
+<img alt="Azure DevOps builds" src="https://img.shields.io/azure-devops/build/StringEpsilon/StringEpsilon/1.svg?style=flat-square">
+<img alt="Azure DevOps coverage" src="https://img.shields.io/azure-devops/coverage/StringEpsilon/StringEpsilon/1.svg?style=flat-square">
+<img alt="npm" src="https://img.shields.io/npm/v/alnilam.svg?style=flat-square">
+</p>
 
 ## Why "Alnilam"?
 
