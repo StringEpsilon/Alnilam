@@ -1,11 +1,18 @@
 <p align="center"> :star: :star2: :star: </p>
 <p align="center">
-<img alt="npm bundle size" src="https://img.shields.io/bundlephobia/min/alnilam.svg?style=flat-square">
-<img alt="Azure DevOps builds" src="https://img.shields.io/azure-devops/build/StringEpsilon/StringEpsilon/1.svg?style=flat-square">
-<img alt="Azure DevOps coverage" src="https://img.shields.io/azure-devops/coverage/StringEpsilon/StringEpsilon/1.svg?style=flat-square">
-<img alt="npm" src="https://img.shields.io/npm/v/alnilam.svg?style=flat-square">
+<a href="https://bundlephobia.com/result?p=alnilam">
+	<img alt="npm bundle size" src="https://img.shields.io/bundlephobia/min/alnilam.svg?style=flat-square">
+</a>
+<a href="https://dev.azure.com/StringEpsilon/StringEpsilon/_build?definitionId=1&_a=summary" >
+	<img alt="Azure DevOps builds" src="https://img.shields.io/azure-devops/build/StringEpsilon/StringEpsilon/1.svg?style=flat-square">
+<a>
+<a href="https://dev.azure.com/StringEpsilon/StringEpsilon/_build?definitionId=1&_a=summary" >
+	<img alt="Azure DevOps coverage" src="https://img.shields.io/azure-devops/coverage/StringEpsilon/StringEpsilon/1.svg?style=flat-square">
+</a>
+<a href="https://www.npmjs.com/package/alnilam">
+	<img alt="npm" src="https://img.shields.io/npm/v/alnilam.svg?style=flat-square">
+</a>
 </p>
-
 ## Why "Alnilam"?
 
 [Alnilam](https://en.wikipedia.org/wiki/Alnilam) is a star that was used in celestial
