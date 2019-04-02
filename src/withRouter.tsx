@@ -1,7 +1,8 @@
 import hoistStatics from "hoist-non-react-statics";
 import PropTypes from "prop-types";
 import React from "react";
-import Match from "./Match";
+import RouterContext from "./RouterContext";
+import { RouterException } from "./RouterException";
 
 interface WithRouterProps {
 	wrappedComponentRef?: (props: any) => any;
@@ -10,24 +11,29 @@ interface WithRouterProps {
 /**
  * A public higher-order component to access the imperative API
  */
-function withRouter<P>(Component: React.ComponentType<P>): any {
+function withRouter(Component: React.ComponentType<any>): any {
+	const displayName = `withRouter(${Component.displayName || Component.name})`;
+
 	const WrappedComponent = (props: WithRouterProps) => {
 		const { wrappedComponentRef, ...rest } = props;
 
 		return (
-			<Match>
-				{(routeComponentProps: any) => (
-					<Component
+			<RouterContext.Consumer>
+				{(context) => {
+					if (!context) {
+						throw RouterException(displayName);
+					}
+					return <Component
 						{...rest}
-						{...routeComponentProps}
+						{...context}
 						ref={wrappedComponentRef}
-					/>
-				)}
-			</Match>
+					/>;
+				}}
+			</RouterContext.Consumer>
 		);
 	};
 
-	WrappedComponent.displayName = `withRouter(${Component.displayName || Component.name})`;
+	WrappedComponent.displayName = displayName;
 	WrappedComponent.WrappedComponent = Component;
 
 	if (process.env.NODE_ENV !== "production") {
