@@ -1,8 +1,12 @@
-## Future:
+## 0.4.0 (2019-04-02)
 
+* Relative paths for all your routing pleasure! No more ``` `${match.url}/foo` ```.
+	* A path is considered as relative to it's parent Match or Route when starting with "./" or when it has no leading slash.
 * Router: When nested inside another Router, will throw an exception (in development).
 
-## 0.3.0
+* Various internal cleanups.
+
+## 0.3.0 (2019-03-27):
 
 ### BREAKING:
 
