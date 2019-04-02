@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import React from "react";
 import Link from "./Link";
 import matchPath from "./matchPath";
-import Route from "./Route";
 import RouterContext from "./RouterContext";
 import { RouterException } from "./RouterException";
 
@@ -108,10 +107,10 @@ if (process.env.NODE_ENV !== "production") {
 		activeClassName: PropTypes.string,
 		activeStyle: PropTypes.object,
 		className: PropTypes.string,
-		exact: Route.propTypes.exact,
+		exact: PropTypes.bool,
 		isActive: PropTypes.func,
 		location: PropTypes.object,
-		strict: Route.propTypes.strict,
+		strict: PropTypes.bool,
 		style: PropTypes.object,
 	};
 }
