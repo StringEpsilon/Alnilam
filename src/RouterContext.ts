@@ -9,6 +9,5 @@ export type RouterContextType = {
 	staticContext: any; // TODO
 } | undefined;
 
-const context = React.createContext<RouterContextType | null>(null);
-context.displayName = "RouterContext";
-export default context;
+export const RouterContext = React.createContext<RouterContextType | null>(null);
+RouterContext.displayName = "RouterContext";

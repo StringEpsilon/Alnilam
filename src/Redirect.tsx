@@ -4,7 +4,7 @@ import React from "react";
 import generatePath from "./generatePath";
 import Lifecycle from "./Lifecycle";
 import { MatchResult } from "./matchPath";
-import RouterContext from "./RouterContext";
+import { RouterContext } from "./RouterContext";
 import { RouterException } from "./RouterException";
 
 export interface RedirectProps {

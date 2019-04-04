@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import warning from "tiny-warning";
 import { MatchResult } from "./matchPath";
-import RouterContext, { RouterContextType } from "./RouterContext";
+import { RouterContext } from "./RouterContext";
 
 export interface RouterProps {
 	basename?: string;

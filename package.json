@@ -30,7 +30,8 @@
 	},
 	"homepage": "https://github.com/StringEpsilon/Alnilam#readme",
 	"files": [
-		"dist/**"
+		"dist/**",
+		"!dist/types/alnilam.min.d.ts"
 	],
 	"peerDependencies": {
 		"react": ">=16.4"

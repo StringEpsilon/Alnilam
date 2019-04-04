@@ -37,7 +37,7 @@ export default function configureRollup(commandOptions) {
 		// ESM:
 		{
 			input: "src/index.ts",
-			output: { file: `dist/esm/${pkg.name}.js`, format: "esm", entryFileNames: "[name].js" },
+			output: { file: `dist/esm/${pkg.name}.js`, format: "esm" },
 			external: isBareModuleId,
 			plugins: [
 				ts({

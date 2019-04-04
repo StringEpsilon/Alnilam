@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		"moduleResolution": "node",
 		"jsx": "react",
-		"noEmit": true,
+		"emitDeclarationOnly": true,
 		"module": "es2015",
 		"removeComments": true,
 		"lib": [
@@ -26,6 +26,6 @@
 	],
 	"exclude": [
 		"node_modules",
-		"**.test.**"
+		"**/__tests__/**"
 	]
 }

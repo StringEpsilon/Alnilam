@@ -1,5 +1,6 @@
-## 0.4.1 Future
+## 0.5.0 Future
 
+* Now comes with types!
 * Context.Provider and Context.Consumer now have the correct displayName attributes.
 * Reduced component nesting in withRouter.
 * Improved error message when using a withRouter-wrapped component outside a Router.

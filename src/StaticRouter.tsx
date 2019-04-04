@@ -56,7 +56,7 @@ function noop(): void { return; }
  * location changes in a context object. Useful mainly in testing and
  * server-rendering scenarios.
  */
-class StaticRouter extends React.Component<StaticRouterProps> {
+export default class StaticRouter extends React.Component<StaticRouterProps> {
 	public static propTypes: {
 		basename: PropTypes.Requireable<string>,
 		context: PropTypes.Requireable<object>,
@@ -106,5 +106,3 @@ if (process.env.NODE_ENV !== "production") {
 	};
 
 }
-
-export default StaticRouter;

@@ -1,7 +1,7 @@
 import hoistStatics from "hoist-non-react-statics";
 import PropTypes from "prop-types";
 import React from "react";
-import RouterContext from "./RouterContext";
+import { RouterContext } from "./RouterContext";
 import { RouterException } from "./RouterException";
 
 export interface WithRouterProps {

@@ -1,7 +1,7 @@
 import React from "react";
 import matchPath from "./matchPath";
 import Route, { RouteProps } from "./Route";
-import RouterContext, { RouterContextType } from "./RouterContext";
+import { RouterContext, RouterContextType } from "./RouterContext";
 import { RouterException } from "./RouterException";
 import { addLocationPropWarning, sanitizeChildren } from "./utils";
 
