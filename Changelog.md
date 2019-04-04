@@ -1,3 +1,12 @@
+## 0.4.1 Future
+
+* Context.Provider and Context.Consumer now have the correct displayName attributes.
+* Reduced component nesting in withRouter.
+* Improved error message when using a withRouter-wrapped component outside a Router.
+
+Internal:
+* Some general housekeeping (readme, devDepenencies, moving code around, ...).
+
 ## 0.4.0 (2019-04-02)
 
 * Relative paths for all your routing pleasure! No more ``` `${match.url}/foo` ```.
