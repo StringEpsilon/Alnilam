@@ -19,9 +19,6 @@ steps:
     npm install
   displayName: 'npm install'
 
-- script: |
-    npm run typecheck
-  displayName: 'Running typechecker'
 
 - script: |
     npm run lint
