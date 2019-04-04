@@ -13,16 +13,6 @@
 	<img alt="npm" src="https://img.shields.io/npm/v/alnilam.svg?style=flat-square">
 </a>
 </p>
-## Why "Alnilam"?
-
-[Alnilam](https://en.wikipedia.org/wiki/Alnilam) is a star that was used in celestial
-navigation. It's one of the stars in Orions belt - which happens to be my
-favorite constellation - and it's official designation is *Epsilon* Orionis.
-I'm also a fan of contrived package names ;-)
-
-## Acknowlegdements
-
-Thanks to all original contributors of [React-Router](https://github.com/ReactTraining/react-router).
 
 ## What / Why is Alnilam?
 
@@ -40,6 +30,10 @@ Motivations:
 5. Port the entire thing to typescript.
 
 Ultimately, it's more about the learning experience. It's my first dabble with a library, typescript and publishing something on NPM. Alnilam also serves as my testbed for contributions back to RR.
+
+## Acknowlegdements
+
+Thanks to all original contributors of [React-Router](https://github.com/ReactTraining/react-router).
 
 ## Getting started:
 
@@ -78,11 +72,11 @@ function MyRouter() {
   );
 }
 ```
+
 Here is a [a small example app](https://codesandbox.io/s/kkw61p4lno) made with Alnilam. It shows:
 * Nested routes
 * Basic use of ```<Match>```, ```<Route>```, ```<Link>```, and ```<Switch>```
 * Use of parameters in route declarations
-
 
 ## TODO for 1.0
 
@@ -95,5 +89,9 @@ Here is a [a small example app](https://codesandbox.io/s/kkw61p4lno) made with A
 * [x] Integrate typescript to rollup build without mandating tslib dependency.
 * [ ] Wait for history 5.0.
 
+## Why is it called "Alnilam"?
 
-<a id="footnote"><sup>1</sup></a> Because it's named after a star, not because it's so awesome.
+[Alnilam](https://en.wikipedia.org/wiki/Alnilam) is a star that was used in celestial
+navigation. It's one of the stars in Orions belt - which happens to be my
+favorite constellation - and it's official designation is *Epsilon* Orionis.
+I'm also a fan of contrived package names ;-)

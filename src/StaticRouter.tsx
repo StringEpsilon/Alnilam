@@ -1,7 +1,6 @@
 import { createLocation, createPath, Location } from "history";
 import PropTypes from "prop-types";
 import React from "react";
-import warning from "tiny-warning";
 import Router from "./Router";
 
 interface StaticRouterProps {
@@ -40,7 +39,7 @@ function createURL(location: string | Location): string {
 	return typeof location === "string" ? location : createPath(location);
 }
 
-function staticHandler(methodName: string) {
+function staticHandler(methodName: string): () => void {
 	return () => {
 		throw new Error(process.env.NODE_ENV !== "production"
 			? `You cannot ${methodName} with <StaticRouter>`
@@ -49,7 +48,7 @@ function staticHandler(methodName: string) {
 	};
 }
 
-function noop() { return; }
+function noop(): void { return; }
 
 /**
  * The public top-level API for a "static" <Router>, so-called because it
@@ -64,19 +63,7 @@ class StaticRouter extends React.Component<StaticRouterProps> {
 		location: PropTypes.Requireable<string | object>,
 	};
 
-	public navigateTo(location: Location, action: any /*TODO*/) {
-		const { basename = "", context } = this.props;
-		context.action = action;
-		context.location = addBasename(basename, createLocation(location));
-		context.url = createURL(context.location);
-	}
-
-	public handlePush = (location: Location) => this.navigateTo(location, "PUSH");
-	public handleReplace = (location: Location) => this.navigateTo(location, "REPLACE");
-	public handleListen = () => noop;
-	public handleBlock = () => noop;
-
-	public render() {
+	public render(): JSX.Element {
 		const { basename = "", context = {}, location = "/", ...rest } = this.props;
 
 		const history = {
@@ -93,6 +80,18 @@ class StaticRouter extends React.Component<StaticRouterProps> {
 		};
 
 		return <Router {...rest} history={history} staticContext={context} />;
+	}
+
+	private handlePush = (location: Location) => this.navigateTo(location, "PUSH");
+	private handleReplace = (location: Location) => this.navigateTo(location, "REPLACE");
+	private handleListen = () => noop;
+	private handleBlock = () => noop;
+
+	private navigateTo(location: Location, action: any /*TODO*/) {
+		const { basename = "", context } = this.props;
+		context.action = action;
+		context.location = addBasename(basename, createLocation(location));
+		context.url = createURL(context.location);
 	}
 }
 

@@ -23,10 +23,42 @@ interface LinkProps {
 /**
  * The public API for rendering a history-aware <a>.
  */
-class Link extends React.Component<LinkProps> {
-	public static propTypes: ObjectMap<any>;
+export default class Link extends React.Component<LinkProps> {
+	public static propTypes: object;
 
-	public handleClick(event: React.MouseEvent, history: History) {
+	public render(): JSX.Element {
+		const { innerRef, replace, to, ...rest } = this.props; // eslint-disable-line no-unused-vars
+
+		return (
+			<RouterContext.Consumer>
+				{(context) => {
+					if (!context) {
+						throw RouterException("Link");
+					}
+
+					const location =
+						typeof to === "string"
+							// void(0) because of the typing missmatch in createLocation().
+							? createLocation(to, null, void (0), context.location)
+							: to;
+					const href = location ? context.history.createHref(location) : "";
+
+					return (
+						<a
+							{...rest}
+							onClick={(event) => {
+								return this.handleClick(event, context.history);
+							}}
+							href={href}
+							ref={innerRef}
+						/>
+					);
+				}}
+			</RouterContext.Consumer>
+		);
+	}
+
+	private handleClick(event: React.MouseEvent, history: History): void {
 		if (this.props.onClick) {
 			this.props.onClick(event);
 		}
@@ -58,38 +90,6 @@ class Link extends React.Component<LinkProps> {
 
 		method(this.props.to);
 	}
-
-	public render() {
-		const { innerRef, replace, to, ...rest } = this.props; // eslint-disable-line no-unused-vars
-
-		return (
-			<RouterContext.Consumer>
-				{(context) => {
-					if (!context) {
-						throw RouterException("Link");
-					}
-
-					const location =
-						typeof to === "string"
-							// void(0) because of the typing missmatch in createLocation().
-							? createLocation(to, null, void (0), context.location)
-							: to;
-					const href = location ? context.history.createHref(location) : "";
-
-					return (
-						<a
-							{...rest}
-							onClick={(event) => {
-								return this.handleClick(event, context.history);
-							}}
-							href={href}
-							ref={innerRef}
-						/>
-					);
-				}}
-			</RouterContext.Consumer>
-		);
-	}
 }
 
 if (process.env.NODE_ENV !== "production") {
@@ -110,5 +110,3 @@ if (process.env.NODE_ENV !== "production") {
 		]).isRequired,
 	};
 }
-
-export default Link;

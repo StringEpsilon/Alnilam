@@ -5,6 +5,7 @@
 	"main": "dist/cjs/alnilam.js",
 	"sideEffects": false,
 	"module": "dist/esm/alnilam.js",
+	"types": "dist/types/alnilam.d.ts",
 	"scripts": {
 		"test": "jest",
 		"build": "rollup -c rollup.config.ts",
@@ -18,7 +19,9 @@
 	},
 	"keywords": [
 		"react",
-		"routing"
+		"routing",
+		"router",
+		"typescript"
 	],
 	"author": "StringEpsilon",
 	"license": "MIT",

@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import React from "react";
 import generatePath from "./generatePath";
 import Lifecycle from "./Lifecycle";
+import { MatchResult } from "./matchPath";
 import RouterContext from "./RouterContext";
 import { RouterException } from "./RouterException";
 
-interface RedirectProps {
-	computedMatch?: Match;
+export interface RedirectProps {
+	computedMatch?: MatchResult;
 	from?: string | Location;
 	to: string | Location;
 	push?: boolean;
@@ -16,7 +17,7 @@ interface RedirectProps {
 /**
  * The public API for navigating programmatically with a component.
  */
-function Redirect(props: RedirectProps) {
+export default function Redirect(props: RedirectProps) {
 	const { computedMatch, to, push = false } = props;
 	return (
 		<RouterContext.Consumer>
@@ -79,5 +80,3 @@ if (process.env.NODE_ENV !== "production") {
 		]).isRequired,
 	};
 }
-
-export default Redirect;

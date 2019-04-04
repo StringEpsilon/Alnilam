@@ -1,11 +1,75 @@
 import pathToRegexp from "path-to-regexp";
 
+export interface MatchResult {
+	path: string;
+	url: string;
+	isExact: boolean;
+	// TODO: find better typing for params, maybe make Match generic?
+	params: object;
+}
+
+export interface MatchOptions {
+	path?: string | string[];
+	exact?: boolean;
+	strict?: boolean;
+	end?: boolean;
+	sensitive?: boolean;
+}
+
+/**
+ * Public API for matching a URL pathname to a path.
+ */
+export default function matchPath(
+	pathname: string,
+	options: MatchOptions | string = {},
+	basePath?: string)
+	: MatchResult | null {
+
+	if (typeof options === "string") { options = { path: options }; }
+
+	const { path: rawPath, exact = false, strict = false, sensitive = false } = options;
+
+	const paths: string[] = ([] as string[]).concat(rawPath || [""]);
+
+	return paths.reduce((matched: MatchResult | null, path: string) => {
+		if (basePath) {
+			path = resolvePath(path, basePath);
+		}
+		if (matched) {
+			return matched;
+		}
+		const { regexp, keys } = compilePath(path, {
+			end: exact,
+			sensitive,
+			strict,
+		});
+		const match = regexp.exec(pathname);
+
+		if (!match) { return null; }
+
+		const [url, ...values] = match;
+		const isExact = pathname === url;
+
+		if (exact && !isExact) { return null; }
+
+		return {
+			isExact, // whether or not we matched exactly
+			params: keys.reduce((memo: { [keys: string]: string }, key, index) => {
+				memo[key.name] = values[index];
+				return memo;
+			}, {}),
+			path, // the path used to match
+			url: path === "/" && url === "" ? "/" : url, // the matched portion of the URL
+		};
+	}, null);
+}
+
 interface CacheEntry {
 	regexp: pathToRegexp.PathRegExp;
 	keys: pathToRegexp.Key[];
 }
 
-const cache: { [key: string]: ObjectMap<CacheEntry> } = {};
+const cache: { [key: string]: { [id: string]: CacheEntry } } = {};
 const cacheLimit = 10000;
 let cacheCount = 0;
 
@@ -60,48 +124,3 @@ function resolvePath(path: string, basePath: string): string {
 	}
 	return path;
 }
-
-/**
- * Public API for matching a URL pathname to a path.
- */
-function matchPath(pathname: string, options: any = {}, basePath?: string): Match | null {
-	if (typeof options === "string") { options = { path: options }; }
-
-	const { path: rawPath, exact = false, strict = false, sensitive = false } = options;
-
-	let paths: string[] = [].concat(rawPath);
-	if (basePath) {
-		paths = paths.map((path: string) => resolvePath(path, basePath));
-	}
-
-	return paths.reduce((matched: Match | null, path: string) => {
-		if (matched) {
-			return matched;
-		}
-		const { regexp, keys } = compilePath(path, {
-			end: exact,
-			sensitive,
-			strict,
-		});
-		const match = regexp.exec(pathname);
-
-		if (!match) { return null; }
-
-		const [url, ...values] = match;
-		const isExact = pathname === url;
-
-		if (exact && !isExact) { return null; }
-
-		return {
-			isExact, // whether or not we matched exactly
-			params: keys.reduce((memo: ObjectMap<string>, key, index) => {
-				memo[key.name] = values[index];
-				return memo;
-			}, {}),
-			path, // the path used to match
-			url: path === "/" && url === "" ? "/" : url, // the matched portion of the URL
-		};
-	}, null);
-}
-
-export default matchPath;

@@ -8,10 +8,10 @@ import { addLocationPropWarning, sanitizeChildren } from "./utils";
 /**
  * The public API for matching a single path and rendering.
  */
-class MatchComponent extends React.Component<RouteProps> {
-	public static propTypes: ObjectMap<any>;
+export default class MatchComponent extends React.Component<RouteProps> {
+	public static propTypes: object;
 
-	public render() {
+	public render(): JSX.Element {
 		return (
 			<RouterContext.Consumer>
 				{(context) => {
@@ -48,5 +48,3 @@ if (process.env.NODE_ENV !== "production") {
 	MatchComponent.propTypes = Route.propTypes;
 	addLocationPropWarning(MatchComponent.prototype, "Match");
 }
-
-export default MatchComponent;

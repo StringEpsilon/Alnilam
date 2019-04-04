@@ -1,7 +1,7 @@
 import { Location } from "history";
 import PropTypes from "prop-types";
 import React from "react";
-import matchPath from "./matchPath";
+import matchPath, { MatchResult } from "./matchPath";
 import RouterContext from "./RouterContext";
 import { RouterException } from "./RouterException";
 import { addLocationPropWarning } from "./utils";
@@ -11,20 +11,17 @@ interface SwitchChildProps {
 	path?: string | string[];
 }
 
-interface SwitchProps {
+export interface SwitchProps {
 	location?: Location;
 }
 
 /**
  * The public API for rendering the first <Route> that matches.
  */
-class Switch extends React.Component<SwitchProps> {
-	public static propTypes: {
-		children: PropTypes.Requireable<PropTypes.ReactNodeLike>;
-		location: PropTypes.Requireable<object>;
-	};
+export default class Switch extends React.Component<SwitchProps> {
+	public static propTypes: object;
 
-	public render() {
+	public render(): JSX.Element {
 		return (
 			<RouterContext.Consumer>
 				{(context) => {
@@ -35,7 +32,7 @@ class Switch extends React.Component<SwitchProps> {
 					const location = this.props.location || context.location;
 
 					let element: React.ReactElement | null = null;
-					let match: Match | null | undefined;
+					let match: MatchResult | null | undefined;
 
 					// We use React.Children.forEach instead of React.Children.toArray().find()
 					// here because toArray adds keys to all child elements and we do not want
@@ -74,5 +71,3 @@ if (process.env.NODE_ENV !== "production") {
 
 	addLocationPropWarning(Switch.prototype, "Switch");
 }
-
-export default Switch;

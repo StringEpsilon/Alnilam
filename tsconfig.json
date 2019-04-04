@@ -12,14 +12,20 @@
 		],
 		"strict": true,
 		"allowSyntheticDefaultImports": true,
-		"allowJs": false,
 		"typeRoots": [
 			"node_modules/@types"
 		],
 		"noImplicitAny": true,
-		"resolveJsonModule": true
+		"noImplicitReturns": true,
+		"resolveJsonModule": true,
+		"declaration": true,
+		"declarationDir": "dist/types",
 	},
 	"include": [
 		"src"
+	],
+	"exclude": [
+		"node_modules",
+		"**.test.**"
 	]
 }

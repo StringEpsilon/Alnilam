@@ -4,14 +4,14 @@ import React from "react";
 import RouterContext from "./RouterContext";
 import { RouterException } from "./RouterException";
 
-interface WithRouterProps {
+export interface WithRouterProps {
 	wrappedComponentRef?: (props: any) => any;
 }
 
 /**
  * A public higher-order component to access the imperative API
  */
-function withRouter(Component: React.ComponentType<any>): any {
+export default function withRouter(Component: React.ComponentType<any>): any {
 	const displayName = `withRouter(${Component.displayName || Component.name})`;
 
 	const WrappedComponent = (props: WithRouterProps) => {
@@ -44,5 +44,3 @@ function withRouter(Component: React.ComponentType<any>): any {
 
 	return hoistStatics(WrappedComponent, Component);
 }
-
-export default withRouter;

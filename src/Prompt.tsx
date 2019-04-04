@@ -4,7 +4,7 @@ import Lifecycle from "./Lifecycle";
 import RouterContext from "./RouterContext";
 import { RouterException } from "./RouterException";
 
-interface PromptProps {
+export interface PromptProps {
 	message?: string;
 	when?: boolean;
 }
@@ -12,7 +12,7 @@ interface PromptProps {
 /**
  * The public API for prompting the user before navigating away from a screen.
  */
-function Prompt({ message, when = true }: PromptProps) {
+export default function Prompt({ message, when = true }: PromptProps) {
 	return (
 		<RouterContext.Consumer>
 			{(context) => {
@@ -57,5 +57,3 @@ if (process.env.NODE_ENV !== "production") {
 		]).isRequired,
 	};
 }
-
-export default Prompt;

@@ -8,24 +8,22 @@ export interface LifecycleProps {
 	message?: any; // for Prompt.tsx
 }
 
-class Lifecycle extends React.Component<LifecycleProps> {
+export default class Lifecycle extends React.Component<LifecycleProps> {
 	public release: ((message?: string) => void) | undefined;
 
-	public componentDidMount() {
+	public componentDidMount(): void {
 		if (this.props.onMount) { this.props.onMount.call(this, this); }
 	}
 
-	public componentDidUpdate(prevProps: any) {
+	public componentDidUpdate(prevProps: any): void {
 		if (this.props.onUpdate) { this.props.onUpdate.call(this, this, prevProps); }
 	}
 
-	public componentWillUnmount() {
+	public componentWillUnmount(): void {
 		if (this.props.onUnmount) { this.props.onUnmount.call(this, this); }
 	}
 
-	public render() {
+	public render(): JSX.Element | null {
 		return null;
 	}
 }
-
-export default Lifecycle;

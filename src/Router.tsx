@@ -2,6 +2,7 @@ import { History, Location } from "history";
 import PropTypes from "prop-types";
 import React from "react";
 import warning from "tiny-warning";
+import { MatchResult } from "./matchPath";
 import RouterContext, { RouterContextType } from "./RouterContext";
 
 export interface RouterProps {
@@ -15,11 +16,11 @@ export interface RouterProps {
 /**
  * The public API for putting history on context.
  */
-class Router extends React.Component<RouterProps, { location: Location }> {
+export default class Router extends React.Component<RouterProps, { location: Location }> {
 	public static contextType = RouterContext;
-	public static propTypes: ObjectMap<any>;
+	public static propTypes: object;
 
-	private static computeRootMatch(pathname: string): Match {
+	private static computeRootMatch(pathname: string): MatchResult {
 		return { path: "/", url: "/", params: {}, isExact: pathname === "/" };
 	}
 	// tslint:disable-next-line:variable-name
@@ -53,7 +54,7 @@ class Router extends React.Component<RouterProps, { location: Location }> {
 		}
 	}
 
-	public componentDidMount() {
+	public componentDidMount(): void {
 		this._isMounted = true;
 
 		if (this.pendingLocation) {
@@ -61,11 +62,11 @@ class Router extends React.Component<RouterProps, { location: Location }> {
 		}
 	}
 
-	public componentWillUnmount() {
+	public componentWillUnmount(): void {
 		if (this.unlisten) { this.unlisten(); }
 	}
 
-	public render() {
+	public render(): JSX.Element {
 		if (process.env.NODE_ENV !== "production") {
 			if (this.context && this.context.history) {
 				throw new Error("You should not nest A <Router> inside another <Router");
@@ -99,5 +100,3 @@ if (process.env.NODE_ENV !== "production") {
 		);
 	};
 }
-
-export default Router;

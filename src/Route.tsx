@@ -1,14 +1,14 @@
 import { History, Location } from "history";
 import PropTypes from "prop-types";
 import React from "react";
-import matchPath from "./matchPath";
+import matchPath, { MatchResult } from "./matchPath";
 import RouterContext from "./RouterContext";
 import { RouterException } from "./RouterException";
 import { addLocationPropWarning, sanitizeChildren } from "./utils";
 
 export interface RouteProps {
 	history?: History;
-	match?: Match | null;
+	match?: MatchResult | null;
 	location?: Location;
 	// TODO: remove any?
 	children?: ((props: any) => React.ReactNode) | React.ReactNode;
@@ -16,14 +16,14 @@ export interface RouteProps {
 	exact?: boolean;
 	sensitive?: boolean;
 	strict?: boolean;
-	computedMatch?: Match;
+	computedMatch?: MatchResult;
 }
 
 /**
  * The public API for matching a single path and rendering.
  */
-class Route extends React.Component<RouteProps> {
-	public static propTypes: ObjectMap<any>;
+export default class Route extends React.Component<RouteProps> {
+	public static propTypes: object;
 
 	public render() {
 		return (
@@ -73,5 +73,3 @@ if (process.env.NODE_ENV !== "production") {
 	};
 	addLocationPropWarning(Route.prototype, "Route");
 }
-
-export default Route;

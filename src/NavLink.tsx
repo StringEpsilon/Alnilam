@@ -2,7 +2,7 @@ import { Location } from "history";
 import PropTypes from "prop-types";
 import React from "react";
 import Link from "./Link";
-import matchPath from "./matchPath";
+import matchPath, { MatchResult } from "./matchPath";
 import RouterContext from "./RouterContext";
 import { RouterException } from "./RouterException";
 
@@ -10,13 +10,13 @@ function joinClassnames(...classnames: any[]): string {
 	return classnames.filter((i) => i).join(" ");
 }
 
-interface NavLinkProps {
+export interface NavLinkProps {
 	"aria-current"?: string | null;
 	activeClassName?: string;
 	activeStyle?: object;
 	className?: string;
 	exact?: boolean;
-	isActive?: (match: Match | null, location: Location) => boolean;
+	isActive?: (match: MatchResult | null, location: Location) => boolean;
 	location?: Location;
 	strict?: boolean;
 	style?: any;
@@ -29,7 +29,7 @@ interface NavLinkProps {
 /**
  * A <Link> wrapper that knows if it's "active" or not.
  */
-function NavLink(props: NavLinkProps) {
+export default function NavLink(props: NavLinkProps) {
 	const {
 		"aria-current": ariaCurrent = "page",
 		activeClassName = "active",
@@ -114,5 +114,3 @@ if (process.env.NODE_ENV !== "production") {
 		style: PropTypes.object,
 	};
 }
-
-export default NavLink;
