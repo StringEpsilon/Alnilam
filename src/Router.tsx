@@ -13,13 +13,17 @@ export interface RouterProps {
 	staticContext?: any;
 }
 
+interface RouterState {
+	location: Location;
+	history: History;
+	staticContext: any;
+}
+
 /**
  * The public API for putting history on context.
  */
-export default class Router extends React.Component<RouterProps, { location: Location }> {
-	public static contextType = RouterContext;
+export default class Router extends React.Component<RouterProps, RouterState> {
 	public static propTypes: object;
-
 	private static computeRootMatch(pathname: string): MatchResult {
 		return { path: "/", url: "/", params: {}, isExact: pathname === "/" };
 	}
@@ -33,6 +37,8 @@ export default class Router extends React.Component<RouterProps, { location: Loc
 
 		this.state = {
 			location: props.history.location,
+			history: this.props.history,
+			staticContext: this.props.staticContext,
 		};
 
 		// This is a bit of a hack. We have to start listening for location
@@ -46,7 +52,9 @@ export default class Router extends React.Component<RouterProps, { location: Loc
 		if (!props.staticContext) {
 			this.unlisten = props.history.listen((location: Location) => {
 				if (this._isMounted) {
-					this.setState({ location });
+					this.setState({
+						location,
+					});
 				} else {
 					this.pendingLocation = location;
 				}
@@ -69,19 +77,18 @@ export default class Router extends React.Component<RouterProps, { location: Loc
 	public render(): JSX.Element {
 		if (process.env.NODE_ENV !== "production") {
 			if (this.context && this.context.history) {
-				throw new Error("You should not nest A <Router> inside another <Router");
+				throw new Error("A <Router> can't work inside another <Router>");
 			}
 		}
 		return (
 			<RouterContext.Provider
-				children={this.props.children || null}
 				value={{
-					history: this.props.history,
-					location: this.state.location,
+					...this.state,
 					match: Router.computeRootMatch(this.state.location.pathname),
-					staticContext: this.props.staticContext,
 				}}
-			/>
+			>
+				{this.props.children}
+			</RouterContext.Provider>
 		);
 	}
 }
@@ -96,7 +103,7 @@ if (process.env.NODE_ENV !== "production") {
 	Router.prototype.componentDidUpdate = function (prevProps) {
 		warning(
 			prevProps.history === this.props.history,
-			"You cannot change <Router> history>",
+			"Changing Router history has no effect.",
 		);
 	};
 }
