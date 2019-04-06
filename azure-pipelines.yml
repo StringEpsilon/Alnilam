@@ -31,7 +31,12 @@ steps:
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: cobertura
-    summaryFileLocation: $(System.DefaultWorkingDirectory)/**/coverage/cobertura-coverage.xml
+    summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'NUnit'
+    testResultsFiles: test-report.xml
+    searchFolder: '$(System.DefaultWorkingDirectory)'
 
 - script: |
     npm run ci
