@@ -20,76 +20,68 @@ interface LinkProps {
 	style?: any;
 }
 
-/**
- * The public API for rendering a history-aware <a>.
- */
-export default class Link extends React.Component<LinkProps> {
-	public static propTypes: object;
+export default function Link(props: LinkProps) {
+	const { innerRef, replace, to, ...rest } = props;
+	return (
+		<RouterContext.Consumer>
+			{(context) => {
+				if (!context) {
+					throw RouterException("Link");
+				}
 
-	public render(): JSX.Element {
-		const { innerRef, replace, to, ...rest } = this.props; // eslint-disable-line no-unused-vars
+				const location =
+					typeof to === "string"
+						// void(0) because of the typing missmatch in createLocation().
+						? createLocation(to, null, void (0), context.location)
+						: to;
+				const href = location ? context.history.createHref(location) : "";
 
-		return (
-			<RouterContext.Consumer>
-				{(context) => {
-					if (!context) {
-						throw RouterException("Link");
-					}
+				return (
+					<a
+						{...rest}
+						onClick={(event) => {
+							return handleClick(event, context.history, props);
+						}}
+						href={href}
+						ref={innerRef}
+					/>
+				);
+			}}
+		</RouterContext.Consumer>
+	);
+}
 
-					const location =
-						typeof to === "string"
-							// void(0) because of the typing missmatch in createLocation().
-							? createLocation(to, null, void (0), context.location)
-							: to;
-					const href = location ? context.history.createHref(location) : "";
-
-					return (
-						<a
-							{...rest}
-							onClick={(event) => {
-								return this.handleClick(event, context.history);
-							}}
-							href={href}
-							ref={innerRef}
-						/>
-					);
-				}}
-			</RouterContext.Consumer>
-		);
+function handleClick(event: React.MouseEvent, history: History, props: LinkProps): void {
+	if (props.onClick) {
+		props.onClick(event);
 	}
 
-	private handleClick(event: React.MouseEvent, history: History): void {
-		if (this.props.onClick) {
-			this.props.onClick(event);
-		}
-
-		if (event.defaultPrevented) {
-			// onClick prevented default
-			return;
-		}
-
-		if (event.button !== 0) {
-			// ignore everything but left clicks
-			return;
-		}
-
-		if (this.props.target && this.props.target !== "_self") {
-			// let browser handle "target=_blank" etc.
-			return;
-		}
-
-		if (isModifiedEvent(event)) {
-			// ignore clicks with modifier keys
-			return;
-		}
-
-		event.preventDefault();
-		const method = this.props.replace ?
-			history.replace as (to: string | Location) => void :
-			history.push as (to: string | Location) => void;
-
-		method(this.props.to);
+	if (event.defaultPrevented) {
+		// onClick prevented default
+		return;
 	}
+
+	if (event.button !== 0) {
+		// ignore everything but left clicks
+		return;
+	}
+
+	if (props.target && props.target !== "_self") {
+		// let browser handle "target=_blank" etc.
+		return;
+	}
+
+	if (isModifiedEvent(event)) {
+		// ignore clicks with modifier keys
+		return;
+	}
+
+	event.preventDefault();
+	const method = props.replace ?
+		history.replace as (to: string | Location) => void :
+		history.push as (to: string | Location) => void;
+
+	method(props.to);
 }
 
 if (process.env.NODE_ENV !== "production") {

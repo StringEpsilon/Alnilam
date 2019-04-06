@@ -53,10 +53,7 @@ export default function Redirect(props: RedirectProps) {
 							method(location);
 						}}
 						onUpdate={(self, prevProps: RedirectProps) => {
-							const prevLocation =
-								typeof prevProps.to === "string"
-									? createLocation(prevProps.to)
-									: prevProps.to;
+							const prevLocation = createLocation(prevProps.to);
 							if (!locationsAreEqual(prevLocation, location)) {
 								method(location);
 							}
