@@ -20,17 +20,7 @@ export function sanitizeChildren(name: string, children: any, props: any, path?:
 		const childrenFunction = children as (props: any) => React.ElementType;
 		children = childrenFunction ? childrenFunction(props) : null;
 
-		if (children === undefined) {
-			if (process.env.NODE_ENV !== "production") {
-				warning(
-					false,
-					"You returned `undefined` from the `children` function of " +
-					`<${name}${path ? ` path="${path}"` : ""}>, but you ` +
-					"should have returned a React element or `null`",
-				);
-			}
-			children = null;
-		}
+
 	} else if (!!children) {
 		return React.Children.map(children, (child) => {
 			if (React.isValidElement(child) && typeof child.type !== "string") {

@@ -266,7 +266,7 @@ describe("A <Match>", () => {
 			});
 
 			describe("that returns `undefined`", () => {
-				it("logs a warning to the console and renders nothing", () => {
+				it("renders nothing", () => {
 					jest.spyOn(console, "warn").mockImplementation(() => null);
 
 					renderStrict(
@@ -279,10 +279,6 @@ describe("A <Match>", () => {
 					);
 
 					expect(node.innerHTML).toEqual("");
-					// tslint:disable-next-line:no-console
-					expect(console.warn).toHaveBeenCalledWith(
-						expect.stringContaining("You returned `undefined` from the `children` function"),
-					);
 				});
 			});
 		});
