@@ -1,9 +1,23 @@
-## 0.5.0 Future
+## 0.5.1 (future)
 
-* Now comes with types!
-* Context.Provider and Context.Consumer now have the correct displayName attributes.
-* Reduced component nesting in withRouter.
-* Improved error message when using a withRouter-wrapped component outside a Router.
+**Bugfixes**:
+* Redirect could still cause an update-loop when ```to``` was a location object.
+
+**Changes**:
+* Router now stores history in state, so changing the prop won't have any (ill) effect.
+* Tweaked error messages:
+	* Warning about paths staring with "../" now includes the path in question.
+	* Warning about location prop changing from controlled to uncontrolled now points to the location prop.
+	* Removed warning about child function returning undefined, as it's obsolete.
+	* Changed warning about changing ```<Router history>```
+	* More strict warning about using a ```<Router>``` inside another. From "You shouldn't" to "It can't work".
+
+## 0.5.0 (2019-04-04)
+
+* Change: Now comes with types!
+* Change: Context.Provider and Context.Consumer now have the correct displayName attributes.
+* Change: Reduced component nesting in withRouter.
+* Change: Improved error message when using a withRouter-wrapped component outside a Router.
 
 Internal:
 * Some general housekeeping (readme, devDepenencies, moving code around, ...).
