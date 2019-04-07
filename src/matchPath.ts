@@ -4,7 +4,6 @@ export interface MatchResult {
 	path: string;
 	url: string;
 	isExact: boolean;
-	// TODO: find better typing for params, maybe make Match generic?
 	params: object;
 }
 
@@ -69,22 +68,21 @@ interface CacheEntry {
 	keys: pathToRegexp.Key[];
 }
 
-const cache: { [key: string]: { [id: string]: CacheEntry } } = {};
+const cache: { [key: string]: CacheEntry } = {};
 const cacheLimit = 10000;
 let cacheCount = 0;
 
 function compilePath(path: string, options: pathToRegexp.RegExpOptions): CacheEntry {
-	const cacheKey = `${options.end}${options.strict}${options.sensitive}`;
-	const pathCache = cache[cacheKey] || (cache[cacheKey] = {});
+	const cacheKey = `${path}${options.end}${options.strict}${options.sensitive}`;
 
-	if (pathCache[path]) { return pathCache[path]; }
+	if (cache[cacheKey]) { return cache[cacheKey]; }
 
 	const keys: pathToRegexp.Key[] = [];
 	const regexp = pathToRegexp(path, keys, options);
 	const result = { regexp, keys };
 
 	if (cacheCount < cacheLimit) {
-		pathCache[path] = result;
+		cache[cacheKey] = result;
 		cacheCount++;
 	}
 
@@ -112,7 +110,7 @@ function resolvePath(path: string, basePath: string): string {
 					return basePath + "/" + path.substr(2);
 				}
 				case ".": {
-					throw new Error("Alnilam does not support paths with starting with '../'");
+					throw new Error("Paths starting with '../' are not supported. Got: " + path);
 				}
 			}
 			break;

@@ -7,7 +7,9 @@ import { RouterContext } from "./RouterContext";
 import { RouterException } from "./RouterException";
 
 function joinClassnames(...classnames: any[]): string {
-	return classnames.filter((i) => i).join(" ");
+	// Using Boolean() here is just a fancy way of writing "(i) => !!i".
+	// Makes for shorter transpiled code.
+	return classnames.filter(Boolean).join(" ");
 }
 
 export interface NavLinkProps {

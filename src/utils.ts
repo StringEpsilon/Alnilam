@@ -5,7 +5,7 @@ export function addLocationPropWarning(prototype: any, componentName: string): v
 	prototype.componentDidUpdate = function (prevProps: any) {
 		warning(
 			!(!!this.props.location !== !!prevProps.location),
-			`<${componentName}> elements should not change from uncontrolled to controlled (or vice versa).`,
+			`<${componentName}> location should not change from uncontrolled to controlled (or vice versa).`,
 		);
 	};
 }
@@ -19,8 +19,6 @@ export function sanitizeChildren(name: string, children: any, props: any, path?:
 	if (typeof children === "function") {
 		const childrenFunction = children as (props: any) => React.ElementType;
 		children = childrenFunction ? childrenFunction(props) : null;
-
-
 	} else if (!!children) {
 		return React.Children.map(children, (child) => {
 			if (React.isValidElement(child) && typeof child.type !== "string") {
