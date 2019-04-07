@@ -80,14 +80,10 @@ Here is a [a small example app](https://codesandbox.io/s/kkw61p4lno) made with A
 
 ## TODO for 1.0
 
-* [x] Verify that the build output and package.json are in order
-* [x] Publish the package.
 * [x] Outline (or implement) API changes and refactorings for future work.
 	* [x] Document the API differences properly in a separate document.
-* [ ] Figure out typing for withRouter()
-* [ ] Figure out how to properly publish types along side the normal output.
-* [x] Integrate typescript to rollup build without mandating tslib dependency.
-* [ ] Wait for history 5.0.
+* [ ] Figure out proper typing for withRouter()
+* [ ] Wait for [history 5.0](https://github.com/ReactTraining/history/issues/505).
 
 ## Why is it called "Alnilam"?
 

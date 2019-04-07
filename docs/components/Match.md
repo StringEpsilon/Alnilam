@@ -23,7 +23,7 @@ Note: A ```path``` without a leading slash or with a leading "./" will be consid
 
 A semi-realistic usecase is demonstrated in this codesandbox:
 
-https://codesandbox.io/s/mz0p66ql9y
+https://codesandbox.io/s/1m8oxpr13
 
 There, an accordion is controlled via the location using the Match component.
 
