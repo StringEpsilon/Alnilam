@@ -3,6 +3,9 @@
 **Bugfixes**:
 * Redirect could still cause an update-loop when ```to``` was a location object.
 
+**Features**:
+* Router props now contains "previousLocation". Note: This is undefined before first navigation.
+
 **Changes**:
 * Router now stores history in state, so changing the prop won't have any (ill) effect.
 * Tweaked error messages:

@@ -15,6 +15,7 @@ export interface RouterProps {
 
 interface RouterState {
 	location: Location;
+	previousLocation?: Location;
 	history: History;
 	staticContext: any;
 }
@@ -52,8 +53,10 @@ export default class Router extends React.Component<RouterProps, RouterState> {
 		if (!props.staticContext) {
 			this.unlisten = props.history.listen((location: Location) => {
 				if (this._isMounted) {
+					const previousLocation = this.state.location;
 					this.setState({
 						location,
+						previousLocation,
 					});
 				} else {
 					this.pendingLocation = location;
@@ -66,7 +69,8 @@ export default class Router extends React.Component<RouterProps, RouterState> {
 		this._isMounted = true;
 
 		if (this.pendingLocation) {
-			this.setState({ location: this.pendingLocation });
+			const previousLocation = this.state.location;
+			this.setState({ location: this.pendingLocation, previousLocation });
 		}
 	}
 

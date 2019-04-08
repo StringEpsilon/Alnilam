@@ -1,7 +1,8 @@
+import { createMemoryHistory } from "history";
 import React from "react";
 import ReactDOM from "react-dom";
 import * as ReactIs from "react-is";
-import { Match, Route, StaticRouter, withRouter } from "../index";
+import { Match, Route, Router, StaticRouter, withRouter } from "../index";
 import MemoryRouter from "./utils/MemoryRouter";
 import renderStrict from "./utils/renderStrict";
 
@@ -32,6 +33,49 @@ describe("withRouter", () => {
 		);
 
 		expect.assertions(4);
+	});
+
+	it("provides proper 'previosLocation' props", () => {
+		const mockComponent = jest.fn(() => null);
+		const PropsChecker = withRouter(mockComponent);
+		const history = createMemoryHistory();
+		renderStrict(
+			<Router history={history}>
+				<PropsChecker />
+			</Router>,
+			node,
+		);
+
+		expect(mockComponent).toBeCalledWith(
+			expect.objectContaining({
+				location: expect.objectContaining({
+					hash: "",
+					pathname: "/",
+					search: "",
+				}),
+			}),
+			{},
+		);
+
+		mockComponent.mockClear();
+		history.push("/milkyway/rigel");
+
+		expect(mockComponent).toBeCalledWith(
+			expect.objectContaining({
+				location: expect.objectContaining({
+					hash: "",
+					pathname: "/milkyway/rigel",
+					search: "",
+				}),
+				previousLocation: expect.objectContaining({
+					hash: "",
+					pathname: "/",
+					search: "",
+				}),
+			}),
+			{},
+		);
+
 	});
 
 	it("provides the parent match as a prop to the wrapped component", () => {

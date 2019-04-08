@@ -12,6 +12,7 @@
 * ```<BrowserRouter/>``` was removed. Use ```Router``` and createBrowserHistory instead.
 * ```<HashRouter/>``` was removed. Use ```Router``` and createHashHistory instead.
 * Minimum react version is 16.4 instead of 15.x
+* Alnilam provides ```previousLocation``` along the current ```location``` via props.
 
 And finally:
 

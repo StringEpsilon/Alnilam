@@ -7,6 +7,7 @@ export type RouterContextType = {
 	location: Location;
 	match?: MatchResult | null;
 	staticContext: any; // TODO
+	previosLocation?: Location;
 } | undefined;
 
 export const RouterContext = React.createContext<RouterContextType | null>(null);
