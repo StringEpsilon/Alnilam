@@ -41,6 +41,63 @@ describe("A <Redirect>", () => {
 		});
 	});
 
+	describe("inside a <Route>", () => {
+		it("respects relative routes", () => {
+			let url;
+			let routedMatch;
+
+			renderStrict(
+				<MemoryRouter initialEntries={["/milkyway/sol"]}>
+					<Route path="/milkyway">
+						<Redirect
+							from="./sol"
+							to="./proxima"
+						/>
+						<Route path="./proxima">
+							{({ match }) => {
+								routedMatch = match;
+								url = match && match.url;
+								return null;
+							}}
+						</Route>
+					</Route>
+				</MemoryRouter>,
+				node,
+			);
+
+			expect(routedMatch).not.toBe(null);
+			expect(url).toBe("/milkyway/proxima");
+		});
+
+		it("respects relative routes with params", () => {
+			let routedMatch;
+
+			renderStrict(
+				<MemoryRouter initialEntries={["/milkyway/sol"]}>
+					<Route path="/:galaxy">
+						<Redirect
+							from="./sol"
+							to="./proxima"
+						/>
+						<Route path="./proxima">
+							{({ match }) => {
+								routedMatch = match;
+								return null;
+							}}
+						</Route>
+					</Route>
+				</MemoryRouter>,
+				node,
+			);
+
+			expect(routedMatch).not.toBe(null);
+			expect(routedMatch.params).toEqual({
+				galaxy: "milkyway",
+			});
+			expect(routedMatch.url).toBe("/milkyway/proxima");
+		});
+	});
+
 	describe("inside a <Switch>", () => {
 		it("automatically interpolates params", () => {
 			let params;
