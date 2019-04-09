@@ -5,6 +5,8 @@ import { createLocation, History, Location } from "history";
 import PropTypes from "prop-types";
 import { RouterException } from "./RouterException";
 
+const isExternalUrl = new RegExp(/^https?:\/\//);
+
 function isModifiedEvent(event: React.MouseEvent) {
 	return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
 }
@@ -28,18 +30,26 @@ export default function Link(props: LinkProps) {
 				if (!context) {
 					throw RouterException("Link");
 				}
+				let isExternal = false;
+				let href = "";
 
-				const location =
-					typeof to === "string"
-						// void(0) because of the typing missmatch in createLocation().
-						? createLocation(to, null, void (0), context.location)
-						: to;
-				const href = location ? context.history.createHref(location) : "";
-
+				if (typeof to === "string") {
+					if (isExternalUrl.test(to)) {
+						isExternal = true;
+						href = to;
+					} else {
+						href = context.history.createHref(
+							// void(0) because of the typing missmatch in createLocation().
+							createLocation(to, null, void (0), context.location),
+						);
+					}
+				} else {
+					href = to ? context.history.createHref(to) : "";
+				}
 				return (
 					<a
 						{...rest}
-						onClick={(event) => {
+						onClick={isExternal ? props.onClick : (event) => {
 							return handleClick(event, context.history, props);
 						}}
 						href={href}

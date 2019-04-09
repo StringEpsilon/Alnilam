@@ -13,6 +13,7 @@
 * ```<HashRouter/>``` was removed. Use ```Router``` and createHashHistory instead.
 * Minimum react version is 16.4 instead of 15.x
 * Alnilam provides ```previousLocation``` along the current ```location``` via props.
+* [```Link```](./components/Link.md)) supports external URLs.
 
 And finally:
 

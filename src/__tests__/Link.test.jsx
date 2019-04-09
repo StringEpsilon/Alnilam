@@ -38,6 +38,27 @@ describe("A <Link>", () => {
 		expect(memoryHistory.push).toBeCalledWith(to);
 	})
 
+	it("does not call history.push if link has protocol", () => {
+		const memoryHistory = createMemoryHistory();
+		memoryHistory.push = jest.fn();
+
+		renderStrict(
+			<Router history={memoryHistory}>
+				<Link to={"https://en.wikipedia.org/wiki/Star"}>link</Link>
+			</Router>,
+			node
+		);
+
+		const a = node.querySelector("a");
+		ReactTestUtils.Simulate.click(a, {
+			defaultPrevented: false,
+			button: 1,
+		});
+
+		expect(memoryHistory.push).toBeCalledTimes(0);
+	})
+
+
 	it("does not call history.push on right click", () => {
 		const memoryHistory = createMemoryHistory();
 		memoryHistory.push = jest.fn();

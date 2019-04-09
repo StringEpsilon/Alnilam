@@ -1,9 +1,10 @@
-## 0.5.1 (future)
+## 0.6.0 (future)
 
 **Bugfixes**:
 * Redirect could still cause an update-loop when ```to``` was a location object.
 
 **Features**:
+* Experimental: A ```<Link to="">``` starting with "http(s)://" will act like a normal ```<a>``` element.
 * Router props now contains "previousLocation". Note: This is undefined before first navigation.
 
 **Changes**:

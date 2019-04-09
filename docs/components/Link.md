@@ -16,9 +16,11 @@ Component for rendering a history-aware anchor element.
 | className    | string   | no       | ```className``` passed on to the underlying a element.
 | style        | object   | no       | [```style```](https://reactjs.org/docs/dom-elements.html#style) object passed on to the underlying a element.
 
-**Note:**
+**Notes:**
 
 ```Link``` with pass additional props forward to the anchor. So you can pass your own additional event handlers, callbacks and attributes to the anchor element.
+
+```Link``` intercepts the click on the underlying ```a``` element, unless the string for the ```to``` prop starts with a http / https scheme. See example below.
 
 **Call signatures for the callbacks:**
 
@@ -30,6 +32,12 @@ Basic linking in the application:
 
 ```jsx
 <Link to="/sol/earth/moon"> To the moon! </Link>
+```
+
+External link:
+
+```jsx
+<Link to="https://en.wikipedia.org/wiki/Alnilam"> To the Wikipedia! </Link>
 ```
 
 Inhibiting navigation in the onClick callback:
