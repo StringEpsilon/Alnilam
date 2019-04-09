@@ -4,6 +4,7 @@ import { uglify } from "rollup-plugin-uglify";
 import pkg from "./package.json";
 
 function isBareModuleId(id) {
+	id = id.toLowerCase();
 	return !id.startsWith(".") && !id.includes(pkg.name + "/");
 }
 
