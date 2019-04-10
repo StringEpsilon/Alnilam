@@ -1,9 +1,9 @@
 import React from "react";
-import matchPath from "./matchPath";
-import Route, { RouteProps } from "./Route";
+import Route from "./Route";
+import { RouteProps } from "./RouteProps";
 import { RouterContext, RouterContextType } from "./RouterContext";
 import { RouterException } from "./RouterException";
-import { addLocationPropWarning, sanitizeChildren } from "./utils";
+import { addLocationPropWarning, calculateMatch, sanitizeChildren } from "./utils";
 
 /**
  * The public API for matching a single path and rendering.
@@ -19,11 +19,7 @@ export default class MatchComponent extends React.Component<RouteProps> {
 						throw RouterException("Match");
 					}
 					const location = this.props.location || context.location;
-					const match = this.props.computedMatch
-						? this.props.computedMatch // <Switch> already computed the match for us
-						: this.props.path
-							? matchPath(location.pathname, this.props, context.match ? context.match.path : "")
-							: context.match;
+					const match = calculateMatch(this.props, context);
 
 					const props: RouterContextType = { ...context, location, match };
 

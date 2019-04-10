@@ -1,5 +1,17 @@
 import React from "react";
 import warning from "tiny-warning";
+import matchPath from "./matchPath";
+import { RouteProps } from "./RouteProps";
+import { RouterContextType } from "./RouterContext";
+
+export function calculateMatch(props: RouteProps, context: RouterContextType) {
+	const location = props.location || context.location;
+	return props.computedMatch
+		? props.computedMatch // <Switch> already computed the match for us
+		: props.path
+			? matchPath(location.pathname, props, context.match ? context.match.path : "")
+			: context.match;
+}
 
 export function addLocationPropWarning(prototype: any, componentName: string): void {
 	prototype.componentDidUpdate = function (prevProps: any) {

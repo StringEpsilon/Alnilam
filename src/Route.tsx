@@ -1,23 +1,9 @@
-import { History, Location } from "history";
 import PropTypes from "prop-types";
 import React from "react";
-import matchPath, { MatchResult } from "./matchPath";
+import { RouteProps } from "./RouteProps";
 import { RouterContext } from "./RouterContext";
 import { RouterException } from "./RouterException";
-import { addLocationPropWarning, sanitizeChildren } from "./utils";
-
-export interface RouteProps {
-	history?: History;
-	match?: MatchResult | null;
-	location?: Location;
-	// TODO: remove any?
-	children?: ((props: any) => React.ReactNode) | React.ReactNode;
-	path?: string | string[];
-	exact?: boolean;
-	sensitive?: boolean;
-	strict?: boolean;
-	computedMatch?: MatchResult;
-}
+import { addLocationPropWarning, calculateMatch, sanitizeChildren } from "./utils";
 
 /**
  * The public API for matching a single path and rendering.
@@ -34,11 +20,7 @@ export default class Route extends React.Component<RouteProps> {
 					}
 					const location = this.props.location || context.location;
 					const path = this.props.path;
-					const match = this.props.computedMatch
-						? this.props.computedMatch // <Switch> already computed the match for us
-						: this.props.path
-							? matchPath(location.pathname, this.props, context.match ? context.match.path : "")
-							: context.match;
+					const match = calculateMatch(this.props, context);
 
 					const props = { ...context, location, match };
 
