@@ -1,9 +1,9 @@
-## Differences in API / Behavior in this Fork:
+## Differences in API / behavior in this Fork:
 
 * Alnilam supports relative routes (as of version 0.4).
-	* A path without a leading slash or starting with "./" will match as if you appended the parent' <Route> or <Match> URL.
+	* A path without a leading slash or starting with "./" will match as if you appended the parent path manually. ``` `${match.pathname}/foo` ``` becomes ```"./foo"```
 	* A NavLink with a relative path will apply the active style as expected
-	* "../" is not supported and cause an exception.
+	* "../" is not supported and will throw an exception.
 * [```<Route/>```](./components/Route.md) no longer has a "render" or "component" prop. Instead, it will render it's children only when the path matches.
 * ```<Route/>``` supports multiple children, all of which will get the router props.
 * [```<Match/>```](./components/Match.md), like Route, but will always render.
@@ -12,8 +12,9 @@
 * ```<BrowserRouter/>``` was removed. Use ```Router``` and createBrowserHistory instead.
 * ```<HashRouter/>``` was removed. Use ```Router``` and createHashHistory instead.
 * Minimum react version is 16.4 instead of 15.x
-* Alnilam provides ```previousLocation``` along the current ```location``` via props.
-* [```Link```](./components/Link.md)) supports external URLs.
+* Alnilam [provides](./functions/withRouter.md#passed-props) ```previousLocation``` along the current ```location``` via props.
+* [```Link```](./components/Link.md)) supports external URLs in a limited fashion.
+* Some error messages differ.
 
 And finally:
 
@@ -22,4 +23,3 @@ And finally:
 ## Bugfixes:
 
 * A withRouter() wrapped component will get the wrong props when inside a [```<NavLink>```](./components/NavLink.md)
-* A ```Redirect``` that always render may case an infitie update loop (and thus a stackoverflow exception)
