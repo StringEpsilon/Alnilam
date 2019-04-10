@@ -1,4 +1,4 @@
-## 0.6.0 (future)
+## 0.6.0 (2019-04-10)
 
 **Bugfixes**:
 * Redirect could still cause an update-loop when ```to``` was a location object.
