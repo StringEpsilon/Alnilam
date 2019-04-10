@@ -2,6 +2,8 @@
 
 **Bugfixes**:
 * Redirect could still cause an update-loop when ```to``` was a location object.
+* Fixed CJS build.
+* Fixed build on windows.
 
 **Features**:
 * Experimental: A ```<Link to="">``` starting with "http(s)://" will act like a normal ```<a>``` element.
