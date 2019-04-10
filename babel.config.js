@@ -1,8 +1,5 @@
 module.exports = {
 	presets: [
-		["@babel/env",
-			{ loose: true }
-		],
 		"@babel/react",
 		"@babel/typescript"
 	],
@@ -11,4 +8,26 @@ module.exports = {
 			{ loose: true }
 		]
 	],
+	env:{
+		development: {
+			presets: [
+				[
+					"@babel/env", { loose: true, modules: false }
+				],
+			],
+			plugins: [
+				[
+					"@babel/plugin-transform-runtime",
+					{ "useESModules": false },
+				]
+			]
+		},
+		test: {
+			presets: [
+				[
+					"@babel/env", { loose: true }
+				],
+			],
+		}
+	}
 }
