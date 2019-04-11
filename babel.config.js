@@ -8,7 +8,7 @@ module.exports = {
 			{ loose: true }
 		]
 	],
-	env:{
+	env: {
 		development: {
 			presets: [
 				[
@@ -18,7 +18,6 @@ module.exports = {
 			plugins: [
 				[
 					"@babel/plugin-transform-runtime",
-					{ "useESModules": false },
 				]
 			]
 		},
