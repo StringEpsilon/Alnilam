@@ -2,7 +2,6 @@
 
 **Bugfixes**:
 * Redirect could still cause an update-loop when ```to``` was a location object.
-* Fixed CJS build.
 * Fixed build on windows.
 
 **Features**:
@@ -17,6 +16,9 @@
 	* Removed warning about child function returning undefined, as it's obsolete.
 	* Changed warning about changing ```<Router history>```
 	* More strict warning about using a ```<Router>``` inside another. From "You shouldn't" to "It can't work".
+	
+**Known issues:**
+CJS is currently broken. My apologies.
 
 ## 0.5.0 (2019-04-04)
 
