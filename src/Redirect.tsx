@@ -8,14 +8,19 @@ import { RouterContext } from "./RouterContext";
 import { RouterException } from "./RouterException";
 
 export interface RedirectProps {
-	computedMatch?: MatchResult;
-	from?: string | Location;
+    /** The path redirect destination */
 	to: string | Location;
+	/** Wether to replace (default) or push onto history. */
 	push?: boolean;
+	/** When child of `Switch`, redirect only if location matches from. */
+	from?: string | Location;
+
+	/** Alnilam internal. */
+	computedMatch?: MatchResult;
 }
 
 /**
- * The public API for navigating programmatically with a component.
+ * Component for navigating programmatically with a component.
  */
 export default function Redirect(props: RedirectProps) {
 	const { computedMatch, to, push = false } = props;

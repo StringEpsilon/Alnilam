@@ -11,17 +11,32 @@ function isModifiedEvent(event: React.MouseEvent) {
 	return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
 }
 
-interface LinkProps {
-	onClick?: (event: React.MouseEvent) => void;
-	innerRef?: any;
-	replace?: boolean;
+export interface LinkProps {
+	/** Target path or location of the link. */
 	to: string | Location;
+	/** Whether or not to replace the current location (default: false). */
+	replace?: boolean;
+	/** onClick callback. */
+	onClick?: (event: React.MouseEvent) => void;
+	/** Ref passed down to the underlying anchor */
+	innerRef?: any;
+	/** "target" attribute of the anchor element. */	
 	target?: string;
+	/** 'aria-current' attribute passed to the anchor. */
 	"aria-current"?: any;
+	/** className passed on to the anchor element. */
 	className?: any;
+	/** style object passed on to the anchor element. */
 	style?: any;
+	/** Children for the anchor element. */
+	children?: any,
 }
 
+/**
+ * Component for rendering a history-aware anchor element.
+ * 
+ * @param props - Link properties
+ */
 export default function Link(props: LinkProps) {
 	const { innerRef, replace, to, ...rest } = props;
 	return (

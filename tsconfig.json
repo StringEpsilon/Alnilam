@@ -4,7 +4,6 @@
 		"jsx": "react",
 		"emitDeclarationOnly": true,
 		"module": "es2015",
-		"removeComments": true,
 		"lib": [
 			"es2015",
 			"es2016",

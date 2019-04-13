@@ -1,6 +1,6 @@
 [back to documentation overview](../readme.md)
 
-## Overview
+## MatchOptions
 
 | Property  | type   | default   | explanation
 |-----------|--------|-----------|-------------
@@ -12,7 +12,7 @@
 ```exact``` is implemented in alnilam. For the rest of the matching options,
 you can also consult the documentation of [path-to-regexp@1.7.0](https://github.com/pillarjs/path-to-regexp/tree/v1.7.0).
 
-## Default
+### Default
 
 | Location        | path      | matching? |
 |-----------------|-----------|-----------|
@@ -23,14 +23,14 @@ you can also consult the documentation of [path-to-regexp@1.7.0](https://github.
 | /andromeda      | /milkyway | false     |
 | /milkyway/rigel | /milkyway | true      |
 
-## sensitive
+### sensitive
 
 | Location  | path          | sensitive | matching? |
 |-----------|---------------|-----------|-----------|
 | /milkyway | /**M**ilkyway | false     | true      |
 | /milkyway | /**M**ilkyway | true      | false     |
 
-## strict
+### strict
 
 ```strict``` enforces trailing slashes:
 

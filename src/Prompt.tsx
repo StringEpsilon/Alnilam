@@ -5,12 +5,14 @@ import { RouterContext } from "./RouterContext";
 import { RouterException } from "./RouterException";
 
 export interface PromptProps {
+	/** Messsage shown to the user in the prompt */
 	message?: string;
+	/** Stops <Prompt/> from showing when false. */
 	when?: boolean;
 }
 
 /**
- * The public API for prompting the user before navigating away from a screen.
+ * Component for prompting the user before navigating away from a screen.
  */
 export default function Prompt({ message, when = true }: PromptProps) {
 	return (

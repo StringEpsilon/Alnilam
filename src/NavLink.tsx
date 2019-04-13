@@ -1,7 +1,7 @@
 import { Location } from "history";
 import PropTypes from "prop-types";
 import React from "react";
-import Link from "./Link";
+import Link, { LinkProps } from "./Link";
 import matchPath, { MatchResult } from "./matchPath";
 import { RouterContext } from "./RouterContext";
 import { RouterException } from "./RouterException";
@@ -12,20 +12,15 @@ function joinClassnames(...classnames: any[]): string {
 	return classnames.filter(Boolean).join(" ");
 }
 
-export interface NavLinkProps {
-	"aria-current"?: string | null;
-	activeClassName?: string;
-	activeStyle?: object;
-	className?: string;
+export interface NavLinkProps extends LinkProps {
 	exact?: boolean;
+	activeStyle?: object;
+	activeClassName?: string;
 	isActive?: (match: MatchResult | null, location: Location) => boolean;
 	location?: Location;
 	strict?: boolean;
-	style?: any;
-	to: string | Location;
-	children: React.ReactNode;
-
-	staticContext?: any;
+	style?: object;
+	staticContext?: any,
 }
 
 /**

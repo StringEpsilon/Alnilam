@@ -6,7 +6,7 @@ import { RouterException } from "./RouterException";
 import { addLocationPropWarning, calculateMatch, sanitizeChildren } from "./utils";
 
 /**
- * The public API for matching a single path and rendering.
+ * Component for matching a single path and rendering children on match.
  */
 export default class Route extends React.Component<RouteProps> {
 	public static propTypes: object;

@@ -1,7 +1,10 @@
 import pathToRegexp from "path-to-regexp";
 
 /**
- * Public API for generating a URL pathname from a path and parameters.
+ * Constructs a path from a base string and parameters.
+ * 
+ * @param path - Base string.
+ * @param params - Parameters
  */
 export default function generatePath(path: string = "/", params: object = {}) {
 	return path === "/" ?

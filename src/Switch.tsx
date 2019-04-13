@@ -12,11 +12,12 @@ interface SwitchChildProps {
 }
 
 export interface SwitchProps {
+	/** Overrides current location from history for matching */
 	location?: Location;
 }
 
 /**
- * The public API for rendering the first <Route> that matches.
+ * Component for rendering only the first <Route> that matches.
  */
 export default class Switch extends React.Component<SwitchProps> {
 	public static propTypes: object;

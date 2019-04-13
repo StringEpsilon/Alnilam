@@ -6,9 +6,9 @@ import { RouterException } from "./RouterException";
 import { addLocationPropWarning, calculateMatch, sanitizeChildren } from "./utils";
 
 /**
- * The public API for matching a single path and rendering.
+ * Component for matching a path and passing the result to it's children.
  */
-export default class MatchComponent extends React.Component<RouteProps> {
+export default class Match extends React.Component<RouteProps> {
 	public static propTypes: object;
 
 	public render(): JSX.Element {
@@ -41,6 +41,6 @@ export default class MatchComponent extends React.Component<RouteProps> {
 }
 
 if (process.env.NODE_ENV !== "production") {
-	MatchComponent.propTypes = Route.propTypes;
-	addLocationPropWarning(MatchComponent.prototype, "Match");
+	Match.propTypes = Route.propTypes;
+	addLocationPropWarning(Match.prototype, "Match");
 }

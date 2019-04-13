@@ -1,22 +1,39 @@
 import pathToRegexp from "path-to-regexp";
 
+/**
+ * Match result details.
+ */
 export interface MatchResult {
+	/** The path pattern used to match. */
 	path: string;
+	/** The match portion fo the URL.  */
 	url: string;
+	/** Whether or not the route matched exactly */
 	isExact: boolean;
+	/** Key/value pairs parsed from the URL corresponding to the dynamic segments of the path */
 	params: object;
 }
 
+/**
+ * Matching options.
+ */
 export interface MatchOptions {
+	/** The path to match against the current location */
 	path?: string | string[];
+	/** If true, only match when paths have the same depth */
 	exact?: boolean;
+	/** If true, only match if trailing slashes are identical */
 	strict?: boolean;
-	end?: boolean;
+	/** if true, only match on identical casing */
 	sensitive?: boolean;
 }
 
 /**
- * Public API for matching a URL pathname to a path.
+ * Evaluates the match between the given pathname and options path.
+ * 
+ * @param pathname - The URL path segment to match against.
+ * @param options - Matching parameters / options.
+ * @param basePath - Base path for matching relative paths.
  */
 export default function matchPath(
 	pathname: string,

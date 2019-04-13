@@ -7,7 +7,6 @@ import { RouterContext } from "./RouterContext";
 
 export interface RouterProps {
 	basename?: string;
-	context?: any; // TODO
 	location?: Location;
 	history: History | any; // the "any" is to work around the static router.
 	staticContext?: any;

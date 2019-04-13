@@ -9,7 +9,7 @@ export interface WithRouterProps {
 }
 
 /**
- * A public higher-order component to access the imperative API
+ * A higher-order component to access the alnilam routing context / props.
  */
 export default function withRouter(Component: React.ComponentType<any>): any {
 	const displayName = `withRouter(${Component.displayName || Component.name})`;
