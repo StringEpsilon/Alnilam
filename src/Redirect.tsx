@@ -8,13 +8,12 @@ import { RouterContext } from "./RouterContext";
 import { RouterException } from "./RouterException";
 
 export interface RedirectProps {
-    /** The path redirect destination */
+	/** The path redirect destination */
 	to: string | Location;
 	/** Wether to replace (default) or push onto history. */
 	push?: boolean;
 	/** When child of `Switch`, redirect only if location matches from. */
 	from?: string | Location;
-
 	/** Alnilam internal. */
 	computedMatch?: MatchResult;
 }

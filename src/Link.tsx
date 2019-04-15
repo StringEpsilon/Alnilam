@@ -20,7 +20,7 @@ export interface LinkProps {
 	onClick?: (event: React.MouseEvent) => void;
 	/** Ref passed down to the underlying anchor */
 	innerRef?: any;
-	/** "target" attribute of the anchor element. */	
+	/** "target" attribute of the anchor element. */
 	target?: string;
 	/** 'aria-current' attribute passed to the anchor. */
 	"aria-current"?: any;
@@ -29,12 +29,12 @@ export interface LinkProps {
 	/** style object passed on to the anchor element. */
 	style?: any;
 	/** Children for the anchor element. */
-	children?: any,
+	children?: any;
 }
 
 /**
  * Component for rendering a history-aware anchor element.
- * 
+ *
  * @param props - Link properties
  */
 export default function Link(props: LinkProps) {

@@ -2,7 +2,7 @@ import pathToRegexp from "path-to-regexp";
 
 /**
  * Constructs a path from a base string and parameters.
- * 
+ *
  * @param path - Base string.
  * @param params - Parameters
  */

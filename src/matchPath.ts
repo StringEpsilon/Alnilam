@@ -30,7 +30,7 @@ export interface MatchOptions {
 
 /**
  * Evaluates the match between the given pathname and options path.
- * 
+ *
  * @param pathname - The URL path segment to match against.
  * @param options - Matching parameters / options.
  * @param basePath - Base path for matching relative paths.

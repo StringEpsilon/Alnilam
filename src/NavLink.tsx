@@ -20,7 +20,7 @@ export interface NavLinkProps extends LinkProps {
 	location?: Location;
 	strict?: boolean;
 	style?: object;
-	staticContext?: any,
+	staticContext?: any;
 }
 
 /**
