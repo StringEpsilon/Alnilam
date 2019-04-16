@@ -5,6 +5,7 @@ import Link, { LinkProps } from "./Link";
 import matchPath, { MatchResult } from "./matchPath";
 import { RouterContext } from "./RouterContext";
 import { RouterException } from "./RouterException";
+import { useRouterContext } from "./useRouterContext";
 
 function joinClassnames(...classnames: any[]): string {
 	// Using Boolean() here is just a fancy way of writing "(i) => !!i".
@@ -47,44 +48,35 @@ export default function NavLink(props: NavLinkProps) {
 
 	// Regex taken from: https://github.com/pillarjs/path-to-regexp/blob/master/index.js#L202
 	const escapedPath = path && path.replace(/([.+*?=^!:${}()[\]|/\\])/g, "\\$1");
+	const context = useRouterContext("NavLink");
 
+	const pathToMatch = locationProp
+		? locationProp.pathname
+		: context.location.pathname;
+
+	const match = escapedPath
+		? matchPath(
+			pathToMatch,
+			{ path: escapedPath, exact, strict },
+			context.match ? context.match.path : "",
+		)
+		: null;
+
+	const isActiveFlag = !!(isActive
+		? isActive(match, context.location)
+		: match);
+
+	const classNameValue = isActiveFlag
+		? joinClassnames(className, activeClassName)
+		: className;
 	return (
-		<RouterContext.Consumer>
-			{(context) => {
-				if (!context) {
-					throw RouterException("NavLink");
-				}
-
-				const pathToMatch = locationProp
-					? locationProp.pathname
-					: context.location.pathname;
-
-				const match = escapedPath
-					? matchPath(
-						pathToMatch,
-						{ path: escapedPath, exact, strict },
-						context.match ? context.match.path : "",
-					)
-					: null;
-
-				const isActiveFlag = !!(isActive
-					? isActive(match, context.location)
-					: match);
-
-				const classNameValue = isActiveFlag
-					? joinClassnames(className, activeClassName)
-					: className;
-				return (
-					<Link
-						aria-current={isActiveFlag ? ariaCurrent : null}
-						className={classNameValue}
-						style={isActiveFlag ? { ...style, ...activeStyle } : style}
-						to={to}
-						{...rest}
-					/>
-				);
-			}}
-		</RouterContext.Consumer>
+		<Link
+			aria-current={isActiveFlag ? ariaCurrent : null}
+			className={classNameValue}
+			style={isActiveFlag ? { ...style, ...activeStyle } : style}
+			to={to}
+			{...rest}
+		/>
 	);
 }
 

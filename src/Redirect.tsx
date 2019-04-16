@@ -4,8 +4,7 @@ import React from "react";
 import generatePath from "./generatePath";
 import Lifecycle from "./Lifecycle";
 import { MatchResult } from "./matchPath";
-import { RouterContext } from "./RouterContext";
-import { RouterException } from "./RouterException";
+import { useRouterContext } from "./useRouterContext";
 
 export interface RedirectProps {
 	/** The path redirect destination */
@@ -23,50 +22,41 @@ export interface RedirectProps {
  */
 export default function Redirect(props: RedirectProps) {
 	const { computedMatch, to, push = false } = props;
+	const context = useRouterContext("Redirect");
+	const { history, staticContext } = context;
+
+	const method = push ? history.push : history.replace;
+	const location = createLocation(
+		computedMatch
+			? typeof to === "string"
+				? generatePath(to, computedMatch.params)
+				: {
+					...to,
+					pathname: generatePath(to.pathname, computedMatch.params),
+				}
+			: to,
+	);
+
+	// When rendering in a static context,
+	// set the new location immediately.
+	if (staticContext) {
+		method(location);
+		return null;
+	}
+
 	return (
-		<RouterContext.Consumer>
-			{(context) => {
-				if (!context) {
-					throw RouterException("Redirect");
-				}
-
-				const { history, staticContext } = context;
-
-				const method = push ? history.push : history.replace;
-				const location = createLocation(
-					computedMatch
-						? typeof to === "string"
-							? generatePath(to, computedMatch.params)
-							: {
-								...to,
-								pathname: generatePath(to.pathname, computedMatch.params),
-							}
-						: to,
-				);
-
-				// When rendering in a static context,
-				// set the new location immediately.
-				if (staticContext) {
-					method(location);
-					return null;
-				}
-
-				return (
-					<Lifecycle
-						onMount={() => {
-							method(location);
-						}}
-						onUpdate={(self, prevProps: RedirectProps) => {
-							const prevLocation = createLocation(prevProps.to);
-							if (!locationsAreEqual(prevLocation, location)) {
-								method(location);
-							}
-						}}
-						to={to}
-					/>
-				);
+		<Lifecycle
+			onMount={() => {
+				method(location);
 			}}
-		</RouterContext.Consumer>
+			onUpdate={(self, prevProps: RedirectProps) => {
+				const prevLocation = createLocation(prevProps.to);
+				if (!locationsAreEqual(prevLocation, location)) {
+					method(location);
+				}
+			}}
+			to={to}
+		/>
 	);
 }
 

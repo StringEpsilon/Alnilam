@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import React from "react";
 import Lifecycle from "./Lifecycle";
-import { RouterContext } from "./RouterContext";
 import { RouterException } from "./RouterException";
+import { useRouterContext } from "./useRouterContext";
 
 export interface PromptProps {
 	/** Messsage shown to the user in the prompt */
@@ -15,38 +15,33 @@ export interface PromptProps {
  * Component for prompting the user before navigating away from a screen.
  */
 export default function Prompt({ message, when = true }: PromptProps) {
+	const context = useRouterContext("Prompt");
+	if (!context) {
+		throw RouterException("Prompt");
+	}
+
+	if (!when || context.staticContext) { return null; }
+
+	const method = context.history.block;
+
 	return (
-		<RouterContext.Consumer>
-			{(context) => {
-				if (!context) {
-					throw RouterException("Prompt");
-				}
-
-				if (!when || context.staticContext) { return null; }
-
-				const method = context.history.block;
-
-				return (
-					<Lifecycle
-						onMount={(self) => {
-							self.release = method(message);
-						}}
-						onUpdate={(self, prevProps) => {
-							if (prevProps.message !== message && self.release) {
-								self.release();
-								self.release = method(message);
-							}
-						}}
-						onUnmount={(self) => {
-							if (self.release) {
-								self.release();
-							}
-						}}
-						message={message}
-					/>
-				);
+		<Lifecycle
+			onMount={(self) => {
+				self.release = method(message);
 			}}
-		</RouterContext.Consumer>
+			onUpdate={(self, prevProps) => {
+				if (prevProps.message !== message && self.release) {
+					self.release();
+					self.release = method(message);
+				}
+			}}
+			onUnmount={(self) => {
+				if (self.release) {
+					self.release();
+				}
+			}}
+			message={message}
+		/>
 	);
 }
 

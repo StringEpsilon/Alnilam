@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import Router from "./Router";
 
-interface StaticRouterProps {
+export interface StaticRouterProps {
 	basename?: string;
 	context?: any;
 	location?: Location | string;

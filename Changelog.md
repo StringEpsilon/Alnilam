@@ -1,4 +1,13 @@
-## 0.6.0 (2019-04-11)
+## 0.7.0 Future
+
+### BREAKING:
+* Requires react 16.8 
+
+**Changes:**
+* Now uses hooks internally for some components
+* Exports useRouter() hook.
+
+## 0.6.1 (2019-04-11)
 
 **Bugfixes**:
 * Fixed CJS build. A big thank you to wessberg. :)

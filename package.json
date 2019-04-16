@@ -34,7 +34,7 @@
 		"!dist/types/alnilam.min.d.ts"
 	],
 	"peerDependencies": {
-		"react": ">=16.4"
+		"react": ">=16.8"
 	},
 	"dependencies": {
 		"@babel/runtime": "^7.4.0",
