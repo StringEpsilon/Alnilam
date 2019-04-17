@@ -1,9 +1,6 @@
-import React from "react";
-import { RouterContext } from "./RouterContext";
-
 import { createLocation, History, Location } from "history";
 import PropTypes from "prop-types";
-import { RouterException } from "./RouterException";
+import React from "react";
 import { useRouterContext } from "./useRouterContext";
 
 const isExternalUrl = new RegExp(/^https?:\/\//);

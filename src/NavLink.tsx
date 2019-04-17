@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import React from "react";
 import Link, { LinkProps } from "./Link";
 import matchPath, { MatchResult } from "./matchPath";
-import { RouterContext } from "./RouterContext";
-import { RouterException } from "./RouterException";
 import { useRouterContext } from "./useRouterContext";
 
 function joinClassnames(...classnames: any[]): string {

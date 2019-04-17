@@ -1,5 +1,7 @@
+import { RoutingProps } from "./RouterContext";
 import { useRouterContext } from "./useRouterContext";
 
-export function useRouter(){
-    return useRouterContext("useRouter");
+/** Returns the current routing props (history, match, location, previousLocation) */
+export function useRouter(): RoutingProps {
+	return useRouterContext("useRouter");
 }
