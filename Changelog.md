@@ -1,4 +1,4 @@
-## 0.7.0 Future
+## 0.8.0 Future
 
 ### BREAKING:
 * Requires react 16.8 
@@ -6,6 +6,11 @@
 **Changes:**
 * Now uses hooks internally for some components
 * Exports useRouter() hook.
+* Merged NavLink into Link. Link now has the full capabilities of NavLink by default.
+
+## 0.7.0 - Skipped
+
+0.7.0 was only published as a 'next' tagged release with the hooks changes of 0.8.0.
 
 ## 0.6.1 (2019-04-11)
 

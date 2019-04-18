@@ -11,10 +11,13 @@
 * ```<MemoryRouter/>``` was removed. Use ```Router``` and createMemoryHistory instead.
 * ```<BrowserRouter/>``` was removed. Use ```Router``` and createBrowserHistory instead.
 * ```<HashRouter/>``` was removed. Use ```Router``` and createHashHistory instead.
-* Minimum react version is 16.4 instead of 15.x
+* Minimum react version is 16.8 instead of 15.x
 * Alnilam [provides](./functions/withRouter.md#passed-props) ```previousLocation``` along the current ```location``` via props.
 * [```Link```](./components/Link.md)) supports external URLs in a limited fashion.
 * Some error messages differ.
+* ```Link``` and ```NavLink``` have been merged into ```Link```.
+* Uses hooks internally
+* Exports ```useRouter()``` hook.
 
 And finally:
 
