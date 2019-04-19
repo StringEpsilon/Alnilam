@@ -1,12 +1,14 @@
 ## 0.8.0 Future
 
 ### BREAKING:
-* Requires react 16.8 
+* Requires react 16.8
 
 **Changes:**
 * Now uses hooks internally for some components
 * Exports useRouter() hook.
 * Merged NavLink into Link. Link now has the full capabilities of NavLink by default.
+* Added `<Focus>` component for simple focus management.
+* Added `manageFocus` prop to `Router`.
 
 ## 0.7.0 - Skipped
 

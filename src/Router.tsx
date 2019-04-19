@@ -2,6 +2,7 @@ import { History, Location } from "history";
 import PropTypes from "prop-types";
 import React from "react";
 import warning from "tiny-warning";
+import Focus from "./Focus";
 import { MatchResult } from "./matchPath";
 import { RouterContext } from "./RouterContext";
 
@@ -9,7 +10,9 @@ export interface RouterProps {
 	basename?: string;
 	location?: Location;
 	history: History | any; // the "any" is to work around the static router.
+	manageFocus?: boolean;
 	staticContext?: any;
+
 }
 
 interface RouterState {
@@ -90,7 +93,13 @@ export default class Router extends React.Component<RouterProps, RouterState> {
 					match: Router.computeRootMatch(this.state.location.pathname),
 				}}
 			>
-				{this.props.children}
+				{this.props.manageFocus ?
+					<Focus>
+						{this.props.children}
+					</Focus>
+					:
+					this.props.children
+				}
 			</RouterContext.Provider>
 		);
 	}

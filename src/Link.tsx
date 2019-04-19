@@ -17,7 +17,6 @@ function joinClassnames(...classnames: any[]): string {
 }
 
 export interface LinkProps {
-
 	/** Target path or location of the link. */
 	to: string | Location;
 	/** Whether or not to replace the current location (default: false). */
