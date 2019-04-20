@@ -38,6 +38,35 @@ describe("A <Link>", () => {
 		expect(memoryHistory.push).toBeCalledWith(to);
 	})
 
+	it("calls onClick eventhandler and history.push", () => {
+		const clickHandler = jest.fn();
+		const memoryHistory = createMemoryHistory({ initialEntries: ["/root"] });
+		const push = jest.spyOn(memoryHistory, "push");
+		const to = { hash: "#the-hash" }
+
+		renderStrict(
+			<Router history={memoryHistory}>
+				<Link to={to} onClick={clickHandler} mergeLocations={true}>link</Link>
+			</Router>,
+			node
+		);
+
+		expect(memoryHistory.location).toMatchObject({
+			hash: "",
+			pathname: "/root",
+		});
+
+		const a = node.querySelector("a");
+		ReactTestUtils.Simulate.click(a, {
+			defaultPrevented: false,
+			button: 0,
+		});
+		expect(memoryHistory.location).toMatchObject({
+			hash: "#the-hash",
+			pathname: "/root",
+		});
+	})
+
 	it("does not call history.push if link has protocol", () => {
 		const memoryHistory = createMemoryHistory();
 		memoryHistory.push = jest.fn();

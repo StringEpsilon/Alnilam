@@ -1,3 +1,4 @@
+import { tsParameterProperty } from "@babel/types";
 import { createLocation, History, Location } from "history";
 import PropTypes from "prop-types";
 import React from "react";
@@ -49,6 +50,8 @@ export interface LinkProps {
 	strict?: boolean;
 	/** Alnilam Internal. */
 	staticContext?: any;
+	/** When using a Location object in `to`, merge a partial object with the current location */
+	mergeLocations: boolean;
 }
 
 /**
@@ -71,6 +74,7 @@ export default function Link(props: LinkProps) {
 		staticContext,
 		innerRef,
 		replace,
+		mergeLocations,
 		...rest
 	} = props;
 
@@ -115,7 +119,12 @@ export default function Link(props: LinkProps) {
 			);
 		}
 	} else {
-		href = to ? context.history.createHref(to) : "";
+		const newLocation =
+			mergeLocations
+				? { ...context.location, ...to }
+				: to;
+
+		href = newLocation ? context.history.createHref(newLocation) : "";
 	}
 	return (
 		<a

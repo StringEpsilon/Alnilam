@@ -23,6 +23,7 @@ Component for rendering a history-aware anchor element. It also knows whether it
 | activeClassName | string   | no       | Will be passed to Link className in addition to the className prop when **active**
 | activeStyle     | object   | no       | CSS rules object applied to Link when **active**. Defaults to "active".
 | aria-current    | string   | no       | [See WAI-ARIA specs.](https://www.w3.org/TR/wai-aria-1.1/#aria-current) Defaults to "page".
+| mergeLocations  | boolean  | no       | When using a Location object in `to`, merge a partial object with the current location
 
 **Notes:**
 
@@ -31,6 +32,8 @@ Component for rendering a history-aware anchor element. It also knows whether it
 * ```Link``` intercepts the click on the underlying ```a``` element, unless the string for the ```to``` prop starts with a http / https scheme. See example below.
 
 * A ```path``` without a leading slash or with a leading "./" will be considered relative to it's parent Route or Match.
+
+* When using `mergeLocations`: ```<Link to={{hash: "#asteroids"}} />``` is not equal to ```<Link to="#asteroids" />```. You have to set location properties you don't want on the new location. You might accidentally preserve state or search when you don't want to.
 
 **Call signatures for the callbacks:**
 
