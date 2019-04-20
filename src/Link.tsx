@@ -143,7 +143,12 @@ export default function Link(props: LinkProps) {
 
 function handleClick(event: React.MouseEvent, history: History, props: LinkProps): void {
 	if (props.onClick) {
-		props.onClick(event);
+		try {
+			props.onClick(event);
+		} catch (exception) {
+			event.preventDefault();
+			throw exception;
+		}
 	}
 
 	if (event.defaultPrevented) {

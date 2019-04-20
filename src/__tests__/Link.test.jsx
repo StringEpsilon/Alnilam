@@ -67,6 +67,35 @@ describe("A <Link>", () => {
 		});
 	})
 
+	it("prevents default on exception in onClick callback", () => {
+		const memoryHistory = createMemoryHistory();
+		memoryHistory.push = jest.fn();
+		const onClick = () => { throw new Error };
+		const mockPreventDefault = jest.fn();
+
+		renderStrict(
+			<Router history={memoryHistory}>
+				<Link to="/foo/bar" onClick={onClick}>link</Link>
+			</Router>,
+			node
+		);
+		console.error = jest.fn(); // keep console clean.
+		try {
+			const a = node.querySelector("a");
+			ReactTestUtils.Simulate.click(a, {
+				defaultPrevented: false,
+				preventDefault: mockPreventDefault,
+				button: 1,
+			});
+		} catch (e) {
+			// nothing to do.
+		}
+
+		console.error.mockRestore();
+		expect(mockPreventDefault).toHaveBeenCalled();
+		expect(memoryHistory.push).toBeCalledTimes(0);
+	})
+
 	it("does not call history.push if link has protocol", () => {
 		const memoryHistory = createMemoryHistory();
 		memoryHistory.push = jest.fn();
