@@ -1,14 +1,25 @@
-## 0.8.0 Future
+## 0.8.0 (2019-04-21)
 
 ### BREAKING:
 * Requires react 16.8
+* Merged NavLink into Link. Link now has the full capabilities of NavLink by default.
 
 **Changes:**
 * Now uses hooks internally for some components
-* Exports useRouter() hook.
-* Merged NavLink into Link. Link now has the full capabilities of NavLink by default.
+* Warn about the future deletion of the NavLink export. For now, it just re-exports `Link`
+* Upgraded `react-is` dependency to `^16.8.0`
+
+**Features:**
+* Added useRouter() hook.
 * Added `<Focus>` component for simple focus management.
 * Added `manageFocus` prop to `Router`.
+* Allow merging of `<Link to={Location}/>` with the current history location.
+
+**Bugfixes:**
+* Don't navigate if `<Link onClick/>` throws an exception.
+
+**Other changes:**
+* Added more doc strings on accross components, interfaces and functions and include them in the unminified ESM and CJS build.
 
 ## 0.7.0 - Skipped
 
