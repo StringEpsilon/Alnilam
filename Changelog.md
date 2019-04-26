@@ -1,3 +1,15 @@
+## 0.8.1
+
+**Features:**
+* Added `useMatch(path|options)` hook.
+
+**Changes:**
+* Fixed NavLink import warnings popping up in unit tests.
+* Fixed typo in interface declaration for RoutingProps and RouterContext.
+* Improved typing of `MatchResult.params`.
+* Added documentation for useRouter()
+* Added documentation for useMatch()
+
 ## 0.8.0 (2019-04-21)
 
 ### BREAKING:
