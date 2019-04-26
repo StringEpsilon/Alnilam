@@ -35,7 +35,7 @@ describe("withRouter", () => {
 		expect.assertions(4);
 	});
 
-	it("provides proper 'previosLocation' props", () => {
+	it("provides proper 'previousLocation' (and the non-typo'd one) props", () => {
 		const mockComponent = jest.fn(() => null);
 		const PropsChecker = withRouter(mockComponent);
 		const history = createMemoryHistory();
