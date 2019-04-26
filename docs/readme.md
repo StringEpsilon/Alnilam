@@ -9,7 +9,6 @@
 * [Prompt](./components/Prompt.md)
 * [Redirect](./components/Redirect.md)
 * [Link](./components/Link.md)
-* [NavLink](./components/NavLink.md)
 * [StaticRouter](./components/StaticRouter.md)
 
 ## Functions
@@ -17,6 +16,8 @@
 * [withRouter()](./functions/withRouter.md)
 * [matchPath()](./functions/matchPath.md)
 * [generatePath()](./functions/generatePath.md)
+* [useRouter()](./functions/useRouter.md)
+* [useMatch()](./functions/useMatch.md)
 
 ## Types
 
