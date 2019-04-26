@@ -11,7 +11,7 @@ export interface MatchResult {
 	/** Whether or not the route matched exactly */
 	isExact: boolean;
 	/** Key/value pairs parsed from the URL corresponding to the dynamic segments of the path */
-	params: object;
+	params?: {[key: string]: string};
 }
 
 /**
