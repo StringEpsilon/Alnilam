@@ -13,9 +13,9 @@ A route without a path will always render it's children, but in that case the ``
 | prop      | type          |required  |purpose|
 |-----------|---------------|----------|-------|
 | path      | string        | no       | Path to match against the current location
-| exact     | bool          | no       | Whether or not the route matched [exactly](../recipes/matching_options.md#exact)
-| strict    | bool          | no       | Whether or not the route matched [strictly](../recipes/matching_options.md#strict)
-| sensitive | bool          | no       | Whether or not to use [case sensitive matching]../recipes/matching_options.md#sensitive)
+| exact     | bool          | no       | Whether or not the route matched [exactly](../types/matching_options.md#exact)
+| strict    | bool          | no       | Whether or not the route matched [strictly](../types/matching_options.md#strict)
+| sensitive | bool          | no       | Whether or not to use [case sensitive matching]../types/matching_options.md#sensitive)
 | children  | React element | no       | Child elements
 | location  | [Location](../types/Location.md)| no       | Overrides current location from history for matching
 

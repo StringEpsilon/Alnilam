@@ -8,6 +8,7 @@
 * [Match](./components/Match.md)
 * [Prompt](./components/Prompt.md)
 * [Redirect](./components/Redirect.md)
+* [Focus](./components/Focus.md)
 * [Link](./components/Link.md)
 * [StaticRouter](./components/StaticRouter.md)
 
@@ -23,13 +24,7 @@
 
 * [Location](./types/location.md)
 * [Match](./types/match.md)
-* [Matching options](./recipes/matching_options.md)
-
-# Recipes
-
-* [Basics](./recipes/basics.md)
-* [Nested routing](./recipes/nested_routing.md)
-* [Testing](./recipes/testing.md)
+* [Matching options](./types/matching_options.md)
 
 # Differences to RR:
 

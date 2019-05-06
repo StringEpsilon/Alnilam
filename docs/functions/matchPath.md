@@ -13,7 +13,7 @@ You might use it to build your own specialized versions of ```Match``` or ```Rou
 | parameter | type   | required | purpose
 |-----------|--------|----------|---------
 | pathName  | string | yes      | the URL pathname you want to match
-| options   | object | no       | [parameters for matching](../recipes/matching_options.md)
+| options   | object | no       | [parameters for matching](../types/matching_options.md)
 | basePath  | string | no       | Parent (or base) path for matching a relative pathname
 
 #### Path

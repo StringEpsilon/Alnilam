@@ -14,8 +14,8 @@ Component for rendering a history-aware anchor element. It also knows whether it
 | onClick         | function | no       | Callback that will be called on click of the a element, before any alnilam handling.
 | innerRef        | object   | no       | [Ref](https://reactjs.org/docs/refs-and-the-dom.html) passed on to the a element.
 | className       | string   | no       | ```className``` passed on to the underlying a element.
-| exact           | boolean  | no       | Whether or not to use [exact matching](../recipes/matching_options.md#exact)
-| strict          | boolean  | no       | Whether or not to use [strict matching](../recipes/matching_options.md#strict)
+| exact           | boolean  | no       | Whether or not to use [exact matching](../types/matching_options.md#exact)
+| strict          | boolean  | no       | Whether or not to use [strict matching](../types/matching_options.md#strict)
 | children        | Node     | no       | children passed through to the underlying link.
 | isActive        | function | no       | A function to add extra logic for determining whether the link is active
 | style           | object   | no       | [```style```](https://reactjs.org/docs/dom-elements.html#style) object passed on to the underlying a element when **inactive**
