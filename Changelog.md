@@ -1,4 +1,11 @@
-## 0.8.1
+## Future
+
+**Bugfixes:**
+
+* More forgiving propTypes for `wrappedComponentRef` on withRouter HOC.
+
+
+## 0.8.1 - 2019-04-26
 
 **Features:**
 * Added `useMatch(path|options)` hook.

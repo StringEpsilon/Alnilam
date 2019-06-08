@@ -30,7 +30,11 @@ export default function withRouter(Component: React.ComponentType<any>): any {
 
 	if (process.env.NODE_ENV !== "production") {
 		WrappedComponent.propTypes = {
-			wrappedComponentRef: PropTypes.func,
+			wrappedComponentRef: PropTypes.oneOfType([
+				PropTypes.string,
+				PropTypes.func,
+				PropTypes.object,
+			]),
 		};
 	}
 
