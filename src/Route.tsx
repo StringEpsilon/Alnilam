@@ -2,43 +2,32 @@ import PropTypes from "prop-types";
 import React from "react";
 import { RouteProps } from "./RouteProps";
 import { RouterContext } from "./RouterContext";
-import { RouterException } from "./RouterException";
+import { useRouterContext } from "./useRouterContext";
 import { calculateMatch, sanitizeChildren } from "./utils";
 
 /**
  * Component for matching a single path and rendering children on match.
  */
-export default class Route extends React.Component<RouteProps> {
-	public static propTypes: object;
+export default function Route(props: RouteProps) {
+	const context = useRouterContext("Route");
 
-	public render() {
-		return (
-			<RouterContext.Consumer>
-				{(context) => {
-					if (!context) {
-						throw RouterException("Route");
-					}
-					const location = this.props.location || context.location;
-					const path = this.props.path;
-					const match = calculateMatch(this.props, context);
+	const location = props.location || context.location;
+	const path = props.path;
+	const match = calculateMatch(props, context);
 
-					const props = { ...context, location, match };
+	const contextProps = { ...context, location, match };
 
-					const children = sanitizeChildren("Route", this.props.children, props, path);
+	const children = sanitizeChildren("Route", props.children, contextProps, path);
 
-					if (!match || !children) {
-						return null;
-					}
-
-					return (
-						<RouterContext.Provider value={props}>
-							{children}
-						</RouterContext.Provider>
-					);
-				}}
-			</RouterContext.Consumer>
-		);
+	if (!match || !children) {
+		return null;
 	}
+
+	return (
+		<RouterContext.Provider value={contextProps}>
+			{children}
+		</RouterContext.Provider>
+	);
 }
 
 if (process.env.NODE_ENV !== "production") {

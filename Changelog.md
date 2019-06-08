@@ -6,7 +6,7 @@
 
 **Changes:**
 * Removed warning for chaning `location` prop on Match, Route and Switch.
-
+* Match and Route now use hooks internally and are functional components.
 
 ## 0.8.1 - 2019-04-26
 
