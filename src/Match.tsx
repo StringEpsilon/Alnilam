@@ -3,7 +3,7 @@ import Route from "./Route";
 import { RouteProps } from "./RouteProps";
 import { RouterContext, RouterContextType } from "./RouterContext";
 import { RouterException } from "./RouterException";
-import { addLocationPropWarning, calculateMatch, sanitizeChildren } from "./utils";
+import { calculateMatch, sanitizeChildren } from "./utils";
 
 /**
  * Component for matching a path and passing the result to it's children.
@@ -42,5 +42,4 @@ export default class Match extends React.Component<RouteProps> {
 
 if (process.env.NODE_ENV !== "production") {
 	Match.propTypes = Route.propTypes;
-	addLocationPropWarning(Match.prototype, "Match");
 }

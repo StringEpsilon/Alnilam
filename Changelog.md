@@ -1,8 +1,11 @@
 ## Future
 
 **Bugfixes:**
-
 * More forgiving propTypes for `wrappedComponentRef` on withRouter HOC.
+
+
+**Changes:**
+* Removed warning for chaning `location` prop on Match, Route and Switch.
 
 
 ## 0.8.1 - 2019-04-26

@@ -2,10 +2,7 @@ import { Location } from "history";
 import PropTypes from "prop-types";
 import React from "react";
 import matchPath, { MatchResult } from "./matchPath";
-import { RouterContext } from "./RouterContext";
-import { RouterException } from "./RouterException";
 import { useRouterContext } from "./useRouterContext";
-import { addLocationPropWarning } from "./utils";
 
 interface SwitchChildProps {
 	from?: string;

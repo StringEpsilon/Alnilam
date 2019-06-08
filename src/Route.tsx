@@ -3,7 +3,7 @@ import React from "react";
 import { RouteProps } from "./RouteProps";
 import { RouterContext } from "./RouterContext";
 import { RouterException } from "./RouterException";
-import { addLocationPropWarning, calculateMatch, sanitizeChildren } from "./utils";
+import { calculateMatch, sanitizeChildren } from "./utils";
 
 /**
  * Component for matching a single path and rendering children on match.
@@ -53,5 +53,4 @@ if (process.env.NODE_ENV !== "production") {
 		sensitive: PropTypes.bool,
 		strict: PropTypes.bool,
 	};
-	addLocationPropWarning(Route.prototype, "Route");
 }

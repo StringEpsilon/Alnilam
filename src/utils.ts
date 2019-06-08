@@ -13,15 +13,6 @@ export function calculateMatch(props: RouteProps, context: RouterContextType) {
 			: context.match;
 }
 
-export function addLocationPropWarning(prototype: any, componentName: string): void {
-	prototype.componentDidUpdate = function (prevProps: any) {
-		warning(
-			!(!!this.props.location !== !!prevProps.location),
-			`<${componentName}> location should not change from uncontrolled to controlled (or vice versa).`,
-		);
-	};
-}
-
 export function sanitizeChildren(name: string, children: any, props: any, path?: string | string[]): any | null {
 	// Preact uses an empty array as children by
 	// default, so use null if that's the case.
