@@ -22,7 +22,3 @@
 And finally:
 
 * Dropped support for react native to unify and simplify the codebase.
-
-## Bugfixes:
-
-* A withRouter() wrapped component will get the wrong props when inside a [```<NavLink>```](./components/NavLink.md)
