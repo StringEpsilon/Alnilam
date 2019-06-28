@@ -1,9 +1,8 @@
 import ts from "@wessberg/rollup-plugin-ts";
 import path from "path";
-import commonjs from "rollup-plugin-commonjs";
 import resolve from "rollup-plugin-node-resolve";
 import replace from "rollup-plugin-replace";
-import { uglify } from "rollup-plugin-uglify";
+import { terser } from "rollup-plugin-terser";
 import pkg from "./package.json";
 
 function isBareModuleId(id) {
@@ -17,7 +16,6 @@ function isBareModuleId(id) {
 }
 
 export default function configureRollup(commandOptions) {
-	const isCi = !commandOptions["config-ci"];
 	return [
 		// CJS:
 		{
@@ -29,7 +27,6 @@ export default function configureRollup(commandOptions) {
 				ts({
 					transpiler: "babel",
 				}),
-				commonjs(),
 				replace({ "process.env.NODE_ENV": JSON.stringify("development") }),
 			],
 		},
@@ -42,9 +39,8 @@ export default function configureRollup(commandOptions) {
 				ts({
 					transpiler: "babel",
 				}),
-				commonjs(),
 				replace({ "process.env.NODE_ENV": JSON.stringify("production") }),
-				uglify(),
+				terser(),
 			],
 		},
 		// ESM:
@@ -57,7 +53,18 @@ export default function configureRollup(commandOptions) {
 				ts({
 					transpiler: "babel",
 				}),
-				commonjs(),
+			],
+		},
+		{
+			input: "src/index.ts",
+			output: { file: `dist/esm/${pkg.name}.min.js`, format: "esm" },
+			external: isBareModuleId,
+			plugins: [
+				resolve({ extensions: [".js", ".jsx", ".ts", ".tsx"] }),
+				ts({
+					transpiler: "babel",
+				}),
+				terser(),
 			],
 		},
 	];

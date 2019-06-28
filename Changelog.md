@@ -7,6 +7,8 @@
 **Changes:**
 * Removed warning for chaning `location` prop on Match, Route and Switch.
 * Match and Route now use hooks internally and are functional components.
+* ESM build now includes a pre-minified version.
+* Minifaction now done with terser instead of uglify.
 
 ## 0.8.1 - 2019-04-26
 
