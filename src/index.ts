@@ -10,6 +10,5 @@ export { default as StaticRouter } from "./StaticRouter";
 export { default as withRouter } from "./withRouter";
 export { default as generatePath } from "./generatePath";
 export { default as matchPath } from "./matchPath";
-export { RouterContext } from "./RouterContext";
 export { useRouter } from "./useRouter";
 export { useMatch } from "./useMatch";

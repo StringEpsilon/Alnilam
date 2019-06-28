@@ -1,8 +1,10 @@
 ## Future
 
+**Breaking:**
+* Dropped RouterContext export. You can extend alnilam functionality using hooks instead.
+
 **Bugfixes:**
 * More forgiving propTypes for `wrappedComponentRef` on withRouter HOC.
-
 
 **Changes:**
 * Removed warning for chaning `location` prop on Match, Route and Switch.
