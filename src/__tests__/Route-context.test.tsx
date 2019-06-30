@@ -1,8 +1,8 @@
 import { createMemoryHistory as createHistory } from "history";
 import React from "react";
 import ReactDOM from "react-dom";
-import { Route, Router, RouterContext } from "..";
-import { RouterContextType } from "../RouterContext";
+import { Route, Router } from "..";
+import { RouterContext, RouterContextType } from "../RouterContext";
 import renderStrict from "./utils/renderStrict";
 
 describe("A <Route>", () => {
