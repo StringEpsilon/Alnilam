@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useRouterContext } from "../hooks/useRouterContext";
+import { RouteProps } from "../RouteProps";
+import { RouterContext, RouterContextType } from "../RouterContext";
+import { calculateMatch, sanitizeChildren } from "../utils";
 import Route from "./Route";
-import { RouteProps } from "./RouteProps";
-import { RouterContext, RouterContextType } from "./RouterContext";
-import { useRouterContext } from "./useRouterContext";
-import { calculateMatch, sanitizeChildren } from "./utils";
 
 /**
  * Component for matching a path and passing the result to it's children.

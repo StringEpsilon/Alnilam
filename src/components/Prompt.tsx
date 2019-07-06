@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import React from "react";
+import { useRouterContext } from "../hooks/useRouterContext";
+import { RouterException } from "../RouterException";
 import Lifecycle from "./Lifecycle";
-import { RouterException } from "./RouterException";
-import { useRouterContext } from "./useRouterContext";
 
 export interface PromptProps {
 	/** Messsage shown to the user in the prompt */

@@ -1,9 +1,8 @@
 import { createMemoryHistory as createHistory } from "history";
 import React from "react";
 import ReactDOM from "react-dom";
-import { Router } from "..";
-
-import renderStrict from "./utils/renderStrict";
+import { Router } from "../..";
+import renderStrict from "../../testutils/renderStrict";
 
 describe("A <Router>", () => {
 	const node = document.createElement("div");

@@ -3,8 +3,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 // tslint:disable-next-line:no-submodule-imports
 import ReactDOMServer from "react-dom/server";
-import { Prompt, Redirect, Route, StaticRouter } from "..";
-import renderStrict from "./utils/renderStrict";
+import { Prompt, Redirect, Route, StaticRouter } from "../..";
+import renderStrict from "../../testutils/renderStrict";
 
 describe("A <StaticRouter>", () => {
 	const node = document.createElement("div");

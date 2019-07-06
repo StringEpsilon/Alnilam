@@ -1,7 +1,7 @@
 import hoistStatics from "hoist-non-react-statics";
 import PropTypes from "prop-types";
 import React from "react";
-import { useRouterContext } from "./useRouterContext";
+import { useRouterContext } from "./hooks/useRouterContext";
 
 export interface WithRouterProps {
 	wrappedComponentRef?: (props: any) => any;

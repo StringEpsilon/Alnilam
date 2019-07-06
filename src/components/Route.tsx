@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { RouteProps } from "./RouteProps";
-import { RouterContext } from "./RouterContext";
-import { useRouterContext } from "./useRouterContext";
-import { calculateMatch, sanitizeChildren } from "./utils";
+import { useRouterContext } from "../hooks/useRouterContext";
+import { RouteProps } from "../RouteProps";
+import { RouterContext } from "../RouterContext";
+import { calculateMatch, sanitizeChildren } from "../utils";
 
 /**
  * Component for matching a single path and rendering children on match.

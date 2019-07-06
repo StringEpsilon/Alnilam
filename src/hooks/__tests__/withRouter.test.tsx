@@ -2,9 +2,9 @@ import { createMemoryHistory } from "history";
 import React from "react";
 import ReactDOM from "react-dom";
 import * as ReactIs from "react-is";
-import { Match, Route, Router, StaticRouter, withRouter } from "../index";
-import MemoryRouter from "./utils/MemoryRouter";
-import renderStrict from "./utils/renderStrict";
+import { Match, Route, Router, StaticRouter, withRouter } from "../../index";
+import MemoryRouter from "../../testutils/MemoryRouter";
+import renderStrict from "../../testutils/renderStrict";
 
 describe("withRouter", () => {
 	const node = document.createElement("div");

@@ -1,6 +1,6 @@
 import { createMemoryHistory, Location } from "history";
 import React from "react";
-import Router from "../../Router";
+import Router from "../components/Router";
 
 interface MemoryRouterProps {
 	basename?: string;

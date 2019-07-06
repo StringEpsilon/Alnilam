@@ -1,10 +1,10 @@
 import { createLocation, Location, locationsAreEqual } from "history";
 import PropTypes from "prop-types";
 import React from "react";
-import generatePath from "./generatePath";
+import generatePath from "../generatePath";
+import { useRouterContext } from "../hooks/useRouterContext";
+import { MatchResult } from "../matchPath";
 import Lifecycle from "./Lifecycle";
-import { MatchResult } from "./matchPath";
-import { useRouterContext } from "./useRouterContext";
 
 export interface RedirectProps {
 	/** The path redirect destination */

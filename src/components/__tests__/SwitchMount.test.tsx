@@ -1,10 +1,10 @@
 import { createMemoryHistory } from "history";
 import React from "react";
 import ReactDOM from "react-dom";
-import { Route, Switch } from "..";
+import renderStrict from "../../testutils/renderStrict";
+import Route from "../Route";
 import Router from "../Router";
-import MemoryRouter from "./utils/MemoryRouter";
-import renderStrict from "./utils/renderStrict";
+import Switch from "../Switch";
 
 describe("A <Switch>", () => {
 	const node = document.createElement("div");

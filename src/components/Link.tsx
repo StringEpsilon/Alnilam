@@ -1,9 +1,8 @@
-import { tsParameterProperty } from "@babel/types";
 import { createLocation, History, Location } from "history";
 import PropTypes from "prop-types";
 import React from "react";
-import matchPath, { MatchResult } from "./matchPath";
-import { useRouterContext } from "./useRouterContext";
+import { useRouterContext } from "../hooks/useRouterContext";
+import matchPath, { MatchResult } from "../matchPath";
 
 const isExternalUrl = new RegExp(/^https?:\/\//);
 

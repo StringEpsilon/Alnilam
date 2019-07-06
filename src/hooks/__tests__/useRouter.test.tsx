@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { useRouter } from "../index";
-import MemoryRouter from "./utils/MemoryRouter";
-import renderStrict from "./utils/renderStrict";
+import { useRouter } from "../../index";
+import MemoryRouter from "../../testutils/MemoryRouter";
+import renderStrict from "../../testutils/renderStrict";
 
 describe("useRouter", () => {
 	const node = document.createElement("div");

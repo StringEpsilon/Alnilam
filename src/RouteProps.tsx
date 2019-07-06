@@ -4,7 +4,7 @@ import { MatchResult } from "./matchPath";
 
 export interface RouteProps {
 	/** Child components / elements to render in case of a match. */
-	children?: ((props: any) => React.ReactNode) | React.ReactNode;
+	children?: ((props: any) => React.ReactNode) | React.ReactNode | React.ReactNode[];
 	/** Path to match against the current location */
 	path?: string | string[];
 	/** Whether or not to match the path level exactly */

@@ -2,9 +2,9 @@ import { History, Location } from "history";
 import PropTypes from "prop-types";
 import React from "react";
 import warning from "tiny-warning";
+import { MatchResult } from "../matchPath";
+import { RouterContext } from "../RouterContext";
 import Focus from "./Focus";
-import { MatchResult } from "./matchPath";
-import { RouterContext } from "./RouterContext";
 
 export interface RouterProps {
 	basename?: string;

@@ -1,11 +1,12 @@
 import { createMemoryHistory as createHistory } from "history";
 import React from "react";
 import ReactDOM from "react-dom";
-import { Route, Router } from "..";
-import { RouterContext, RouterContextType } from "../RouterContext";
-import renderStrict from "./utils/renderStrict";
+import { Router } from "../..";
 
-describe("A <Route>", () => {
+import { RouterContext, RouterContextType } from "../../RouterContext";
+import renderStrict from "../../testutils/renderStrict";
+
+describe("A <Router>", () => {
 	const node = document.createElement("div");
 
 	afterEach(() => {
@@ -34,12 +35,12 @@ describe("A <Route>", () => {
 
 			renderStrict(
 				<Router history={history}>
-					<Route ><ContextChecker /></Route>
+					<ContextChecker />
 				</Router>,
 				node,
 			);
 
-			expect(context).toBeTruthy();
+			expect(context).not.toBeNull();
 			if (context) {
 				expect(context.history).toBe(history);
 			}
@@ -50,11 +51,11 @@ describe("A <Route>", () => {
 
 			renderStrict(
 				<Router history={history}>
-					<Route ><ContextChecker /></Route>
+					<ContextChecker />
 				</Router>,
 				node,
 			);
-			expect(context).toBeTruthy();
+			expect(context).not.toBeNull();
 			if (context) {
 				expect(context.location).toBe(history.location);
 			}
@@ -67,13 +68,12 @@ describe("A <Route>", () => {
 
 			renderStrict(
 				<Router history={history}>
-					<Route >
-						<ContextChecker />
-					</Route>
+					<ContextChecker />
 				</Router>,
 				node,
 			);
-			expect(context).toBeTruthy();
+
+			expect(context).not.toBeNull();
 			if (context) {
 				expect(context.match).toMatchObject({
 					path: "/",
@@ -81,6 +81,22 @@ describe("A <Route>", () => {
 					params: {},
 					isExact: true,
 				});
+			}
+		});
+
+		it("does not have a `staticContext` property", () => {
+			const history = createHistory();
+
+			renderStrict(
+				<Router history={history}>
+					<ContextChecker />
+				</Router>,
+				node,
+			);
+
+			expect(context).not.toBeNull();
+			if (context) {
+				expect(context.staticContext).toBe(undefined);
 			}
 		});
 	});

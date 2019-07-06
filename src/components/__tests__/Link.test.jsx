@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Link } from "../index";
-import MemoryRouter from "./utils/MemoryRouter";
-import renderStrict from "./utils/renderStrict";
+import { Link } from "../../index";
+import MemoryRouter from "../../testutils/MemoryRouter";
+import renderStrict from "../../testutils/renderStrict";
 import { createHashHistory, createMemoryHistory } from "history";
 import Router from "../Router";
 import ReactTestUtils from "react-dom/test-utils";

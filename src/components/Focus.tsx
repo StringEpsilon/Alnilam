@@ -1,6 +1,6 @@
 import React from "react";
-import { RouterContext, RoutingProps } from "./RouterContext";
-import withRouter from "./withRouter";
+import { RouterContext, RoutingProps } from "../RouterContext";
+import withRouter from "../withRouter";
 
 export interface FocusProps extends RoutingProps {
 	onMount: boolean;

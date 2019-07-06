@@ -1,12 +1,11 @@
 import { createMemoryHistory as createHistory } from "history";
 import React from "react";
 import ReactDOM from "react-dom";
-import { Match as MatchComponent, Router } from "..";
-import { RouteProps } from "../Route";
-import MemoryRouter from "./utils/MemoryRouter";
-import renderStrict from "./utils/renderStrict";
+import { Route, Router } from "../..";
+import MemoryRouter from "../../testutils/MemoryRouter";
+import renderStrict from "../../testutils/renderStrict";
 
-describe("A <Match>", () => {
+describe("A <Route>", () => {
 	const node = document.createElement("div");
 
 	afterEach(() => {
@@ -15,11 +14,11 @@ describe("A <Match>", () => {
 
 	describe("without a <Router>", () => {
 		it("throws an error", () => {
-			jest.spyOn(console, "error").mockImplementation(() => null);
+			jest.spyOn(console, "error").mockImplementation(() => ({}));
 
 			expect(() => {
-				renderStrict(<MatchComponent><div /></MatchComponent>, node);
-			}).toThrow(/You should not use <Match> outside a <Router>/);
+				renderStrict(<Route />, node);
+			}).toThrow(/You should not use <Route> outside a <Router>/);
 		});
 	});
 
@@ -28,9 +27,9 @@ describe("A <Match>", () => {
 
 		renderStrict(
 			<MemoryRouter initialEntries={["/cupcakes"]}>
-				<MatchComponent path="/cupcakes">
+				<Route path="/cupcakes">
 					<h1>{text}</h1>
-				</MatchComponent>
+				</Route>
 			</MemoryRouter>,
 			node,
 		);
@@ -38,19 +37,34 @@ describe("A <Match>", () => {
 		expect(node.innerHTML).toContain(text);
 	});
 
-	it("also renders when it does not match", () => {
-		const text = "bubblegum";
+	it("renders when it matches at the root URL", () => {
+		const text = "cupcakes";
 
 		renderStrict(
-			<MemoryRouter initialEntries={["/bunnies"]}>
-				<MatchComponent path="/flowers">
+			<MemoryRouter initialEntries={["/"]}>
+				<Route path="/">
 					<h1>{text}</h1>
-				</MatchComponent>
+				</Route>
 			</MemoryRouter>,
 			node,
 		);
 
 		expect(node.innerHTML).toContain(text);
+	});
+
+	it("does not render when it does not match", () => {
+		const text = "bubblegum";
+
+		renderStrict(
+			<MemoryRouter initialEntries={["/bunnies"]}>
+				<Route path="/flowers">
+					<h1>{text}</h1>
+				</Route>
+			</MemoryRouter>,
+			node,
+		);
+
+		expect(node.innerHTML).not.toContain(text);
 	});
 
 	it("matches using nextContext when updating", () => {
@@ -60,10 +74,9 @@ describe("A <Match>", () => {
 
 		renderStrict(
 			<Router history={history}>
-				<MatchComponent path="/sushi/:roll">
+				<Route path="/sushi/:roll">
 					{({ match }) => <h1>{match.url}</h1>}
-				</MatchComponent>
-				/>
+				</Route>
 			</Router>,
 			node,
 		);
@@ -77,10 +90,9 @@ describe("A <Match>", () => {
 		it("decodes them", () => {
 			renderStrict(
 				<MemoryRouter initialEntries={["/a%20dynamic%20segment"]}>
-					<MatchComponent path="/:id">
+					<Route path="/:id" >
 						{({ match }) => <h1>{match.params.id}</h1>}
-					</MatchComponent>
-					/>
+					</Route>
 				</MemoryRouter>,
 				node,
 			);
@@ -93,9 +105,9 @@ describe("A <Match>", () => {
 		it("matches the first provided path", () => {
 			ReactDOM.render(
 				<MemoryRouter initialEntries={["/hello"]}>
-					<MatchComponent path={["/hello", "/world"]}>
+					<Route path={["/hello", "/world"]} >
 						{() => <div>Hello World</div>}
-					</MatchComponent>
+					</Route>
 				</MemoryRouter>,
 				node,
 			);
@@ -106,9 +118,9 @@ describe("A <Match>", () => {
 		it("matches other provided paths", () => {
 			ReactDOM.render(
 				<MemoryRouter initialEntries={["/other", "/world"]} initialIndex={1}>
-					<MatchComponent path={["/hello", "/world"]}>
+					<Route path={["/hello", "/world"]} >
 						{() => <div>Hello World</div>}
-					</MatchComponent>
+					</Route>
 				</MemoryRouter>,
 				node,
 			);
@@ -119,9 +131,9 @@ describe("A <Match>", () => {
 		it("provides the matched path as a string", () => {
 			ReactDOM.render(
 				<MemoryRouter initialEntries={["/other", "/world"]} initialIndex={1}>
-					<MatchComponent path={["/hello", "/world"]}>
+					<Route path={["/hello", "/world"]} >
 						{({ match }) => <div>{match.path}</div>}
-					</MatchComponent>
+					</Route>
 				</MemoryRouter>,
 				node,
 			);
@@ -144,9 +156,9 @@ describe("A <Match>", () => {
 			history.push("/hello");
 			ReactDOM.render(
 				<Router history={history}>
-					<MatchComponent path={["/hello", "/world"]} >
+					<Route path={["/hello", "/world"]}>
 						<MatchedRoute />
-					</MatchComponent>
+					</Route>
 				</Router>,
 				node,
 			);
@@ -165,9 +177,9 @@ describe("A <Match>", () => {
 		it("is able to match", () => {
 			renderStrict(
 				<MemoryRouter initialEntries={["/パス名"]}>
-					<MatchComponent path="/パス名">
+					<Route path="/パス名" >
 						{({ match }) => <h1>{match.url}</h1>}
-					</MatchComponent>
+					</Route>
 				</MemoryRouter>,
 				node,
 			);
@@ -180,14 +192,87 @@ describe("A <Match>", () => {
 		it("is able to match", () => {
 			renderStrict(
 				<MemoryRouter initialEntries={["/pizza (1)"]}>
-					<MatchComponent path="/pizza \(1\)">
-						{({ match }: any) => <h1>{match.url}</h1>}
-					</MatchComponent>
+					<Route path="/pizza \(1\)">
+						{({ match }) => <h1>{match.url}</h1>}
+					</Route>
 				</MemoryRouter>,
 				node,
 			);
 
 			expect(node.innerHTML).toContain("/pizza (1)");
+		});
+	});
+
+	describe("with `exact=true`", () => {
+		it("renders when the URL does not have a trailing slash", () => {
+			const text = "bubblegum";
+
+			renderStrict(
+				<MemoryRouter initialEntries={["/somepath/"]}>
+					<Route exact={true} path="/somepath">
+						{() => <h1>{text}</h1>}
+					</Route>
+				</MemoryRouter>,
+				node,
+			);
+
+			expect(node.innerHTML).toContain(text);
+		});
+
+		it("renders when the URL has trailing slash", () => {
+			const text = "bubblegum";
+
+			renderStrict(
+				<MemoryRouter initialEntries={["/somepath"]}>
+					<Route exact={true} path="/somepath/">
+						<h1>{text}</h1>}
+					</Route>
+				</MemoryRouter>,
+				node,
+			);
+
+			expect(node.innerHTML).toContain(text);
+		});
+
+		describe("and `strict=true`", () => {
+			it("does not render when the URL has a trailing slash", () => {
+				const text = "bubblegum";
+
+				renderStrict(
+					<MemoryRouter initialEntries={["/somepath/"]}>
+						<Route
+							exact={true}
+							strict={true}
+							path="/somepath"
+							>
+								<h1>{text}</h1>
+							</Route>
+						/>
+					</MemoryRouter>,
+					node,
+				);
+
+				expect(node.innerHTML).not.toContain(text);
+			});
+
+			it("does not render when the URL does not have a trailing slash", () => {
+				const text = "bubblegum";
+
+				renderStrict(
+					<MemoryRouter initialEntries={["/somepath"]}>
+						<Route
+							exact={true}
+							strict={true}
+							path="/somepath/"
+							>
+							<h1>{text}</h1>
+						</Route>
+					</MemoryRouter>,
+					node,
+				);
+
+				expect(node.innerHTML).not.toContain(text);
+			});
 		});
 	});
 
@@ -197,90 +282,15 @@ describe("A <Match>", () => {
 
 			renderStrict(
 				<MemoryRouter initialEntries={["/cupcakes"]}>
-					<MatchComponent
-						location={{ pathname: "/bubblegum", search: "", state: "", hash: "" }}
+					<Route location={{ pathname: "/bubblegum", search: "", state: "", hash: "" }}
 						path="/bubblegum">
-						{({ match }) => <h1>{match.url}</h1>}
-					</MatchComponent>
+						<h1>{text}</h1>
+					</Route>
 				</MemoryRouter>,
 				node,
 			);
 
-			expect(node.innerHTML).toContain("/bubblegum");
-		});
-	});
-
-	describe("the `children` prop", () => {
-		describe("that is an element", () => {
-			it("renders", () => {
-				const text = "bubblegum";
-
-				renderStrict(
-					<MemoryRouter initialEntries={["/"]}>
-						<MatchComponent path="/">
-							<h1>{text}</h1>
-						</MatchComponent>
-					</MemoryRouter>,
-					node,
-				);
-
-				expect(node.innerHTML).toContain(text);
-			});
-		});
-
-		describe("that is a function", () => {
-			it("receives { history, location, match } props", () => {
-				const history = createHistory();
-
-				renderStrict(
-					<Router history={history}>
-						<MatchComponent
-							path="/"
-							children={(props: RouteProps) => {
-								expect(props).not.toBe(null);
-								if (props) {
-									expect(props.history).toBe(history);
-									expect(typeof props.location).toBe("object");
-									expect(typeof props.match).toBe("object");
-								}
-								return null;
-							}}
-						/>
-					</Router>,
-					node,
-				);
-				expect.assertions(4);
-			});
-
-			it("renders", () => {
-				const text = "bubblegum";
-
-				renderStrict(
-					<MemoryRouter initialEntries={["/"]}>
-						<MatchComponent path="/" children={() => <h1>{text}</h1>} />
-					</MemoryRouter>,
-					node,
-				);
-
-				expect(node.innerHTML).toContain(text);
-			});
-
-			describe("that returns `undefined`", () => {
-				it("renders nothing", () => {
-					jest.spyOn(console, "warn").mockImplementation(() => null);
-
-					renderStrict(
-						<MemoryRouter initialEntries={["/"]}>
-							<MatchComponent path="/" >
-								{() => undefined}
-							</MatchComponent>
-						</MemoryRouter>,
-						node,
-					);
-
-					expect(node.innerHTML).toEqual("");
-				});
-			});
+			expect(node.innerHTML).toContain(text);
 		});
 	});
 });

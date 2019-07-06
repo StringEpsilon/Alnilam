@@ -1,6 +1,6 @@
-import { MatchOptions, MatchResult } from "./matchPath";
+import { MatchOptions, MatchResult } from "../matchPath";
+import { calculateMatch } from "../utils";
 import { useRouterContext } from "./useRouterContext";
-import { calculateMatch } from "./utils";
 
 /**
  * Hook for easy matching inside a functional component.

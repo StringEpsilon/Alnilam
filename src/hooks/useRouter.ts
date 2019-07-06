@@ -1,4 +1,4 @@
-import { RoutingProps } from "./RouterContext";
+import { RoutingProps } from "../RouterContext";
 import { useRouterContext } from "./useRouterContext";
 
 /** Returns the current routing props (history, match, location, previousLocation) */

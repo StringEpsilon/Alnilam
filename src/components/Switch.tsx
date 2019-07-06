@@ -1,8 +1,8 @@
 import { Location } from "history";
 import PropTypes from "prop-types";
 import React from "react";
-import matchPath, { MatchResult } from "./matchPath";
-import { useRouterContext } from "./useRouterContext";
+import { useRouterContext } from "../hooks/useRouterContext";
+import matchPath, { MatchResult } from "../matchPath";
 
 interface SwitchChildProps {
 	from?: string;
@@ -13,7 +13,7 @@ export interface SwitchProps {
 	/** Overrides current location from history for matching */
 	location?: Location;
 	/** Children */
-	children?: React.ReactElement;
+	children?: React.ReactElement[] | React.ReactElement;
 }
 
 /**
