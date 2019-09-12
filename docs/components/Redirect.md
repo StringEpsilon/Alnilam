@@ -2,9 +2,9 @@
 
 ## Redirect
 
-Allows navigating programmatically with a component. Upon mounting, it will replace the current location with the path specified with the ```to``` prop.
+Allows navigating programmatically with a component. Upon mounting, it will replace the current location with the path specified with the `to` prop.
 
-Redirect has some bonus functionality when used as a direct child of [```Switch```](./Switch.md), see [below](#Redirect%20and%20Switch).
+Redirect has some bonus functionality when used as a direct child of [`Switch`](./Switch.md), see [below](#Redirect%20and%20Switch).
 
 ### Props
 
@@ -12,10 +12,10 @@ Redirect has some bonus functionality when used as a direct child of [```Switch`
 |-----------|--------|----------|---------
 | to        | string | **yes**  | The path redirect destination
 | push      | bool   | no       | Wether to replace (default) or push onto history.
-| from      | string | no       | When child of ```Switch```, redirect only if location matches from.
-| exact     | string | no       | Use [exact matching](../recipes/matching_options#exact) for ```from```
-| strict    | string | no       | Use [strict matching](../recipes/matching_options#strict) for ```from```
-| sensitive | string | no       | Use [sensitive matching](../recipes/matching_options#sensitive) for ```from```
+| from      | string | no       | When child of `Switch`, redirect only if location matches from.
+| exact     | string | no       | Use [exact matching](../recipes/matching_options#exact) for `from` when inside a `Switch`
+| strict    | string | no       | Use [strict matching](../recipes/matching_options#strict) for `from` when inside a `Switch`
+| sensitive | string | no       | Use [sensitive matching](../recipes/matching_options#sensitive) for `from` when inside a `Switch`
 
 ### Example usage
 
@@ -40,7 +40,7 @@ const destination = {
 
 ### Redirect and Switch
 
-When rendering, ```Switch``` looks at it's childrens props for ```to``` to evaluate whether or not that child matches the current location so it can be rendered. For the purpose of redirecting / forwarding certain paths, ```Switch``` also looks for a "from" prop on children:
+When rendering, `Switch` looks at it's childrens props for `to` to evaluate whether or not that child matches the current location so it can be rendered. For the purpose of redirecting / forwarding certain paths, `Switch` also looks for a "from" prop on children:
 
 ```jsx
 // Given current location = "/ran":
@@ -62,5 +62,6 @@ A **notable quirk** of that implementation is that ```path``` has the same effec
 
 ### Caveats
 
-0. ```Redirect``` does not work outside of a ```<Router>``` and will throw an invariant exception.
-1. ```from``` only affects the ```Redirect```, if it's an immediate member of ```Switch```.
+0. `Redirect` does not work outside of a `<Router>` and will throw an invariant exception.
+1. `from` only affects the `Redirect`, if it's a direct child of a `Switch`.
+2. Similarly, `exact`, `strict` and `sensitive` only have an effect, if the Redirect is an immediate child of a `Switch`
