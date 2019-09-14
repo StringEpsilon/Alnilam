@@ -11,6 +11,8 @@
 * Match and Route now use hooks internally and are functional components.
 * ESM build now includes a pre-minified version.
 * Minifaction now done with terser instead of uglify.
+* Updated history dependency to 4.10.1
+* Updated babel/runtime dependency to 7.6.0
 
 ## 0.8.1 - 2019-04-26
 
