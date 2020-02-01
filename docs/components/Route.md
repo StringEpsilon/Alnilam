@@ -4,8 +4,6 @@
 
 Component to declare a route within your application. Route will only render it's children if the given path matches the current location.
 
-Route will pass on the ```history```, ```location```(../types/location.md) and ```match```(../types/match.md) as props to all children.
-
 A route without a path will always render it's children, but in that case the ```match``` prop will be null.
 
 ### Props

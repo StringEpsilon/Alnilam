@@ -1,5 +1,4 @@
 import React from "react";
-import warning from "tiny-warning";
 import matchPath from "./matchPath";
 import { RouteProps } from "./RouteProps";
 import { RouterContextType } from "./RouterContext";
@@ -22,14 +21,6 @@ export function sanitizeChildren(name: string, children: any, props: any, path?:
 	if (typeof children === "function") {
 		const childrenFunction = children as (props: any) => React.ElementType;
 		children = childrenFunction ? childrenFunction(props) : null;
-	} else if (!!children) {
-		return React.Children.map(children, (child) => {
-			if (React.isValidElement(child) && typeof child.type !== "string") {
-				return React.cloneElement(child, props);
-			} else {
-				return child;
-			}
-		});
 	}
 	return children;
 }

@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 import ReactDOMServer from "react-dom/server";
 import { Prompt, Redirect, Route, StaticRouter } from "../..";
 import renderStrict from "../../testutils/renderStrict";
+import { useRouter } from "../../hooks/useRouter";
 
 describe("A <StaticRouter>", () => {
 	const node = document.createElement("div");
@@ -42,8 +43,8 @@ describe("A <StaticRouter>", () => {
 	describe("with a string location prop", () => {
 		it("parses the location into an object", () => {
 			let location;
-			function LocationChecker(props: any) {
-				location = props.location;
+			function LocationChecker() {
+				location = useRouter().location;
 				return null;
 			}
 
@@ -64,9 +65,10 @@ describe("A <StaticRouter>", () => {
 
 		describe("with a URL-encoded pathname", () => {
 			it("decodes the pathname", () => {
-				function PropsChecker(props: any) {
-					expect(props.location.pathname).toEqual("/estático");
-					expect(props.match.params.type).toBe("estático");
+				function PropsChecker() {
+					const { match, location } = useRouter();
+					expect(location.pathname).toEqual("/estático");
+					expect(match.params.type).toBe("estático");
 					return null;
 				}
 
@@ -85,8 +87,9 @@ describe("A <StaticRouter>", () => {
 
 	describe("with an object location prop", () => {
 		it("adds missing properties", () => {
-			function LocationChecker(props: any) {
-				expect(props.location).toMatchObject({
+			function LocationChecker() {
+				const { location } = useRouter();
+				expect(location).toMatchObject({
 					pathname: "/the/path",
 					search: "",
 					hash: "",
@@ -104,9 +107,10 @@ describe("A <StaticRouter>", () => {
 
 		describe("with a URL-encoded pathname", () => {
 			it("decodes the pathname", () => {
-				function PropsChecker(props: any) {
-					expect(props.location.pathname).toEqual("/estático");
-					expect(props.match.params.type).toBe("estático");
+				function PropsChecker() {
+					const { location, match } = useRouter();
+					expect(location.pathname).toEqual("/estático");
+					expect(match.params.type).toBe("estático");
 					return null;
 				}
 
@@ -140,8 +144,9 @@ describe("A <StaticRouter>", () => {
 
 	describe("with a basename", () => {
 		it("strips the basename from location pathnames", () => {
-			function LocationChecker(props: any) {
-				expect(props.location.pathname).toEqual("/path");
+			function LocationChecker() {
+				const location = useRouter().location;
+				expect(location.pathname).toEqual("/path");
 				return null;
 			}
 

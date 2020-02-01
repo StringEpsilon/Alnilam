@@ -2,12 +2,14 @@
 
 **Breaking:**
 * Dropped RouterContext export. You can extend alnilam functionality using hooks instead.
+* Route and Match no longer pass props to children via cloneElement. You can access the needed props via hooks or `withRouter`.
+   * If you pass a function to children, that also still works. `<Route children={(props) => console.log(props) } />`
 
 **Bugfixes:**
 * More forgiving propTypes for `wrappedComponentRef` on withRouter HOC.
 
 **Changes:**
-* Removed warning for chaning `location` prop on Match, Route and Switch.
+* Removed warning for changing `location` prop on Match, Route and Switch.
 * Match and Route now use hooks internally and are functional components.
 * ESM build now includes a pre-minified version.
 * Minifaction now done with terser instead of uglify.

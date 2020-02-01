@@ -2,9 +2,7 @@
 
 ## Match
 
-Match always renders it's children, whether or not the current location matches the given path. But it provides the calculated match as a prop to the child.
-
-Like Route and NavLink, Match will provide the same props to the children as [withRouter](../functions/withRouter) would.
+Match always renders it's children, whether or not the current location matches the given path. But it provides the calculated match via context to it's children.
 
 ### Props
 
