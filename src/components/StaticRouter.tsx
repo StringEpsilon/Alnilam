@@ -1,4 +1,5 @@
-import { createLocation, createPath, Location } from "history";
+import { createPath, Location } from "history";
+import { createLocation } from "../utils";
 import PropTypes from "prop-types";
 import React from "react";
 import Router from "./Router";

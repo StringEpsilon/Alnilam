@@ -133,7 +133,7 @@ describe("A <Match>", () => {
 			const history = createHistory();
 			const mount = jest.fn();
 			class MatchedRoute extends React.Component {
-				public componentWillMount() {
+				public componentDidMount() {
 					mount();
 				}
 

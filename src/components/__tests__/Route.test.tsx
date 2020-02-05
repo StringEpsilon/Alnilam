@@ -145,7 +145,7 @@ describe("A <Route>", () => {
 			const history = createHistory();
 			const mount = jest.fn();
 			class MatchedRoute extends React.Component {
-				public componentWillMount() {
+				public componentDidMount() {
 					mount();
 				}
 
@@ -244,9 +244,9 @@ describe("A <Route>", () => {
 							exact={true}
 							strict={true}
 							path="/somepath"
-							>
-								<h1>{text}</h1>
-							</Route>
+						>
+							<h1>{text}</h1>
+						</Route>
 						/>
 					</MemoryRouter>,
 					node,
@@ -264,7 +264,7 @@ describe("A <Route>", () => {
 							exact={true}
 							strict={true}
 							path="/somepath/"
-							>
+						>
 							<h1>{text}</h1>
 						</Route>
 					</MemoryRouter>,

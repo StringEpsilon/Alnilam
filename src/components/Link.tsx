@@ -1,8 +1,9 @@
-import { createLocation, History, Location } from "history";
+import { History, Location } from "history";
 import PropTypes from "prop-types";
 import React from "react";
 import { useRouterContext } from "../hooks/useRouterContext";
 import matchPath, { MatchResult } from "../matchPath";
+import { createLocation, resolveLocation } from "../utils";
 
 const isExternalUrl = new RegExp(/^https?:\/\//);
 
@@ -114,7 +115,8 @@ export default function Link(props: LinkProps) {
 		} else {
 			href = context.history.createHref(
 				// void(0) because of the typing missmatch in createLocation().
-				createLocation(to, null, void (0), context.location),
+				// TODO: Merge locations.
+				resolveLocation(to, location.pathname),
 			);
 		}
 	} else {

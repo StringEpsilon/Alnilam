@@ -1,4 +1,3 @@
-import { createLocation } from "history";
 import React from "react";
 import ReactDOM from "react-dom";
 import MemoryRouter from "../../testutils/MemoryRouter";
@@ -6,6 +5,7 @@ import renderStrict from "../../testutils/renderStrict";
 import Redirect from "../Redirect";
 import Route from "../Route";
 import Switch from "../Switch";
+import { createLocation } from "../../utils";
 
 describe("A <Redirect>", () => {
 	const node = document.createElement("div");

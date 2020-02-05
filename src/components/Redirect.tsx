@@ -1,10 +1,12 @@
-import { createLocation, Location, locationsAreEqual } from "history";
+import { Location } from "history";
+import { createLocation, resolveLocation } from "../utils";
 import PropTypes from "prop-types";
 import React from "react";
 import generatePath from "../generatePath";
 import { useRouterContext } from "../hooks/useRouterContext";
 import { MatchResult } from "../matchPath";
 import Lifecycle from "./Lifecycle";
+import { create } from "domain";
 
 export interface RedirectProps {
 	/** The path redirect destination */
@@ -17,42 +19,51 @@ export interface RedirectProps {
 	computedMatch?: MatchResult;
 }
 
+function locationsAreEqual(a: Location, b: Location) {
+	return a.pathname === b.pathname &&
+		a.hash === b.hash &&
+		a.search === b.search;
+}
+
 /**
  * Component for navigating programmatically with a component.
  */
 export default function Redirect(props: RedirectProps) {
 	const { computedMatch, to, push = false } = props;
 	const context = useRouterContext("Redirect");
-	const { history, staticContext } = context;
+	const { history, staticContext, location } = context;
 
 	const method = push ? history.push : history.replace;
-	const location = createLocation(
-		computedMatch
-			? typeof to === "string"
-				? generatePath(to, computedMatch.params)
-				: {
-					...to,
-					pathname: generatePath(to.pathname, computedMatch.params),
-				}
-			: to,
+	const targetLocation = resolveLocation(
+		createLocation(
+			computedMatch
+				? typeof to === "string"
+					? generatePath(to, computedMatch.params)
+					: {
+						...to,
+						pathname: generatePath(to.pathname, computedMatch.params),
+					}
+				: to,
+		),
+		context.location.pathname
 	);
 
 	// When rendering in a static context,
 	// set the new location immediately.
 	if (staticContext) {
-		method(location);
+		console.log("asjdkasdkasdk");
+		method(targetLocation);
 		return null;
 	}
 
 	return (
 		<Lifecycle
 			onMount={() => {
-				method(location);
+				method(targetLocation);
 			}}
 			onUpdate={(self, prevProps: RedirectProps) => {
-				const prevLocation = createLocation(prevProps.to);
-				if (!locationsAreEqual(prevLocation, location)) {
-					method(location);
+				if (self.props.to !== prevProps.to && !locationsAreEqual(location, targetLocation)) {
+					method(targetLocation);
 				}
 			}}
 			to={to}

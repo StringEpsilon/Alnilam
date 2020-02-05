@@ -1,4 +1,4 @@
-import { History, Location } from "history";
+import { History, Location, HistoryEvent } from "history";
 import PropTypes from "prop-types";
 import React from "react";
 import warning from "tiny-warning";
@@ -53,15 +53,15 @@ export default class Router extends React.Component<RouterProps, RouterState> {
 		this.pendingLocation = null;
 
 		if (!props.staticContext) {
-			this.unlisten = props.history.listen((location: Location) => {
+			this.unlisten = props.history.listen((event: HistoryEvent) => {
 				if (this._isMounted) {
 					const previousLocation = this.state.location;
 					this.setState({
-						location,
+						location: event.location,
 						previousLocation,
 					});
 				} else {
-					this.pendingLocation = location;
+					this.pendingLocation = event.location;
 				}
 			});
 		}

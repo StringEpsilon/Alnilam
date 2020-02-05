@@ -11,7 +11,7 @@ export interface MatchResult {
 	/** Whether or not the route matched exactly */
 	isExact: boolean;
 	/** Key/value pairs parsed from the URL corresponding to the dynamic segments of the path */
-	params?: {[key: string]: string};
+	params?: { [key: string]: string };
 }
 
 /**
@@ -71,7 +71,7 @@ export default function matchPath(
 		return {
 			isExact, // whether or not we matched exactly
 			params: keys.reduce((memo: { [keys: string]: string }, key, index) => {
-				memo[key.name] = values[index];
+				memo[key.name] = decodeURI(values[index]);
 				return memo;
 			}, {}),
 			path, // the path used to match

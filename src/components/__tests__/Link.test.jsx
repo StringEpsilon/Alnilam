@@ -226,7 +226,7 @@ describe("A <Link>", () => {
 	it("accepts an object `to` prop", () => {
 		const to = {
 			pathname: "/the/path",
-			search: "the=query",
+			search: "?the=query",
 			hash: "#the-hash"
 		};
 
@@ -305,9 +305,9 @@ describe("A <Link>", () => {
 			window.history.replaceState(null, "", "#");
 		});
 
-		function createLinkNode(hashType, to) {
+		function createLinkNode(to) {
 			renderStrict(
-				<Router history={createHashHistory({ hashType })}>
+				<Router history={createHashHistory()}>
 					<Link to={to} />
 				</Router>,
 				node
@@ -316,40 +316,15 @@ describe("A <Link>", () => {
 			return node.querySelector("a");
 		}
 
-		describe('with the "slash" hashType', () => {
-			it("has the correct href", () => {
-				const linkNode = createLinkNode("slash", "/foo");
-				expect(linkNode.getAttribute("href")).toEqual("#/foo");
-			});
-
-			it("has the correct href with a leading slash if it is missing", () => {
-				const linkNode = createLinkNode("slash", "foo");
-				expect(linkNode.getAttribute("href")).toEqual("#/foo");
-			});
+		it("has the correct href", () => {
+			const linkNode = createLinkNode("/foo");
+			expect(linkNode.getAttribute("href")).toEqual("#/foo");
 		});
 
-		describe('with the "hashbang" hashType', () => {
-			it("has the correct href", () => {
-				const linkNode = createLinkNode("hashbang", "/foo");
-				expect(linkNode.getAttribute("href")).toEqual("#!/foo");
-			});
-
-			it("has the correct href with a leading slash if it is missing", () => {
-				const linkNode = createLinkNode("hashbang", "foo");
-				expect(linkNode.getAttribute("href")).toEqual("#!/foo");
-			});
+		it("has the correct href with a leading slash if it is missing", () => {
+			const linkNode = createLinkNode("foo");
+			expect(linkNode.getAttribute("href")).toEqual("#/foo");
 		});
 
-		describe('with the "noslash" hashType', () => {
-			it("has the correct href", () => {
-				const linkNode = createLinkNode("noslash", "foo");
-				expect(linkNode.getAttribute("href")).toEqual("#foo");
-			});
-
-			it("has the correct href and removes the leading slash", () => {
-				const linkNode = createLinkNode("noslash", "/foo");
-				expect(linkNode.getAttribute("href")).toEqual("#foo");
-			});
-		});
 	});
 });

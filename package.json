@@ -11,7 +11,7 @@
 		"build": "rollup -c rollup.config.ts",
 		"ci": "rollup -c rollup.config.ts --config-ci",
 		"lint": "tslint --project tsconfig.json",
-		"typecheck": "tsc --noEmit"
+		"typecheck": "tsc"
 	},
 	"repository": {
 		"type": "git",
@@ -37,7 +37,7 @@
 		"react": ">=16.8"
 	},
 	"dependencies": {
-		"history": "^4.10.1",
+		"history": "^5.0.0-beta.4",
 		"hoist-non-react-statics": "^3.3.0",
 		"path-to-regexp": "^1.7.0",
 		"prop-types": "^15.7.2",
@@ -54,7 +54,6 @@
 		"@babel/preset-react": "^7.8.3",
 		"@babel/preset-typescript": "^7.8.3",
 		"@babel/runtime": "^7.8.4",
-		"@types/history": "^4.7.5",
 		"@types/hoist-non-react-statics": "^3.3.1",
 		"@types/jest": "^25.1.1",
 		"@types/prop-types": "^15.7.3",
