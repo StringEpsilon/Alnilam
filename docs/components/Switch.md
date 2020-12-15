@@ -15,7 +15,7 @@ Exclusively renders the first [```Match```](./Match.md), [```Route```](./Route.m
 
 ```jsx
 import { Router, Switch, Route } from "alnilam";
-import { createBrowserHistory } from "history";
+import { createBrowserHistory } from "verlauf";
 
 const history = createBrowserHistory()
 

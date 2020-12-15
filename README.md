@@ -45,7 +45,7 @@ Thanks to all original contributors of [React-Router](https://github.com/ReactTr
 ```jsx
 // Minimal example using the browser history API.
 import { Router, Switch, Route } from "alnilam";
-import { createBrowserHistory } from "history";
+import { createBrowserHistory } from "verlauf";
 
 const myHistory = createBrowserHistory(/* consult the history documentation for your options here*/);
 
@@ -84,7 +84,6 @@ Here is a [a small example app](https://codesandbox.io/s/kkw61p4lno) made with A
 * [x] Outline (or implement) API changes and refactorings for future work.
   * [x] Document the API differences properly in a separate document.
 * [ ] Figure out proper typing for withRouter()
-* [ ] Wait for [history 5.0](https://github.com/ReactTraining/history/issues/505).
 
 ## Why is it called "Alnilam"?
 

@@ -1,4 +1,4 @@
-import { History, Location } from "history";
+import { History, Location } from "verlauf";
 import PropTypes from "prop-types";
 import React from "react";
 import warning from "tiny-warning";

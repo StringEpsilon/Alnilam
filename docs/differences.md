@@ -18,6 +18,8 @@
 * ```Link``` and ```NavLink``` have been merged into ```Link```.
 * Uses hooks internally
 * Exports ```useRouter()``` hook.
+* Uses "verlauf" instead of "history". This means alnilam does not encode or decode paths for you. This might break some applications.
+  - [See verlaufs documentation for a workaround.](https://github.com/StringEpsilon/verlauf/blob/master/docs/URI_Decoding.md)
 
 And finally:
 

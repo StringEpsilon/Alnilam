@@ -18,7 +18,7 @@ Acceptable as a value for the history prop is any history object from the [```hi
 
 ```jsx
 import { Router } from "alnilam";
-import { createBrowserHistory } from "history";
+import { createBrowserHistory } from "verlauf";
 
 const history = createBrowserHistory()
 

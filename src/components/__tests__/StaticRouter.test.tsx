@@ -1,4 +1,4 @@
-import { Location } from "history";
+import { Location } from "verlauf";
 import React from "react";
 import ReactDOM from "react-dom";
 // tslint:disable-next-line:no-submodule-imports
@@ -62,27 +62,6 @@ describe("A <StaticRouter>", () => {
 				hash: "#the-hash",
 			});
 		});
-
-		describe("with a URL-encoded pathname", () => {
-			it("decodes the pathname", () => {
-				function PropsChecker() {
-					const { match, location } = useRouter();
-					expect(location.pathname).toEqual("/estático");
-					expect(match.params.type).toBe("estático");
-					return null;
-				}
-
-				ReactDOMServer.renderToStaticMarkup(
-					<StaticRouter location="/est%C3%A1tico">
-						<Route path="/:type">
-							<PropsChecker />
-						</Route>
-					</StaticRouter>,
-				);
-
-				expect.assertions(2);
-			});
-		});
 	});
 
 	describe("with an object location prop", () => {
@@ -103,25 +82,6 @@ describe("A <StaticRouter>", () => {
 				</StaticRouter>,
 			);
 			expect.assertions(1);
-		});
-
-		describe("with a URL-encoded pathname", () => {
-			it("decodes the pathname", () => {
-				function PropsChecker() {
-					const { location, match } = useRouter();
-					expect(location.pathname).toEqual("/estático");
-					expect(match.params.type).toBe("estático");
-					return null;
-				}
-
-				ReactDOMServer.renderToStaticMarkup(
-					<StaticRouter location={{ pathname: "/est%C3%A1tico", search: "", state: "", hash: "" }}>
-						<Route path="/:type" ><PropsChecker /></Route>
-					</StaticRouter>,
-				);
-
-				expect.assertions(2);
-			});
 		});
 	});
 

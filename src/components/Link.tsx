@@ -1,4 +1,4 @@
-import { createLocation, History, Location } from "history";
+import { createLocation, History, Location } from "verlauf";
 import PropTypes from "prop-types";
 import React from "react";
 import { useRouterContext } from "../hooks/useRouterContext";
@@ -50,7 +50,7 @@ export interface LinkProps {
 	/** Alnilam Internal. */
 	staticContext?: any;
 	/** When using a Location object in `to`, merge a partial object with the current location */
-	mergeLocations: boolean;
+	mergeLocations?: boolean;
 }
 
 /**

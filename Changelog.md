@@ -1,6 +1,8 @@
-## Future
+## 0.9.0
 
 **Breaking:**
+* **Migrated from `history` to `verlauf`. This removes auto encoding and decoding of pathnames and can potentially break your application.**
+   * [See verlaufs documentation for a workaround.](https://github.com/StringEpsilon/verlauf/blob/master/docs/URI_Decoding.md)
 * Dropped RouterContext export. You can extend alnilam functionality using hooks instead.
 * Route and Match no longer pass props to children via cloneElement. You can access the needed props via hooks or `withRouter`.
    * If you pass a function to children, that also still works. `<Route children={(props) => console.log(props) } />`

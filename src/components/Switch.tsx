@@ -1,4 +1,4 @@
-import { Location } from "history";
+import { Location } from "verlauf";
 import PropTypes from "prop-types";
 import React from "react";
 import { useRouterContext } from "../hooks/useRouterContext";

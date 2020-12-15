@@ -1,4 +1,4 @@
-import { createMemoryHistory, Location } from "history";
+import { createMemoryHistory, Location } from "verlauf";
 import React from "react";
 import Router from "../components/Router";
 
@@ -18,7 +18,7 @@ interface MemoryRouterProps {
  */
 class MemoryRouter extends React.Component<MemoryRouterProps> {
 	public static propTypes: object;
-	public history = createMemoryHistory(this.props);
+	public history = createMemoryHistory({...this.props });
 
 	public render() {
 		return <Router history={this.history} children={this.props.children} />;

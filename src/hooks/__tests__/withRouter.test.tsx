@@ -1,4 +1,4 @@
-import { createMemoryHistory } from "history";
+import { createMemoryHistory } from "verlauf";
 import React from "react";
 import ReactDOM from "react-dom";
 import * as ReactIs from "react-is";

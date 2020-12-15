@@ -1,4 +1,4 @@
-import { createLocation } from "history";
+import { createLocation } from "verlauf";
 import React from "react";
 import ReactDOM from "react-dom";
 import MemoryRouter from "../../testutils/MemoryRouter";

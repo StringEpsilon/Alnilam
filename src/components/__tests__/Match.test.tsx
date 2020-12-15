@@ -1,4 +1,4 @@
-import { createMemoryHistory as createHistory } from "history";
+import { createMemoryHistory as createHistory } from "verlauf";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Match as MatchComponent, Router } from "../..";
@@ -73,22 +73,6 @@ describe("A <Match>", () => {
 		expect(node.innerHTML).toContain("/sushi/spicy-tuna");
 	});
 
-	describe("with dynamic segments in the path", () => {
-		it("decodes them", () => {
-			renderStrict(
-				<MemoryRouter initialEntries={["/a%20dynamic%20segment"]}>
-					<MatchComponent path="/:id">
-						{({ match }) => <h1>{match.params.id}</h1>}
-					</MatchComponent>
-					/>
-				</MemoryRouter>,
-				node,
-			);
-
-			expect(node.innerHTML).toContain("a dynamic segment");
-		});
-	});
-
 	describe("with an array of paths", () => {
 		it("matches the first provided path", () => {
 			ReactDOM.render(
@@ -133,7 +117,7 @@ describe("A <Match>", () => {
 			const history = createHistory();
 			const mount = jest.fn();
 			class MatchedRoute extends React.Component {
-				public componentWillMount() {
+				public componentDidMount() {
 					mount();
 				}
 

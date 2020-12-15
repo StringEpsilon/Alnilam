@@ -1,4 +1,4 @@
-import { History, Location } from "history";
+import { History, Location } from "verlauf";
 import React from "react";
 import { MatchResult } from "./matchPath";
 

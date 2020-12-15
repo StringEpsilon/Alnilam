@@ -1,4 +1,4 @@
-import { createLocation, Location, locationsAreEqual } from "history";
+import { createLocation, Location, locationsAreEqual } from "verlauf";
 import PropTypes from "prop-types";
 import React from "react";
 import generatePath from "../generatePath";

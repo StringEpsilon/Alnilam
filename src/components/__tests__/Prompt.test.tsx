@@ -1,4 +1,4 @@
-import { createMemoryHistory as createHistory } from "history";
+import { createMemoryHistory as createHistory } from "verlauf";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Prompt, Router } from "../..";

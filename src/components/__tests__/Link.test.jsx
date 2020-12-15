@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Link } from "../../index";
 import MemoryRouter from "../../testutils/MemoryRouter";
 import renderStrict from "../../testutils/renderStrict";
-import { createHashHistory, createMemoryHistory } from "history";
+import { createHashHistory, createMemoryHistory } from "verlauf";
 import Router from "../Router";
 import ReactTestUtils from "react-dom/test-utils";
 

@@ -1,4 +1,4 @@
-import { Location } from "history";
+import { Location } from "verlauf";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Link, Route, withRouter } from "../..";
