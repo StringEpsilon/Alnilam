@@ -56,44 +56,36 @@ function noop(): void { return; }
  * location changes in a context object. Useful mainly in testing and
  * server-rendering scenarios.
  */
-export default class StaticRouter extends React.Component<StaticRouterProps> {
-	public static propTypes: {
-		basename: PropTypes.Requireable<string>,
-		context: PropTypes.Requireable<object>,
-		location: PropTypes.Requireable<string | object>,
-	};
-
-	public render(): JSX.Element {
-		const { basename = "", context = {}, location = "/", ...rest } = this.props;
-
-		const history = {
-			createHref: (path: string) => addLeadingSlash(basename + createURL(path)),
-			action: "POP",
-			location: stripBasename(basename, createLocation(location)),
-			push: this.handlePush,
-			replace: this.handleReplace,
-			go: staticHandler("go"),
-			goBack: staticHandler("goBack"),
-			goForward: staticHandler("goForward"),
-			listen: this.handleListen,
-			block: this.handleBlock,
-		};
-
-		return <Router {...rest} history={history} staticContext={context} />;
-	}
-
-	private handlePush = (location: Location) => this.navigateTo(location, "PUSH");
-	private handleReplace = (location: Location) => this.navigateTo(location, "REPLACE");
-	private handleListen = () => noop;
-	private handleBlock = () => noop;
-
-	private navigateTo(location: Location, action: any /*TODO*/) {
-		const { basename = "", context } = this.props;
+export default function StaticRouter(props: StaticRouterProps) {
+	const navigateTo = (location: Location, action: any /*TODO*/) => {
+		const { basename = "", context } = props;
 		context.action = action;
 		context.location = addBasename(basename, createLocation(location));
 		context.url = createURL(context.location);
-	}
+	} 
+	const handlePush = (location: Location) => navigateTo(location, "PUSH");
+	const handleReplace = (location: Location) => navigateTo(location, "REPLACE");
+	const handleListen = () => noop;
+	const handleBlock = () => noop;
+
+	const { basename = "", context = {}, location = "/", ...rest } = props;
+
+	const history = {
+		createHref: (path: string) => addLeadingSlash(basename + createURL(path)),
+		action: "POP",
+		location: stripBasename(basename, createLocation(location)),
+		push: handlePush,
+		replace: handleReplace,
+		go: staticHandler("go"),
+		goBack: staticHandler("goBack"),
+		goForward: staticHandler("goForward"),
+		listen: handleListen,
+		block: handleBlock,
+	};
+
+	return <Router {...rest} history={history} staticContext={context} />;
 }
+
 
 if (process.env.NODE_ENV !== "production") {
 	StaticRouter.propTypes = {
@@ -104,5 +96,4 @@ if (process.env.NODE_ENV !== "production") {
 			PropTypes.object,
 		]),
 	};
-
 }

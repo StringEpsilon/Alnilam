@@ -49,7 +49,7 @@ export default function Redirect(props: RedirectProps) {
 			onMount={() => {
 				method(location);
 			}}
-			onUpdate={(self, prevProps: RedirectProps) => {
+			onUpdate={(prevProps: RedirectProps) => {
 				const prevLocation = createLocation(prevProps.to);
 				if (!locationsAreEqual(prevLocation, location)) {
 					method(location);

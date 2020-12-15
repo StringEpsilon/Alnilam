@@ -12,7 +12,6 @@ export interface RouterProps {
 	history: History | any; // the "any" is to work around the static router.
 	manageFocus?: boolean;
 	staticContext?: any;
-
 }
 
 interface RouterState {
@@ -22,14 +21,15 @@ interface RouterState {
 	staticContext: any;
 }
 
+function computeRootMatch(pathname: string): MatchResult {
+	return { path: "/", url: "/", params: {}, isExact: pathname === "/" };
+}
+
 /**
  * The public API for putting history on context.
  */
 export default class Router extends React.Component<RouterProps, RouterState> {
-	public static propTypes: object;
-	private static computeRootMatch(pathname: string): MatchResult {
-		return { path: "/", url: "/", params: {}, isExact: pathname === "/" };
-	}
+	static propTypes: any;
 	// tslint:disable-next-line:variable-name
 	private _isMounted: boolean;
 	private pendingLocation: Location | null;
@@ -90,7 +90,7 @@ export default class Router extends React.Component<RouterProps, RouterState> {
 			<RouterContext.Provider
 				value={{
 					...this.state,
-					match: Router.computeRootMatch(this.state.location.pathname),
+					match: computeRootMatch(this.state.location.pathname),
 				}}
 			>
 				{this.props.manageFocus ?

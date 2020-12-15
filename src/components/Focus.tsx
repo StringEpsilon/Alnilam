@@ -1,45 +1,40 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { useRouterContext } from "../hooks/useRouterContext";
 import { RouterContext, RoutingProps } from "../RouterContext";
 import withRouter from "../withRouter";
 
 export interface FocusProps extends RoutingProps {
 	onMount: boolean;
+	children: any,
 }
 
 /**
  * Component that refocuses to an internally rendered div on location change.
  */
-class Focus extends React.Component<FocusProps> {
-	public static contextType = RouterContext;
-	private focusRef: React.RefObject<HTMLDivElement>;
+function Focus(props: FocusProps) {
+	const context = useRouterContext("Focus");
+	const focusRef: React.RefObject<any> = useRef(React.createRef());
+	const pathname = props.location.pathname;
 
-	public constructor(props: any) {
-		super(props);
-
-		this.focusRef = React.createRef();
-	}
-
-	public componentDidMount() {
-		if (this.props.onMount && this.focusRef.current) {
-			this.focusRef.current.focus();
+	useEffect(() => {
+		if (focusRef.current) {
+			focusRef.current.focus();
 		}
-	}
+	}, [pathname]);
 
-	public componentDidUpdate(prevProps: FocusProps) {
-		if (prevProps.location.pathname !== this.props.location.pathname) {
-			if (this.focusRef.current) {
-				this.focusRef.current.focus();
-			}
+	useEffect(() => {
+		if (props.onMount && focusRef.current){
+			focusRef.current.focus();
 		}
-	}
+	}, []);
 
-	public render() {
-		return (
-			<div tabIndex={-1} ref={this.focusRef}>
-				{this.props.children}
-			</div>
-		);
-	}
+
+	return (
+		<div tabIndex={-1} ref={focusRef}>
+			{props.children}
+		</div>
+	);
+	
 }
 
 export default withRouter(Focus);

@@ -15,7 +15,9 @@ function isBareModuleId(id) {
   return !id.includes(path.join(process.cwd(), "src"));
 }
 
-export default function configureRollup(commandOptions) {
+const extensions = [".ts", ".tsx"];
+
+export default function configureRollup() {
   return [
     // CJS:
     {
@@ -23,11 +25,11 @@ export default function configureRollup(commandOptions) {
       output: { file: `dist/cjs/${pkg.name}.js`, format: "cjs", compact: true },
       external: isBareModuleId,
       plugins: [
-        resolve({ extensions: [".js", ".jsx", ".ts", ".tsx"] }),
+        resolve({ extensions }),
         ts({
           transpiler: "babel"
         }),
-        replace({ "process.env.NODE_ENV": JSON.stringify("development") })
+        replace({ "process.env.NODE_ENV": ("\"development\"") }),
       ]
     },
     {
@@ -39,24 +41,25 @@ export default function configureRollup(commandOptions) {
       },
       external: isBareModuleId,
       plugins: [
-        resolve({ extensions: [".js", ".jsx", ".ts", ".tsx"] }),
+        resolve({ extensions }),
         ts({
           transpiler: "babel"
         }),
-        replace({ "process.env.NODE_ENV": JSON.stringify("production") }),
+        replace({ "process.env.NODE_ENV": ("\"production\"") }),
         terser()
       ]
     },
     // ESM:
     {
       input: "src/index.ts",
-      output: { file: `dist/esm/${pkg.name}.js`, format: "esm" },
+      output: { file: `dist/esm/${pkg.name}.js`, format: "esm",  compact: true },
       external: isBareModuleId,
       plugins: [
-        resolve({ extensions: [".js", ".jsx", ".ts", ".tsx"] }),
+        resolve({ extensions }),
         ts({
           transpiler: "babel"
-        })
+        }),
+        replace({ "process.env.NODE_ENV": ("\"development\"") }),
       ]
     },
     {
@@ -64,10 +67,11 @@ export default function configureRollup(commandOptions) {
       output: { file: `dist/esm/${pkg.name}.min.js`, format: "esm" },
       external: isBareModuleId,
       plugins: [
-        resolve({ extensions: [".js", ".jsx", ".ts", ".tsx"] }),
+        resolve({ extensions }),
         ts({
           transpiler: "babel"
         }),
+        replace({ "process.env.NODE_ENV": ("\"production\"") }),
         terser()
       ]
     }

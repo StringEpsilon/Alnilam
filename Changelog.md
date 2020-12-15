@@ -1,3 +1,18 @@
+## 0.9.1
+
+**Bugfixes:**
+* Added `@babel/runtime` to dependencies
+
+**Changes:**
+* `<Prompt/>` and `<Focus/>` now use hooks instead of the old lifecycle methods.
+* `<StaticRouter/>` is now a function component.
+* `<Focus/>` is now a function component.
+* The internally used `<Lifecycle>` component is now a function component.
+
+These changes result in a small reduction in filesize:
+- ESM: 13.9 kB -> 11.1 kB
+- CJS: 12.6 kB -> 11.6 kB
+
 ## 0.9.0
 
 **Breaking:**

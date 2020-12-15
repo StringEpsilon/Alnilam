@@ -1,6 +1,7 @@
 import { createMemoryHistory as createHistory } from "verlauf";
 import React from "react";
 import ReactDOM from "react-dom";
+import { act } from "react-dom/test-utils";
 import { Prompt, Router } from "../..";
 import renderStrict from "../../testutils/renderStrict";
 
@@ -8,7 +9,9 @@ describe("A <Prompt>", () => {
 	const node = document.createElement("div");
 
 	afterEach(() => {
-		ReactDOM.unmountComponentAtNode(node);
+		act(() => {
+			ReactDOM.unmountComponentAtNode(node);
+		});
 	});
 
 	describe("without a <Router>", () => {
@@ -30,15 +33,17 @@ describe("A <Prompt>", () => {
 			getUserConfirmation,
 		});
 
-		renderStrict(
-			<Router history={history}>
-				<Prompt message="Are you sure?" />
-			</Router>,
-			node,
-		);
-
-		history.push("/somewhere");
-
+		act(() => {
+			renderStrict(
+				<Router history={history}>
+					<Prompt message="Are you sure?" />
+				</Router>,
+				node,
+			);
+		});
+		act(() => {
+			history.push("/somewhere");
+		});
 		expect(getUserConfirmation).toHaveBeenCalledWith(
 			expect.stringMatching("Are you sure?"),
 			expect.any(Function),
@@ -55,14 +60,18 @@ describe("A <Prompt>", () => {
 				getUserConfirmation,
 			});
 
-			renderStrict(
-				<Router history={history}>
-					<Prompt message="Are you sure?" when={false} />
-				</Router>,
-				node,
-			);
+			act(() => {
+				renderStrict(
+					<Router history={history}>
+						<Prompt message="Are you sure?" when={false} />
+					</Router>,
+					node,
+				);
+			});
 
-			history.push("/somewhere");
+			act(() => {
+				history.push("/somewhere");
+			});
 
 			expect(getUserConfirmation).not.toHaveBeenCalled();
 		});
