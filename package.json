@@ -37,13 +37,13 @@
 		"react": ">=16.8"
 	},
 	"dependencies": {
+		"@babel/runtime": "^7.12.5",
 		"hoist-non-react-statics": "^3.3.0",
 		"path-to-regexp": "^1.7.0",
 		"prop-types": "^15.7.2",
 		"react-is": ">=16.8.0",
 		"tiny-warning": "^1.0.3",
-		"verlauf": "^0.8.1",
-		"@babel/runtime": "^7.12.5"
+		"verlauf": "^0.8.1"
 	},
 	"resolutions": {
 		"write-file-atomic": "2.4.1"
